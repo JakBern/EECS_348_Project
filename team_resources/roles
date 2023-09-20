@@ -3,5 +3,34 @@ Responsibilities:
   - Organize meetings and schedule
   - Organize and manage repo
   - Organize and lead meetings
+  - Organize and delegate labor
   - Facilitate communication between members
   - Turn in all artifacts
+
+Role: Scrum Master
+Responsibilities:
+  - Updating Jira
+  - Managing sprints
+  - Assigning workloads for features/modules
+
+Role: Software Quality Analyst
+Responsibilities:
+  - Review code
+  - Ensure code is performant and bug-free
+  - Make sure code is well commented
+  - Think through test cases
+  - Make sure style guidelines are adhered to
+
+Role: Team Resources Manager
+Responsibilities:
+  - Manages and documents team communication
+  - Makes logs of meetings
+  - Reports progress based on activities
+  - Updates schedule with tasks
+
+Role: Project Design Lead
+Responsibilities:
+  - Design 
+
+
+
