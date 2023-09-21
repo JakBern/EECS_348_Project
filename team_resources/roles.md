@@ -1,5 +1,5 @@
-Role: Project Manager
-Responsibilities:
+## Project Manager
+### Responsibilities
   - Organize meetings and schedule
   - Organize and manage repo
   - Organize and lead meetings
@@ -7,29 +7,29 @@ Responsibilities:
   - Facilitate communication between members
   - Turn in all artifacts
 
-Role: Scrum Master
-Responsibilities:
+## Scrum Master
+### Responsibilities
   - Updating Jira
   - Managing sprints
   - Assigning workloads for features/modules
 
-Role: Software Quality Analyst
-Responsibilities:
+## Software Quality Analyst
+### Responsibilities
   - Review code
   - Ensure code is performant and bug-free
   - Make sure code is well commented
   - Think through test cases
   - Make sure style guidelines are adhered to
 
-Role: Team Resources Manager
-Responsibilities:
+## Team Resources Manager
+### Responsibilities
   - Manages and documents team communication
   - Makes logs of meetings
   - Reports progress based on activities
   - Updates schedule with tasks
 
-Role: Project Design Lead
-Responsibilities:
+## Project Design Lead
+### Responsibilities
   - Designs high-level abstractions for functionality
   - Integrates of low-level parts into the greater project
   - Makes sure interfaces are consistent
