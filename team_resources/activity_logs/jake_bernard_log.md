@@ -1,41 +1,40 @@
-ACTIVITY LOG FOR JAKE BERNARD
-Member Name: Jake Bernard
-Project Role: Project Manager
-Lab Section: 4 PM Thursday
+# ACTIVITY LOG FOR JAKE BERNARD
+## Member Name: Jake Bernard
+## Project Role: Project Manager
+## Lab Section: 4 PM Thursday
 
-ENTRIES:
-  9/11/2023
-  11:48 AM - 11:49 AM
-Activity: Creating and sharing GitHub repo for project. Created first activity log.
-Additional details: None.
+# ENTRIES:
+## 9/11/2023
+### 11:48 AM - 11:49 AM
+#### Activity
+- Creating and sharing GitHub repo for project. Created first activity log.
 
-  9/17/2023
-  1 PM - 3PM, 4PM - 5:30 PM, 8 PM - 11:30 PM
-Activity: Filling out project plan.
-Additional details: None.
+## 9/17/2023
+### 1 PM - 3PM, 4PM - 5:30 PM, 8 PM - 11:30 PM
+#### Activity
+- Filling out project plan.
 
-  9/20/2023
-  7:30 - 8:20
-Activities:
-  - Emailed Professor Saiedian some questions about the project
-  - Created member profile template, created member profile
-Additional details: None.
+## 9/20/2023
+### 7:30 - 8:20
+#### Activities:
+- Emailed Professor Saiedian some questions about the project
+- Created member profile template, created member profile
 
-  11:00 - 11:50
-Activities:
+### 11:00 - 11:50
+#### Activities:
   - Entered first meeting into meeting log
   - Created meeting checklist and meeting agendas
   - Entered agenda for next meeting
   - Created roles document, member profiles, reorganized repo
 
-  1:00 - 1:50
-Activities:
+### 1:00 - 1:50
+#### Activities:
   - Updated to do log templates
   - Changed a little of project plan
   
-  9/17/2023
-  1:00 - 2:20
-Activities:
+## 9/17/2023
+### 1:00 - 2:20
+#### Activities:
   - Migrated most documents to Markdown files
   - Continued filling out roles and responsibilities
   - Continued filling out project plan document, replacing example text sections
