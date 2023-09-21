@@ -1,4 +1,4 @@
-<--FORMAT
+<!--FORMAT
 ## MEETING DATE : TIME
 Topics:
   - Topic 1 (highest priority)
