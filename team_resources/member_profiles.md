@@ -20,7 +20,7 @@ Experience:
 Bio:
   <very short bio -- year, major, etc>
 ====END TEMPLATE====
-  
+-------------------------------------------------------------------------------------------------------
   JAKE BERNARD
 Team Roles: Project Manager
 Contact
@@ -42,7 +42,7 @@ Experience:
   Libraries: NumPy, Matplotlib, basic knowledge of PIL, C++ STL, SDL2
 Bio:
   Computer Science major, Junior 
-
+-------------------------------------------------------------------------------------------------------
   NICK REINIG
 Team Roles: Software Quality Analyst
 Contact
@@ -64,3 +64,26 @@ Experience:
   experience in Jira
 Bio:
   Computer science major, Sophomore
+-------------------------------------------------------------------------------------------------------
+  DREW MEYER
+Team Roles: Team Resources Manager
+Contact
+	- Phone: (785) 766-0735
+	- Email: d216m596@ku.edu
+Availability:
+	Mon: After 11:00 AM
+	Tues: 9:15AM - 2:15PM, After 3:45PM
+	Wed: 11:00AM - 4:00PM
+	Thur: 9:15AM - 2:15PM, After 3:45PM
+	Fri: 1:00PM - 4:00PM
+	Sat: Before 5:00PM
+	Sun: Free
+Availability Notes:
+  - I work at Panda Express on evening on Wednesdays, Fridays, and Saturdays
+  - I am free and willing to meet at any time listed within my availablity given advance notice.
+Experience:
+  Languages: Python, working knowledge in C
+  Frameworks: Pandas, Numpy, TensorFlow, Matplotlib, Seaborne
+Bio:
+  Junior Computer Science major, Business minor
+-------------------------------------------------------------------------------------------------------
