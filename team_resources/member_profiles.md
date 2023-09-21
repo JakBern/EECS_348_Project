@@ -3,11 +3,11 @@
 <!--
 TEMPLATE
 ## MEMBER NAME
-Team Roles: <Roles>
-Contact
+### Team Roles: <Roles>
+#### Contact
 	- Phone:
 	- Email:
-Availability:
+#### Availability:
 	Mon:
 	Tues:
 	Wed:
@@ -15,20 +15,20 @@ Availability:
 	Fri:
 	Sat:
 	Sun:
-Availability Notes:
+#### Availability Notes:
   - <Notes on availability>
   - <Notes on availability>
-Experience:
+#### Experience:
   <your areas of expertise>
-Bio:
+#### Bio:
   <very short bio -- year, major, etc>
 END TEMPLATE -->
 
 ## JAKE BERNARD
 ### Team Roles: Project Manager
 #### Contact
-	- Phone: 785-221-0049
-	- Email: jakebernard@ku.edu
+	Phone: 785-221-0049
+	Email: jakebernard@ku.edu
 #### Availability:
 	Mon: After 1 PM
 	Tues: After 3:45 PM
