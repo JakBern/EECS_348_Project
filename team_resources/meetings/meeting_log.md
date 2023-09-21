@@ -25,8 +25,9 @@ got feedback from members on it.
   Vidur created Jira for the project, was assigned role as "Scrum Master",
 decided upon sprint times of 2 weeks.
   Planned next meeting tomorrow, mention of meetings needing itineraries/agendas.
------------------------------------------------------------------------------------------------------------------
-9-20-2023
+
+## 9-20-2023
+
 2:00 PM - 3:00 PM
 Note taker: Drew Meyer
 Members present: Jake, Nick, Drew
@@ -42,4 +43,4 @@ Summary:
     Charlie Gillund - "Project Design Lead"
   Discussed "Meeting Checklist" format, (check /team_resources/meetings/meeting_checklist/).
     New way to structure meetings more efficiently, format outlined within document.
-  -----------------------------------------------------------------------------------------------------------------
+
