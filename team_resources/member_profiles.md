@@ -60,8 +60,8 @@ END TEMPLATE -->
 	Sat:
 	Sun:
 #### Availability Notes:
-  Some changes to my availability during the day due to having lots of tests in my classes
-  My weekend schedule is very unpredictable, but I should be typically available
+  - Some changes to my availability during the day due to having lots of tests in my classes
+  - My weekend schedule is very unpredictable, but I should be typically available
 #### Experience:
   work in Python, javascript
   experience in Jira
