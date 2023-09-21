@@ -11,9 +11,9 @@ Summary:
 	Point 2 Sub-point 2
   Point 3 etc.
 -->
------------------------------------------------------------------------------------------------------------------
 ## 9-19-2023
-## 3:16 PM - 4:00 PM
+
+3:16 PM - 4:00 PM 
 Note taker: Jake Bernard
 Members present: Everyone
 Summary:
