@@ -19,7 +19,7 @@
 #### Note taker
 - Jake Bernard
 #### Members present
-	Everyone
+- Everyone
 #### Summary
 - Began reading through project plan document which Jake had filled out,
 got feedback from members on it.
