@@ -5,8 +5,8 @@ TEMPLATE
 ## MEMBER NAME
 ### Team Roles: <Roles>
 #### Contact
-	- Phone:
-	- Email:
+	Phone:
+	Email:
 #### Availability:
 	Mon:
 	Tues:
@@ -49,8 +49,8 @@ END TEMPLATE -->
 ## NICK REINIG
 ### Team Roles: Software Quality Analyst
 #### Contact
-	- Phone: 913-229-0035
-	- Email: NMReinig@gmail.com
+	Phone: 913-229-0035
+	Email: NMReinig@gmail.com
 #### Availability:
 	Mon: After 1 PM
 	Tues: Before 2:30 PM, After 3:45
@@ -71,8 +71,8 @@ END TEMPLATE -->
 ## DREW MEYER
 ### Team Roles: Team Resources Manager
 #### Contact
-	- Phone: (785) 766-0735
-	- Email: d216m596@ku.edu
+	Phone: (785) 766-0735
+	Email: d216m596@ku.edu
 #### Availability:
 	Mon: After 11:00 AM
 	Tues: 9:15AM - 2:15PM, After 3:45PM
