@@ -1,5 +1,5 @@
-MEETING LOG
-====FORMAT====
+# MEETING LOG
+<!-- FORMAT
 DATE
 TIME
 Note taker: <name>
@@ -10,10 +10,10 @@ Summary:
 	Point 2 Sub-point 1, which is a sub-point of Point 2
 	Point 2 Sub-point 2
   Point 3 etc.
-==============
+-->
 -----------------------------------------------------------------------------------------------------------------
-9-19-2023
-3:16 PM - 4:00 PM
+## 9-19-2023
+## 3:16 PM - 4:00 PM
 Note taker: Jake Bernard
 Members present: Everyone
 Summary:
