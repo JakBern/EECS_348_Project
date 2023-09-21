@@ -33,18 +33,22 @@ decided upon sprint times of 2 weeks.
 ## 9-20-2023
 
 ### 2:00 PM - 3:00 PM
-Note taker: Drew Meyer
-Members present: Jake, Nick, Drew
-Summary:
-  All members instructed to finish member profiles by day end Sunday (9/24)
-  Wrapping up Project Management Plan
-    Glossary may be iteratively developed, no need to complete fully by the end of this week (9/21).
-  Assigned roles:
-    Jake Bernard - "Project Manager"
-    Nick Reinig - "Software Quality Anylist"
-    Drew Meyer - "Team Resources Manager"
-    Vidur Pandiripally - "Scrum Master"
-    Charlie Gillund - "Project Design Lead"
-  Discussed "Meeting Checklist" format, (check /team_resources/meetings/meeting_checklist/).
-    New way to structure meetings more efficiently, format outlined within document.
+#### Note taker
+- Drew Meyer
+#### Members present
+- Jake
+- Nick
+- Drew
+#### Summary
+- All members instructed to finish member profiles by day end Sunday (9/24)
+- Wrapping up Project Management Plan
+- Glossary may be iteratively developed, no need to complete fully by the end of this week (9/21).
+- Assigned roles:
+	- Jake Bernard - "Project Manager"
+ 	- Nick Reinig - "Software Quality Anylist"
+  	- Drew Meyer - "Team Resources Manager"
+    	- Vidur Pandiripally - "Scrum Master"
+- Charlie Gillund - "Project Design Lead"
+- Discussed "Meeting Checklist" format, (check /team_resources/meetings/meeting_checklist/).
+	- New way to structure meetings more efficiently, format outlined within document.
 
