@@ -32,3 +32,10 @@ Activities:
 Activities:
   - Updated to do log templates
   - Changed a little of project plan
+  
+  9/17/2023
+  1:00 - 2:20
+Activities:
+  - Migrated most documents to Markdown files
+  - Continued filling out roles and responsibilities
+  - Continued filling out project plan document, replacing example text sections

@@ -30,7 +30,12 @@ Responsibilities:
 
 Role: Project Design Lead
 Responsibilities:
-  - Design 
+  - Designs high-level abstractions for functionality
+  - Integrates of low-level parts into the greater project
+  - Makes sure interfaces are consistent
+  - Oversees and guides project to better align with project vision
+  - Manages interoperability of modules within the project
+  - Researches and organizes information relevant to the design of project components
 
 
 

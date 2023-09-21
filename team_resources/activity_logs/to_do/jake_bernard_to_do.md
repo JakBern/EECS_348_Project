@@ -19,11 +19,20 @@ ENTRIES:
 
   9/20/2023
   Changes/To-do:
-	- [] Establish standards for problem logs
+	- [X] Establish standards for problem logs
 	- [X] Create template for member profiles
 	- [X] Enter first meeting into meeting log
 	- [X] Establish checklists for meetings
-	- [] Create Vision document
-	- [] Create project glossary
+	- [I] Create Vision document
+	- [I] Create project glossary
 	- [X] Better organize repo
-	- [] Make schedule document
+	- [I] Make schedule document
+	
+  9/21/2023
+  Changes/To-do:
+	- [ ] Finish filling out project plan
+	- [ ] Get member profiles for everyone
+	- [ ] Make schedule document
+	- [ ] Create Vision document
+	- [ ] Create project glossary
+	
