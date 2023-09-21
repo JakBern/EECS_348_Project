@@ -47,7 +47,7 @@ decided upon sprint times of 2 weeks.
 	- Jake Bernard - "Project Manager"
  	- Nick Reinig - "Software Quality Anylist"
   	- Drew Meyer - "Team Resources Manager"
-    	- Vidur Pandiripally - "Scrum Master"
+	- Vidur Pandiripally - "Scrum Master"
 - Charlie Gillund - "Project Design Lead"
 - Discussed "Meeting Checklist" format, (check /team_resources/meetings/meeting_checklist/).
 	- New way to structure meetings more efficiently, format outlined within document.
