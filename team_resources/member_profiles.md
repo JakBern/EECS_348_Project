@@ -2,7 +2,7 @@
 
 <!--
 TEMPLATE
-## MEMBER NAME
+## Member Name
 ### Team Roles: <Roles>
 #### Contact
 	Phone:
@@ -24,7 +24,7 @@ TEMPLATE
   <very short bio -- year, major, etc>
 END TEMPLATE -->
 
-## JAKE BERNARD
+## Jake Bernard
 ### Team Roles: Project Manager
 #### Contact
 	Phone: 785-221-0049
@@ -46,7 +46,7 @@ END TEMPLATE -->
 #### Bio:
   Computer Science major, Junior 
 
-## NICK REINIG
+## Nick Reinig
 ### Team Roles: Software Quality Analyst
 #### Contact
 	Phone: 913-229-0035
@@ -68,7 +68,7 @@ END TEMPLATE -->
 #### Bio:
   Computer science major, Sophomore
 
-## DREW MEYER
+## Drew Meyer
 ### Team Roles: Team Resources Manager
 #### Contact
 	Phone: (785) 766-0735
