@@ -20,7 +20,7 @@ Experience:
 Bio:
   <very short bio -- year, major, etc>
 ====END TEMPLATE====
-____________________________________________________________________________________________
+
   JAKE BERNARD
 Team Roles: Project Manager
 Contact
@@ -42,7 +42,7 @@ Experience:
   Libraries: NumPy, Matplotlib, basic knowledge of PIL, C++ STL, SDL2
 Bio:
   Computer Science major, Junior 
-____________________________________________________________________________________________
+
   NICK REINIG
 Team Roles: Software Quality Analyst
 Contact
@@ -64,7 +64,7 @@ Experience:
   experience in Jira
 Bio:
   Computer science major, Sophomore
--------------------------------------------------------------------------------------------------------
+
   DREW MEYER
 Team Roles: Team Resources Manager
 Contact
@@ -86,4 +86,3 @@ Experience:
   Frameworks: Pandas, Numpy, TensorFlow, Matplotlib, Seaborne
 Bio:
   Junior Computer Science major, Business minor
--------------------------------------------------------------------------------------------------------
