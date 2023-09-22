@@ -11,23 +11,23 @@
 - [ ] Establish standards for problem logs
 - [ ] Establish checklists for meetings
 
-  9/20/2023
-  Changes/To-do:
+  ### 9/20/2023
+  #### Changes/To-do:
 - [X] Establish standards for problem logs
 - [X] Create template for member profiles
 - [X] Enter first meeting into meeting log
 - [X] Establish checklists for meetings
-- [I] Create Vision document
-- [I] Create project glossary
+- [ ] Create Vision document
+- [ ] Create project glossary
 - [X] Better organize repo
-- [I] Make schedule document
+- [ ] Make schedule document
 	
-  9/21/2023
-  Changes/To-do:
-	- [X] Finish filling out project plan
-	- [O] Get member profiles for everyone -- requires Charlie, Drew, and Vidur
-	- [ ] Make schedule document
-	- [ ] Create Vision document
-	- [ ] Create project glossary
-	- [ ] Make task overview document
+  ### 9/21/2023
+  #### Changes/To-do:
+- [X] Finish filling out project plan
+- [ ] Get member profiles for everyone -- requires Charlie, Drew, and Vidur
+- [ ] Make schedule document
+- [ ] Create Vision document
+- [ ] Create project glossary
+- [ ] Make task overview document
 	
