@@ -39,3 +39,10 @@ Activities:
   - Migrated most documents to Markdown files
   - Continued filling out roles and responsibilities
   - Continued filling out project plan document, replacing example text sections
+
+  4:00 - 5:50
+Activities:
+  - Started work on task overviews
+  - Finished project plan
+  - Contacted team about potential review order -- dropped in favor of single reviewer
+  - Changed documents to fit Markdown syntax
