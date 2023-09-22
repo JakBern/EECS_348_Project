@@ -93,3 +93,25 @@ END TEMPLATE -->
   Frameworks: Pandas, Numpy, TensorFlow, Matplotlib, Seaborne
 #### Bio
   Junior Computer Science major, Business minor
+
+## Vidur Pandiripally
+#### Team Role
+- Scrum Master
+#### Contact
+  	Phone: (913) 461-7917
+   	Email: v081p337@ku.edu
+#### Availability 
+	Mon: After 7PM
+ 	Tues: 11:00AM - 12:30PM, After 7PM
+  	Wed: 9-10:30AM, After 1:50PM
+   	Thurs: 9-10:30AM, After 4:00PM
+    Friday: After 5:00PM
+    Sat: All Day
+    Sun: All Day
+#### Availability Notes
+- I might be busy on some weekends due to volunteering
+#### Experience
+ Languages: C, C++, JavaScript, Python
+ Frameworks: Jira
+#### Bio
+ Junior studying computer engineering
