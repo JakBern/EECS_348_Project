@@ -3,7 +3,8 @@
 <!--
 TEMPLATE
 ## Member Name
-### Team Roles: <Roles>
+#### Team Roles:
+- <Roles>
 #### Contact
 	Phone:
 	Email:
@@ -25,7 +26,8 @@ TEMPLATE
 END TEMPLATE -->
 
 ## Jake Bernard
-### Team Roles: Project Manager
+#### Team Roles
+- Project Manager
 #### Contact
 	Phone: 785-221-0049
 	Email: jakebernard@ku.edu
@@ -47,7 +49,8 @@ END TEMPLATE -->
   Computer Science major, Junior 
 
 ## Nick Reinig
-### Team Roles: Software Quality Analyst
+#### Team Roles
+- Software Quality Analyst
 #### Contact
 	Phone: 913-229-0035
 	Email: NMReinig@gmail.com
@@ -69,7 +72,8 @@ END TEMPLATE -->
   Computer science major, Sophomore
 
 ## Drew Meyer
-### Team Roles: Team Resources Manager
+#### Team Roles
+- Team Resources Manager
 #### Contact
 	Phone: (785) 766-0735
 	Email: d216m596@ku.edu
