@@ -6,21 +6,21 @@
 ## ENTRIES:
   ### 9/17/2023
   #### Changes/To-do:
-	- [X] Email about templates for project vision/guideline documents
-	- [X] Email about what sections can be kept the same in project plan
-	- [ ] Establish standards for problem logs
-	- [ ] Establish checklists for meetings
+- [X] Email about templates for project vision/guideline documents
+- [X] Email about what sections can be kept the same in project plan
+- [ ] Establish standards for problem logs
+- [ ] Establish checklists for meetings
 
   9/20/2023
   Changes/To-do:
-	- [X] Establish standards for problem logs
-	- [X] Create template for member profiles
-	- [X] Enter first meeting into meeting log
-	- [X] Establish checklists for meetings
-	- [I] Create Vision document
-	- [I] Create project glossary
-	- [X] Better organize repo
-	- [I] Make schedule document
+- [X] Establish standards for problem logs
+- [X] Create template for member profiles
+- [X] Enter first meeting into meeting log
+- [X] Establish checklists for meetings
+- [I] Create Vision document
+- [I] Create project glossary
+- [X] Better organize repo
+- [I] Make schedule document
 	
   9/21/2023
   Changes/To-do:
