@@ -3,7 +3,8 @@
 <!--
 TEMPLATE
 ## Member Name
-### Team Roles: <Roles>
+#### Team Roles:
+- <Roles>
 #### Contact
 	Phone:
 	Email:
@@ -25,7 +26,8 @@ TEMPLATE
 END TEMPLATE -->
 
 ## Jake Bernard
-### Team Roles: Project Manager
+#### Team Roles
+- Project Manager
 #### Contact
 	Phone: 785-221-0049
 	Email: jakebernard@ku.edu
@@ -47,7 +49,8 @@ END TEMPLATE -->
   Computer Science major, Junior 
 
 ## Nick Reinig
-### Team Roles: Software Quality Analyst
+#### Team Roles
+- Software Quality Analyst
 #### Contact
 	Phone: 913-229-0035
 	Email: NMReinig@gmail.com
@@ -69,7 +72,8 @@ END TEMPLATE -->
   Computer science major, Sophomore
 
 ## Drew Meyer
-### Team Roles: Team Resources Manager
+#### Team Roles
+- Team Resources Manager
 #### Contact
 	Phone: (785) 766-0735
 	Email: d216m596@ku.edu
@@ -89,3 +93,49 @@ END TEMPLATE -->
   Frameworks: Pandas, Numpy, TensorFlow, Matplotlib, Seaborne
 #### Bio
   Junior Computer Science major, Business minor
+
+## Vidur Pandiripally
+#### Team Role
+- Scrum Master
+#### Contact
+  	Phone: (913) 461-7917
+   	Email: v081p337@ku.edu
+#### Availability 
+	Mon: After 7PM
+ 	Tues: 11:00AM - 12:30PM, After 7PM
+  	Wed: 9-10:30AM, After 1:50PM
+   	Thurs: 9-10:30AM, After 4:00PM
+    Friday: After 5:00PM
+    Sat: All Day
+    Sun: All Day
+#### Availability Notes
+- I might be busy on some weekends due to volunteering
+#### Experience
+ Languages: C, C++, JavaScript, Python
+ Frameworks: Jira
+#### Bio
+ Junior studying computer engineering
+
+
+
+
+## Charlie Gillund
+#### Team Roles:
+	Configuration Management
+#### Contact
+	Phone: 7088008915
+	Email:charliegillund@gmail.com  School: c314g360@ku.edu
+#### Availability:
+	Mon: 1pm-6pm
+	Tues: After 7pm
+	Wed: After 1 pm
+	Thur: After 7pm
+	Fri: After 1pm
+	Sat: All
+	Sun: All
+#### Availability Notes:
+	Subject to Change with time 
+#### Experience:
+  Languages: C,C++,Python,JavaScript,HTML,CSS
+#### Bio:
+  Junior studying Computer Science
