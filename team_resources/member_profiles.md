@@ -115,3 +115,27 @@ END TEMPLATE -->
  Frameworks: Jira
 #### Bio
  Junior studying computer engineering
+
+
+
+
+## Charlie Gillund
+#### Team Roles:
+	Configuration Management
+#### Contact
+	Phone: 7088008915
+	Email:charliegillund@gmail.com  School: c314g360@ku.edu
+#### Availability:
+	Mon: 1pm-6pm
+	Tues: After 7pm
+	Wed: After 1 pm
+	Thur: After 7pm
+	Fri: After 1pm
+	Sat: All
+	Sun: All
+#### Availability Notes:
+	Subject to Change with time 
+#### Experience:
+  Languages: C,C++,Python,JavaScript,HTML,CSS
+#### Bio:
+  Junior studying Computer Science
