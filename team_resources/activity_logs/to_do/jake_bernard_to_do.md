@@ -30,9 +30,10 @@ ENTRIES:
 	
   9/21/2023
   Changes/To-do:
-	- [ ] Finish filling out project plan
-	- [ ] Get member profiles for everyone
+	- [X] Finish filling out project plan
+	- [O] Get member profiles for everyone -- requires Charlie, Drew, and Vidur
 	- [ ] Make schedule document
 	- [ ] Create Vision document
 	- [ ] Create project glossary
+	- [ ] Make task overview document
 	
