@@ -1,16 +1,15 @@
-COMMON MEETING CHECKLIST
-========================
-Allow 3 minutes for disordered discussion
-Member check-in
-Mention upcoming deadlines (even if redundant)
-Member-by-member table discussion of progress/important info (try to keep to 1-3 minutes each)
+# COMMON MEETING CHECKLIST
+- Allow 3 minutes for disordered discussion
+- Member check-in
+- Mention upcoming deadlines (even if redundant)
+- Member-by-member table discussion of progress/important info (try to keep to 1-3 minutes each)
 	- Assigning code/artifact reviews if applicable
 	- Check schedule for each person and ask if they don't mention
 	- Get topics from others to talk about
-Address most pressing issues/do group work [Will need to make priority list]
+- Address most pressing issues/do group work [Will need to make priority list]
 	- Add new tasks to schedule
 	- Update repo when necessary
-[Optional] Freeform discussion
-Risk assessment
-Plan next meeting
-End meeting
+- [Optional] Freeform discussion
+- Risk assessment
+- Plan next meeting
+- End meeting

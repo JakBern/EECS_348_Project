@@ -1,5 +1,5 @@
-====FORMAT====
-MEETING DATE == TIME
+<!--FORMAT
+## MEETING DATE : TIME
 Topics:
   - Topic 1 (highest priority)
   - Topic 2 (next highest priority)
@@ -10,10 +10,10 @@ Topics:
 
 Non-optional topics not discussed at the current meeting should be rolled over
 to the next meeting.
-============
+-->
 
-9/20/2023 == 2 PM
-Topics:
+## 9/20/2023 : 2 PM
+### Topics:
   - Meeting checklist/format
   - Email from Professor Saiedian
 	- Get input
