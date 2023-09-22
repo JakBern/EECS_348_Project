@@ -1,7 +1,10 @@
 # TO-DO LOG FOR JAKE BERNARD
-- Member Name: Jake Bernard  
-- Project Role: Project Manager  
-- Lab Section: 4 PM Thursday
+#### Member Name
+Jake Bernard  
+#### Project Role
+Project Manager  
+#### Lab Section
+4 PM Thursday
 
 
 ## ENTRIES:
