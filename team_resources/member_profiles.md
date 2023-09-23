@@ -3,12 +3,12 @@
 <!--
 TEMPLATE
 ## Member Name
-#### Team Roles:
+#### Team Role
 - <Roles>
 #### Contact
 	Phone:
 	Email:
-#### Availability:
+#### Availability
 	Mon:
 	Tues:
 	Wed:
@@ -16,17 +16,17 @@ TEMPLATE
 	Fri:
 	Sat:
 	Sun:
-#### Availability Notes:
+#### Availability Notes
   - <Notes on availability>
   - <Notes on availability>
-#### Experience:
+#### Experience
   <your areas of expertise>
-#### Bio:
+#### Bio
   <very short bio -- year, major, etc>
 END TEMPLATE -->
 
 ## Jake Bernard
-#### Team Roles
+#### Team Role
 - Project Manager
 #### Contact
 	Phone: 785-221-0049
@@ -49,7 +49,7 @@ END TEMPLATE -->
   Computer Science major, Junior 
 
 ## Nick Reinig
-#### Team Roles
+#### Team Role
 - Software Quality Analyst
 #### Contact
 	Phone: 913-229-0035
@@ -72,7 +72,7 @@ END TEMPLATE -->
   Computer science major, Sophomore
 
 ## Drew Meyer
-#### Team Roles
+#### Team Role
 - Team Resources Manager
 #### Contact
 	Phone: (785) 766-0735
@@ -120,12 +120,12 @@ END TEMPLATE -->
 
 
 ## Charlie Gillund
-#### Team Roles:
-	Configuration Management
+#### Team Roles
+- Configuration Management
 #### Contact
 	Phone: 7088008915
 	Email:charliegillund@gmail.com  School: c314g360@ku.edu
-#### Availability:
+#### Availability
 	Mon: 1pm-6pm
 	Tues: After 7pm
 	Wed: After 1 pm
@@ -133,9 +133,9 @@ END TEMPLATE -->
 	Fri: After 1pm
 	Sat: All
 	Sun: All
-#### Availability Notes:
+#### Availability Notes
 - Subject to Change with time 
-#### Experience:
+#### Experience
   Languages: C, C++, Python, JavaScript, HTML, CSS
-#### Bio:
+#### Bio
   Junior studying Computer Science
