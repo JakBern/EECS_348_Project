@@ -1,5 +1,5 @@
 ## Project Manager
-**Responsibilities**
+### Responsibilities
   - Organize meetings and schedule
   - Organize and manage repo
   - Organize and lead meetings
@@ -8,13 +8,13 @@
   - Turn in all artifacts
 
 ## Scrum Master
-**Responsibilities**
+### Responsibilities
   - Updating Jira
   - Managing sprints
   - Assigning workloads for features/modules
 
 ## Software Quality Analyst
-**Responsibilities**
+### Responsibilities
   - Review code
   - Ensure code is performant and bug-free
   - Make sure code is well commented
@@ -22,7 +22,7 @@
   - Make sure style guidelines are adhered to
 
 ## Team Resources Manager
-**Responsibilities**
+### Responsibilities
   - Manages and documents team communication
   - Makes logs of meetings
   - Reports progress based on activities
