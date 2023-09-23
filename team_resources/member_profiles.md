@@ -105,9 +105,9 @@ END TEMPLATE -->
  	Tues: 11:00AM - 12:30PM, After 7PM
   	Wed: 9-10:30AM, After 1:50PM
    	Thurs: 9-10:30AM, After 4:00PM
-    Friday: After 5:00PM
-    Sat: All Day
-    Sun: All Day
+    	Friday: After 5:00PM
+    	Sat: All Day
+    	Sun: All Day
 #### Availability Notes
 - I might be busy on some weekends due to volunteering
 #### Experience
@@ -134,8 +134,8 @@ END TEMPLATE -->
 	Sat: All
 	Sun: All
 #### Availability Notes:
-	Subject to Change with time 
+- Subject to Change with time 
 #### Experience:
-  Languages: C,C++,Python,JavaScript,HTML,CSS
+  Languages: C, C++, Python, JavaScript, HTML, CSS
 #### Bio:
   Junior studying Computer Science
