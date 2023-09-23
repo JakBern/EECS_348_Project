@@ -121,7 +121,7 @@ END TEMPLATE -->
 
 ## Charlie Gillund
 #### Team Roles
-- Configuration Management
+- Configuration Manager
 #### Contact
 	Phone: 7088008915
 	Email:charliegillund@gmail.com  School: c314g360@ku.edu
