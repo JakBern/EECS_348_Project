@@ -11,9 +11,18 @@ Topics:
 Non-optional topics not discussed at the current meeting should be rolled over
 to the next meeting.
 -->
+<!-- omit from toc -->
+# Meeting Agendas
+
+<!-- omit from toc -->
+## Table of Contents
+- [9/20/2023 : 2 PM](#9202023--2-pm)
+- [9/26/2023 : 2 PM](#9262023--2-pm)
+
+
 
 ## 9/20/2023 : 2 PM
-### Topics:
+**Topics**
   - Meeting checklist/format
   - Email from Professor Saiedian
 	- Get input
@@ -25,3 +34,13 @@ to the next meeting.
   - [Opt] Reorganize repo/markdown files
   - [Opt] Group name?
   - [Opt] Data structures for project
+
+## 9/26/2023 : 2 PM
+**Topics**
+  - Review role-related duties
+  - Discuss activity logs/progress reports (don't have to be verbose like mine)
+    - No "To-do" lists required
+  -  Address how Jira will be used and labor divided, make plans
+  - Discuss project vision and look at tasks
+  - [Opt] Discuss how the project should work
+  - Ask members for discussion points

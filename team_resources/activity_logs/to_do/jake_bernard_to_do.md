@@ -30,3 +30,14 @@
 - [ ] Create Vision document
 - [ ] Create project glossary
 - [ ] Make task overview document
+
+### 9/24/2023
+#### Changes/To-do:
+- [X] Make changes to project plan
+- [X] Assign weekly tasks to members
+- [X] Add tables of contents where appropriate
+- [ ] Create Vision document
+- [ ] Create project glossary
+- [ ] Make task overviews
+- [X] Create agenda for next meeting
+- [X] Revise meeting checklist

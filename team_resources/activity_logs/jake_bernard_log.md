@@ -39,18 +39,19 @@
   - Continued filling out roles and responsibilities
   - Continued filling out project plan document, replacing example text sections
 
-<<<<<<< HEAD
-  4:00 - 5:50
-Activities:
-  - Started work on task overviews
-  - Finished project plan
-  - Contacted team about potential review order -- dropped in favor of single reviewer
-  - Changed documents to fit Markdown syntax
-=======
 ### 4:00 - 6:20
 #### Activities:
   - Started work on task overviews
   - Finished project plan
   - Contacted team about potential review order -- dropped in favor of single reviewer
   - Changed documents to fit Markdown syntax
->>>>>>> af91c290149631f73952490361c004edf667a8f6
+  
+## 9/24/2023
+### 12:40 - NULL
+#### Activities:
+  - Redid Markdown files, adding tables of contents/updating organization
+  - Updated role "Configuration Manager"
+  - Updated Project Plan to reflect current organization patterns
+  - Updated README
+  - Created agenda for next meeting
+  - Assigned weekly tasks to members

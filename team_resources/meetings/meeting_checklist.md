@@ -3,9 +3,14 @@
 - Member check-in
 - Mention upcoming deadlines (even if redundant)
 - Member-by-member table discussion of progress/important info (try to keep to 1-3 minutes each)
+    - Ask for discussion points
 	- Assigning code/artifact reviews if applicable
-	- Check schedule for each person and ask if they don't mention
-	- Get topics from others to talk about
+	- Check schedule in case each person has something due
+	- Get topics from others to talk about based upon role
+    	- **Team Resources Manager** Ask about progress report
+    	- **Configuration Manager** Ask about any problems/changes that need to be addressed
+    	- **Software Quality Analyst** Discuss any outstanding issues people need to address/patterns of errors
+    	- **Scrum Master** Discuss assignments of tasks
 - Address most pressing issues/do group work [Will need to make priority list]
 	- Add new tasks to schedule
 	- Update repo when necessary
