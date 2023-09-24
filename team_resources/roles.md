@@ -28,8 +28,8 @@
   - Reports progress based on activities
   - Updates schedule with tasks
 
-## Project Design Lead
-### Responsibilities
+## Configuration Manager
+**Responsibilities**
   - Designs high-level abstractions for functionality
   - Integrates of low-level parts into the greater project
   - Makes sure interfaces are consistent
