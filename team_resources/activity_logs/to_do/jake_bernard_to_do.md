@@ -36,8 +36,9 @@
 - [X] Make changes to project plan
 - [X] Assign weekly tasks to members
 - [X] Add tables of contents where appropriate
-- [ ] Create Vision document
-- [ ] Create project glossary
-- [ ] Make task overviews
+- [X] Create Vision document
+- [ ] Create Iteration Plans -- scrapped, iteration objectives in project plan is fine -- possibly will be added back later
+- [X] Create project glossary
+- [ ] Make task overviews -- put off for later
 - [X] Create agenda for next meeting
 - [X] Revise meeting checklist

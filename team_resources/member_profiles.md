@@ -24,6 +24,7 @@ TEMPLATE
 ### Bio
   <very short bio -- year, major, etc>
 END TEMPLATE -->
+<!-- no toc -->
 ## Table of Contents
 - [Jake Bernard](#jake-bernard)
 - [Nick Reinig](#nick-reinig)
@@ -51,8 +52,8 @@ END TEMPLATE -->
   - *I live in Topeka and have to commute about 40 minutes to KU.
   - I will not be available from October 5th to the 8th.
 ### Experience
-  Main languages: Python, C++, basic knowledge of C
-  Libraries: NumPy, Matplotlib, basic knowledge of PIL, C++ STL, SDL2
+  Main languages: Python, C++, basic knowledge of C  
+  Libraries: NumPy, Matplotlib, PIL, C++ STL, SDL2
 ### Bio
   Computer Science major, Junior 
 
@@ -74,8 +75,8 @@ END TEMPLATE -->
   - Some changes to my availability during the day due to having lots of tests in my classes
   - My weekend schedule is very unpredictable, but I should be typically available
 ### Experience
-  work in Python, javascript
-  experience in Jira
+  Work in Python, Javascript.  
+  Experience in Jira.
 ### Bio
   Computer science major, Sophomore
 
@@ -97,7 +98,7 @@ END TEMPLATE -->
   - I work at Panda Express on evening on Wednesdays, Fridays, and Saturdays
   - I am free and willing to meet at any time listed within my availablity given advance notice.
 ### Experience
-  Languages: Python, working knowledge in C
+  Languages: Python, working knowledge in C  
   Frameworks: Pandas, Numpy, TensorFlow, Matplotlib, Seaborne
 ### Bio
   Junior Computer Science major, Business minor
@@ -113,13 +114,13 @@ END TEMPLATE -->
  	Tues: 11:00AM - 12:30PM, After 7PM
   	Wed: 9-10:30AM, After 1:50PM
    	Thurs: 9-10:30AM, After 4:00PM
-    	Friday: After 5:00PM
-    	Sat: All Day
-    	Sun: All Day
+    Friday: After 5:00PM
+    Sat: All Day
+    Sun: All Day
 ### Availability Notes
 - I might be busy on some weekends due to volunteering
 ### Experience
- Languages: C, C++, JavaScript, Python
+ Languages: C, C++, JavaScript, Python  
  Frameworks: Jira
 ### Bio
  Junior studying computer engineering
