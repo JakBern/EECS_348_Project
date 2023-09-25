@@ -61,3 +61,8 @@
 - Reread project plan and corrected typos/outdated information.
 - Created Project Glossary
 - Created Project Vision
+
+## 9/25/2024
+### 9:45 AM
+#### Activities
+- Added Software Requirements Specification
