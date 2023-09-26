@@ -6,6 +6,6 @@
 ## Current Schedule
 **9/24/2023** - Project Plan Part 1 Due
 
-**10/8/2023** - Software Requirements Specification Due
+**10/15/2023** - Software Requirements Specification Due
 
 

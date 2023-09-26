@@ -66,3 +66,8 @@
 ### 9:45 AM
 #### Activities
 - Added Software Requirements Specification
+
+## 9/26/2024
+### 10:30-10:50 AM
+#### Activities
+- Began filling out task overview
