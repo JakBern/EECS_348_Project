@@ -43,7 +43,7 @@ Operator overloading might be a good idea for some of these.
 
 ## Parser
 ### Description
-Module responsible for parsing and evaluating user input. Will probably get input from the I/O as a Vector of MathNodes.
+Module responsible for parsing and evaluating user input. Will probably get input from the I/O as a string then parse it to MathNodes.
 **Used in:**
 - GUI and I/O
 **Uses:**
@@ -51,7 +51,7 @@ Module responsible for parsing and evaluating user input. Will probably get inpu
 - GUI and I/O
 ### Methods
 **Interface**
-- Value parseInput(std::Vector<MathNode>) // takes input, gives output. Possibly returns a Value containing some kind of error type if 
+- Value parseInput(std::string input) // takes input, gives output. Possibly returns a Value containing some kind of error type if 
 something has gone wrong.
 **Internal**
 - TBD
@@ -61,7 +61,7 @@ something has gone wrong.
 
 ## GUI and I/O
 ### Description
-Module for presenting an interface to the user, getting user input, and displaying the output of evaluating user input. Will most likely need to be broken down into smaller tasks, and some kind of framework will need to be chosen. There will also need to be ways to input special characters for constants like pi, etc.
+Module for presenting an interface to the user, getting user input, and displaying the output of evaluating user input. Will most likely need to be broken down into smaller tasks, and some kind of framework will need to be chosen. There will also need to be ways to input special characters for constants like pi, etc. (possibly using something like "[pi]" which is rendered differently in the input string.)
 **Used in:**
 - None
 **Uses:**
