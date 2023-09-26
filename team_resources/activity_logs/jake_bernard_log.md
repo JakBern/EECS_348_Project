@@ -71,3 +71,7 @@
 ### 10:30-10:50 AM
 #### Activities
 - Began filling out task overview
+
+### 1:30 - 2:20 PM
+#### Activities
+- Continued filling out task overview

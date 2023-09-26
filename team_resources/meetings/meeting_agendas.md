@@ -17,7 +17,7 @@ to the next meeting.
 <!-- omit from toc -->
 ## Table of Contents
 - [9/20/2023 : 2 PM](#9202023--2-pm)
-- [9/26/2023 : 2 PM](#9262023--2-pm)
+- [9/26/2023 : 3:50 PM](#9262023--350-pm)
 
 
 
@@ -35,8 +35,9 @@ to the next meeting.
   - [Opt] Group name?
   - [Opt] Data structures for project
 
-## 9/26/2023 : 2 PM
+## 9/26/2023 : 3:50 PM
 **Topics**
+  - Look at new project
   - Review role-related duties
   - Discuss activity logs/progress reports (don't have to be verbose like mine)
     - No "To-do" lists required
