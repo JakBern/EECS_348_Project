@@ -55,10 +55,10 @@ decided upon sprint times of 2 weeks.
 
 ## 10-3-2023
 
-## 3:50 PM - 4:15 PM
-### Note Taker
+### 3:50 PM - 4:15 PM
+#### Note Taker
 - Drew Meyer
-### Members present
+#### Members present
 - Charlie
 - Drew
 - Jake
