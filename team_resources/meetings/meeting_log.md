@@ -55,7 +55,7 @@ decided upon sprint times of 2 weeks.
 
 ## 10-3-2023
 
-## 4:00 PM - ___ PM
+## 3:50 PM - 4:15 PM
 ### Note Taker
 - Drew Meyer
 ### Members present
@@ -65,7 +65,10 @@ decided upon sprint times of 2 weeks.
 - Nick
 #### Summary
 - Discussed plan for Software Requirements Specificiation
-	- Each team member to individually think of functional requirements of the program
-	- Note: Functional requirements may be
- 	- Member absence: Jake will be out of town Thursday and Friday
-	- Jake has updated the repo by including team member role responsibilities, (check roles.md)
+	- Each team member to individually think of functional requirements of the program and submit them in the Discord server by Friday 10/6/23.
+	- Note: Functional requirements may be optional now, but required in the future
+ 	- Member absence: Jake will be out of town Thursday and Friday.
+	- Jake has updated the repo by including team member role responsibilities, (check /taskts/roles.md/).
+ - Remember to keep an activity log, leaving a brief note of progress made (even slight).
+ - Scrum Board: https://eecs348.atlassian.net/jira/software/projects/SCRUM/boards/1
+ - See /team_resources/tasks/overview.md/ for a task overview which describes design implementations
