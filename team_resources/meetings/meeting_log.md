@@ -52,3 +52,20 @@ decided upon sprint times of 2 weeks.
 - Discussed "Meeting Checklist" format, (check /team_resources/meetings/meeting_checklist/).
 	- New way to structure meetings more efficiently, format outlined within document.
 
+
+## 10-3-2023
+
+## 4:00 PM - ___ PM
+### Note Taker
+- Drew Meyer
+### Members present
+- Charlie
+- Drew
+- Jake
+- Nick
+#### Summary
+- Discussed plan for Software Requirements Specificiation
+	- Each team member to individually think of functional requirements of the program
+	- Note: Functional requirements may be
+ 	- Member absence: Jake will be out of town Thursday and Friday
+	- Jake has updated the repo by including team member role responsibilities, (check roles.md)
