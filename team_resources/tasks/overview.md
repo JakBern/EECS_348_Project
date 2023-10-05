@@ -28,7 +28,7 @@ The data structure which the invididual elements of the arithmetic expression pr
 **Interface**
 - Value getValue() // returns the value of a numeral node -- the Value struct should hold all fomats for the value
 - bool isOperator() // returns true if the Node represents an operator
-- bool isBinary() // returns true if the Node is a binary operator
+- bool isBinary() // returns true if the Node is a binary operator -- may later need to define ternary checks for logs
 - MathNode performOperation(MathNode operand) // return a MathNode with a value determined by a unary operation
 - MathNode performOperation(MathNode operandA, MathNode operandB) // return a MathNode with a value determined by a binary operation
 **Internal**
