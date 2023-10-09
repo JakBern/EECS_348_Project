@@ -19,6 +19,7 @@ Note that listed methods and internal structures are not the final implementatio
 ## MathNode
 ### Description
 The data structure which the invididual elements of the arithmetic expression provided by the user will be parsed into. Math nodes can contain either a numerical value or an operator. Numerical values should be stored in multiple formats (eg, doubles and as BigNums) and can be retrieved as either and will be updated in both formats when an operation is performed upon them. Operators can be binary or unary. Operators should encode priority within the order of operations (parenthetical depth will be handled by the parser).  
+Care should be taken so that the class is easily extensible via inheritance so that an arbitrary number of operators can be added.
 **Used in:**
 - Parser
 - GUI and I/O (Constructing input sequence as a Vector of MathNodes)

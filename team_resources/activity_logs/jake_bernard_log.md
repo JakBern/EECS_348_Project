@@ -75,3 +75,28 @@
 ### 1:30 - 2:20 PM
 #### Activities
 - Continued filling out task overview
+
+
+## 10/5/2023
+### 10:30 - 11:45
+#### Activities
+- Created list of requirements
+- Began filling out software requirements specification form
+- looked into using Nuklear for GUI
+
+## 10/8/2023
+### 11:00 AM - 12:00 PM
+#### Activities
+- Continued filling out Software Requirements Specifications
+
+### 10:15 PM - 11:00 PM
+#### Activities
+- Continued filling out Software Requirements Specifications
+- Began reading through Nuklear documentation
+
+## 10/9/2023
+### 8:50 - 9:50 AM
+#### Activities
+- Aggregated teammates' suggestions for requirements document
+- Continued filling out Software Requirements Specifications
+- Continued reading through Nuklear documentation
