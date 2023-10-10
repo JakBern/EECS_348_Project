@@ -85,4 +85,7 @@ decided upon sprint times of 2 weeks.
 	- Going to contact Professor to clarify various system interfaces found within section 2.1 of the SRS.
  	- Functional requirements: parsing user input, basic operations, order of operations, etc. (See Specific Requirements in section 3 of the SRS).
 	- Functionaliy classification in section 4 deems each functionality as either essential, desirable, or optional.
-- 
+- Member Assignments
+	- Vidur -> Math Node
+	- Drew and Nick -> Parser
+ 	- Charlie and Jake -> GUI
