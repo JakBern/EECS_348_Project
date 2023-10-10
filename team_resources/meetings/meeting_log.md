@@ -72,3 +72,16 @@ decided upon sprint times of 2 weeks.
  - Remember to keep an activity log, leaving a brief note of progress made (even slight).
  - Scrum Board: https://eecs348.atlassian.net/jira/software/projects/SCRUM/boards/1
  - See /team_resources/tasks/overview.md/ for a task overview which describes design implementations
+
+## 10-10-2023
+
+### 4:00 PM - 
+#### Note Taker
+- Drew Meyer
+#### Members present
+- All
+#### Summary
+- Reviewed Software Requirements Specification (SRS)
+	- Going to contact Professor to clarify various system interfaces found within section 2.1 of the SRS.
+ 	- Functional requirements: parsing user input, basic operations, order of operations, etc. (See Specific Requirements in section 3 of the SRS).
+	- Functionaliy classification in section 4 deems each functionality as either essential, desirable, or optional.
