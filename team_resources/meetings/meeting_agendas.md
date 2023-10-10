@@ -45,3 +45,8 @@ to the next meeting.
   - Discuss project vision and look at tasks
   - [Opt] Discuss how the project should work
   - Ask members for discussion points
+  
+ ## 10/10/2023 : 3:50 PM
+ **Topics**
+ - Review Software Requirements Specifications
+ - Assign programming tasks
