@@ -100,3 +100,8 @@
 - Aggregated teammates' suggestions for requirements document
 - Continued filling out Software Requirements Specifications
 - Continued reading through Nuklear documentation
+
+## 10/14/2023 - 10/15/2023
+### Various Times
+#### Activities
+- Finished Software Requirements Specifications with use case modeling
