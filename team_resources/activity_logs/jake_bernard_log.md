@@ -105,3 +105,22 @@
 ### Various Times
 #### Activities
 - Finished Software Requirements Specifications with use case modeling
+
+## 10/17/2023 - 10/18/2023
+### Various Times
+#### Activities
+- Started actual programming
+- Added main.cpp, helper.h, helper.cpp, flags.h, interface.h, cli.h, and cli.cpp
+- Created the main loop
+
+## 10/19/2023
+### Various Times
+#### Activities
+- Continued working on base implementation
+- Separated storage of runtime vars from AppInterface into UserContext
+- looked into ncurses/conio.h for fancy TUI stuff (plan to use in a later iteration)
+
+## 10/20/2023, 10/21/2023, 10/22/2023
+### Various Times
+#### Activities
+- Finished hacky base implementation, pushed to project github
