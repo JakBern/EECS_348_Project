@@ -15,13 +15,13 @@ constexpr std::string_view kHelpMessage =
 "Supported operators:\n"
 "+, -, /, *, %, ^ (or **)\n"
 "Current commands are:\n"
-"- \"exit\": exits program"
-"- \"history\": displays history and allows selecting a previous expression"
-"- \"vars\": displays all user stored variables and their values"
-"- \"removevar <varname>\": removes variable with matching name"
-"- \"savetovar <varname>\": saves result of expression to <varname>"
-"- \"switchGUI\": switches to GUI version of program"
-"- \"help\": displays this stuff";
+"- \"exit\": exits program\n"
+"- \"history\": displays history and allows selecting a previous expression\n"
+"- \"vars\": displays all user stored variables and their values\n"
+"- \"removevar <varname>\": removes variable with matching name\n"
+"- \"savetovar <varname>\": saves result of expression to <varname>\n"
+"- \"switchGUI\": switches to GUI version of program\n"
+"- \"help\": displays this stuff\n";
 
 void TUI::LoadFromHistory(int expr_num) {
   std::cout << "Functionality not yet implemented :)\n";
