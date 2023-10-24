@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef MATH_NODE_H_ 
 
 class MathNode{
-
-    //constructor
-    MathNode(int b){a = b}
-    //public
     
+    //public
+    public:
     
     //protected
+    protected:
     //Add
     //Divide
     //Multiply
@@ -18,10 +18,17 @@ class MathNode{
     
     
     //private
+    private:
     
+    
+    
+    //constructor
+    MathNode()
     
     
     //Needs to handle every integer in user input
     //
     
 };
+
+#endif
