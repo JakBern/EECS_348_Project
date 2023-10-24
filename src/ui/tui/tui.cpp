@@ -63,6 +63,10 @@ flags::InterfaceCode TUI::Run() {
       // DisplayVars();
     }
 
+    else if (user_input_ == "savetovar") {
+      std::cout << "Functionality not yet implemented :)\n";
+    }
+
     else if (user_input_ == "removevar") {
       std::cout << "Functionality not yet implemented :)\n";
     }

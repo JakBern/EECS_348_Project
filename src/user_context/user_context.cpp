@@ -6,15 +6,27 @@
 #include "user_context.h"
 #include "util/flags.h"
 
+constexpr std::string_view kReservedKeywords[] = {
+                                "exit", "var", "vars",
+                                "savetovar", "history",
+                                "removevar", "help",
+                                "switchGUI", "e",
+                                "pi", "g", "log",
+                                "ln", "sqrt", "root"
+                              };
+
 std::size_t UserContext::history_len() {
   return history_.size();
 }
 
 void UserContext::add_history(std::string expr) {
-  if (history_len() == max_history_len_) {
+  if (history_.front() == expr) {
+    return;
+  }
+  if (history_len() >= max_history_len_) {
     history_.pop_back();
   }
-  history_.push_back(expr);
+  history_.push_front(expr);
 }
 
 std::list<std::string>& UserContext::get_history() {
@@ -23,6 +35,11 @@ std::list<std::string>& UserContext::get_history() {
 
 bool UserContext::in_keywords(std::string var) {
   // TODO(Jake): implement functionality later
+  for (auto keyword : kReservedKeywords) {
+    if (var == keyword) {
+      return true;
+    }
+  }
   return false;
 }
 
@@ -46,6 +63,7 @@ flags::UserVarMsg UserContext::add_var(std::string var, int val) {
 
   else {
     // TODO(Jake): insert var and value into user_vars
+    user_vars_.insert({var, val});
     return flags::UserVarMsg::kVarWriteSuccess;
   }
 }

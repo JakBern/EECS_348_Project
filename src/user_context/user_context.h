@@ -4,9 +4,8 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <string_view>
 #include <map>
-#include <array>
-#include <queue>
 
 #include "util/flags.h"
 
@@ -35,11 +34,10 @@ class UserContext {
     std::list<std::string> history_;
 
     // Specifies the maximum number of expressions that can exist in history.
-    std::size_t max_history_len_;
+    static const std::size_t max_history_len_ = 8;
 
-    std::array<std::string, 1> reserved_keywords_;
-    std::map<std::string, int/*Value*/> reserved_vars_;
-    std::map<std::string, int/*Value*/> user_vars_;
+    // will later use Value type instead of int
+    std::map<std::string, int> user_vars_;
 
 };
 

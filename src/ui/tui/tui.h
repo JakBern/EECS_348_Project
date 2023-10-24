@@ -11,6 +11,8 @@
 #ifndef UI_TUI_TUI_H_
 #define UI_TUI_TUI_H_
 
+#include <memory>
+
 #include "ui/interface.h"
 #include "util/flags.h"
 
@@ -21,9 +23,12 @@ class TUI : public AppInterface {
 
   protected:
 
+    // used during savetovar -- if NULL, trigger error in saving var
+    // std::unique_ptr<Value> last_expr_;
+
     flags::InterfaceCode Run() override;
 
-    virtual void Close() override;
+    void Close() override;
 
     void LoadFromHistory(int expr_num) override;
 
@@ -31,9 +36,9 @@ class TUI : public AppInterface {
 
     void DisplayHistory();
 
-    virtual void Eval(std::string expr) override;
+    void Eval(std::string expr) override;
 
-    virtual void DisplayError(
+    void DisplayError(
                   std::string expr, 
                   flags::EvalErr err,
                   int position) override;
