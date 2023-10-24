@@ -124,6 +124,7 @@
 ### Various Times
 #### Activities
 - Finished hacky base implementation, pushed to project github
+- NOTE: several questions were asked to Bing Chat on syntax/debugging questions, but all written code is original.
 
 ## 10/23/2023 - 10/24/2024
 ### Various Times
