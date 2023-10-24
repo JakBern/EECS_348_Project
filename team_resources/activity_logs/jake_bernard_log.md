@@ -124,3 +124,10 @@
 ### Various Times
 #### Activities
 - Finished hacky base implementation, pushed to project github
+
+## 10/23/2023 - 10/24/2024
+### Various Times
+#### Activities
+- Changed base implementation slightly, adding more features
+- Reworked user context and parser to exist as distinct objects in main, parser and menu should hold shared pointers to user context
+- interface will later hold a shared ptr to the parser

@@ -27,6 +27,9 @@ class UserContext {
 
     bool var_exists(std::string var);
 
+    UserContext() {}
+    ~UserContext() {}
+
 
   protected:
     // Contains the history of all expressions evaluated during runtime

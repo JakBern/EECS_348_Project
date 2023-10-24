@@ -31,7 +31,7 @@ void TUI::Eval(std::string expr) {
   // parser_.eval(expr)
   std::cout << "Functionality not yet implemented :)\n";
   std::cout << "Entered string was added to history.\n";
-  user_context_.add_history(expr);
+  user_context_->add_history(expr);
 }
 
 
@@ -105,16 +105,17 @@ void TUI::RunHistoryMenu() {
 
 void TUI::DisplayHistory() {
   int num = 1;
-  if (user_context_.history_len() == 0) {
+  if (user_context_->history_len() == 0) {
     std::cout << "\t...History is empty...\n";
     return;
   }
-  for (std::string expr : user_context_.get_history()) {
+  for (std::string expr : user_context_->get_history()) {
     std::cout << "\t" << num << ") " << expr << "\n";
     num++;
   }
   return;
 }
 
-TUI::TUI() {}
+TUI::TUI(std::shared_ptr<UserContext> context) : AppInterface(context) {}
 TUI::~TUI() {}
+

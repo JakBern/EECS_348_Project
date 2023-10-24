@@ -19,6 +19,7 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <memory>
 
 #include "util/flags.h"
 #include "user_context/user_context.h"
@@ -45,7 +46,7 @@ class AppInterface {
     virtual void Close() = 0;
 
     AppInterface();
-    AppInterface(UserContext &context);
+    AppInterface(std::shared_ptr<UserContext> context);
     virtual ~AppInterface();
 
   protected:
@@ -98,8 +99,8 @@ class AppInterface {
                 flags::EvalErr err,
                 int position) = 0;
 
-    // Parser parser_;
-    UserContext user_context_;
+    // std::shared_ptr<Parser> parser_;
+    std::shared_ptr<UserContext> user_context_;
 
     std::string user_input_;
 

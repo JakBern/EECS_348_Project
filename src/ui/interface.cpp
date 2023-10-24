@@ -4,7 +4,7 @@
 #include "util/flags.h"
 
 void AppInterface::AddToHistory(std::string expr) {
-  user_context_.add_history(expr);
+  user_context_->add_history(expr);
 }
 
 flags::UserVarMsg AppInterface::AddToUserVars(std::string var, int val) {
@@ -18,10 +18,7 @@ bool AppInterface::RemoveFromUserVars(std::string var) {
   return true;
 }
 
-AppInterface::AppInterface() {}
+AppInterface::AppInterface(std::shared_ptr<UserContext> context) : 
+                            user_context_(context) {}
 
-AppInterface::AppInterface(UserContext &context) {
-  // TODO (Jake): use move semantics later
-  user_context_ = context;
-}
 AppInterface::~AppInterface() {}

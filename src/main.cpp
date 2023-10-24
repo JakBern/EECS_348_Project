@@ -20,6 +20,7 @@
 #include "ui/interface.h"
 #include "util/flags.h"
 #include "util/helper.h"
+#include "user_context/user_context.h"
 
 int main() {
 
@@ -29,14 +30,19 @@ int main() {
   // The window in which the program will be run
   std::unique_ptr<AppInterface> window = nullptr;
 
+  std::shared_ptr<UserContext> context = std::make_shared<UserContext>();
+
+  // TODO: Add in parser when implemented
+  // std::shared_ptr<Parser> context = std::make_shared<Parser>(context);
+
   // TUI and GUI are child classes of AppInterface,
   // so we can make our window either of those.
   if (!helper::config::UseGUI()) {
-    window = std::make_unique<TUI>();
+    window = std::make_unique<TUI>(context/*, parser*/);
   }
   // TODO: Add GUI implementation
   // else {
-  //   window =  std::make_unique<GUI>();
+  //   window =  std::make_unique<GUI>(context/*, parser*/);
   // }
 
   while (true) {
