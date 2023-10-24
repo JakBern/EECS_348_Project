@@ -7,7 +7,7 @@
 //
 // Author(s): 
 // Jake Bernard [from 10/17/2023 - Present],
-// YourName Here [from Blank - Blank]
+// Vidur Pandiripally [from 10/24/2023 - Present],
 //
 // Last update:
 //  - 10/19/2023 (Jake): Created file, added basic code
