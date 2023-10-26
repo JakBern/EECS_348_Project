@@ -21,8 +21,8 @@
 #include <unordered_map>
 #include <memory>
 
-#include "util/flags.h"
-#include "user_context/user_context.h"
+#include "util/flags.hpp"
+#include "user_context/user_context.hpp"
 
 class AppInterface {
   public:

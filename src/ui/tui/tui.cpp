@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string_view>
 
-#include "ui/tui/tui.h"
-#include "util/flags.h"
-#include "user_context/user_context.h"
+#include "ui/tui/tui.hpp"
+#include "util/flags.hpp"
+#include "user_context/user_context.hpp"
 
 constexpr std::string_view kWelcomeMessage = 
 "Welcome to the Arithmetic Expression Evaluator\n";

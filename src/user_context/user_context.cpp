@@ -3,8 +3,8 @@
 #include <map>
 #include <array>
 
-#include "user_context.h"
-#include "util/flags.h"
+#include "user_context.hpp"
+#include "util/flags.hpp"
 
 constexpr std::string_view kReservedKeywords[] = {
                                 "exit", "var", "vars",

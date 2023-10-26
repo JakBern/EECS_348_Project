@@ -13,8 +13,8 @@
 
 #include <memory>
 
-#include "ui/interface.h"
-#include "util/flags.h"
+#include "ui/interface.hpp"
+#include "util/flags.hpp"
 
 class TUI : public AppInterface {
   public:

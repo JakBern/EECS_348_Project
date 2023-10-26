@@ -15,7 +15,7 @@
 #include <string>
 #include <fstream>
 
-#include "util/helper.h"
+#include "util/helper.hpp"
 
 // =============================================================================
 //                             CONFIG HELPERS

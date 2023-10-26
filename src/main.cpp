@@ -16,11 +16,11 @@
 #include <memory>
 #include <iostream>
 
-#include "ui/tui/tui.h"
-#include "ui/interface.h"
-#include "util/flags.h"
-#include "util/helper.h"
-#include "user_context/user_context.h"
+#include "ui/tui/tui.hpp"
+#include "ui/interface.hpp"
+#include "util/flags.hpp"
+#include "util/helper.hpp"
+#include "user_context/user_context.hpp"
 
 int main() {
 

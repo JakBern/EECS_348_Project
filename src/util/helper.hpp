@@ -15,7 +15,7 @@
 
 #include <string>
 
-#include "flags.h"
+#include "flags.hpp"
 
 namespace helper {
 

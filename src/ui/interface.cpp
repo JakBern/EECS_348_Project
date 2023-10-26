@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "ui/interface.h"
-#include "util/flags.h"
+#include "ui/interface.hpp"
+#include "util/flags.hpp"
 
 void AppInterface::AddToHistory(std::string expr) {
   user_context_->add_history(expr);
