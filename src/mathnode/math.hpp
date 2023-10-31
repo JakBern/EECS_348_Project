@@ -6,19 +6,31 @@ class MathNode{
     
     //public
     public:
+    //Add
+    void Add();
+
+    //Subtraction
+    void Subtract();
+
+    //Multiply
+    void Multiply();
+
+    //Divide
+    void Divide();
+
+    //Square
+    void Square();
+
+    //Square Root
+    void SquareRoot();
     
     //protected
     protected:
-    //Add
-    //Divide
-    //Multiply
-    //Divide
-    //Square
-    //Square
     
     
     //private
     private:
+    //array of nums
     
     
     
