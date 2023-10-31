@@ -132,3 +132,17 @@
 - Changed base implementation slightly, adding more features
 - Reworked user context and parser to exist as distinct objects in main, parser and menu should hold shared pointers to user context
 - interface will later hold a shared ptr to the parser
+
+# 10/28/2023
+## 11:50 - 5:30
+### Activities
+- Began work on making the "Value" class which holds numbers in symbolic form
+- Also worked on the "BigNum" class which holds signed integers of arbitrary size
+# 6:00 - 6:30
+### Activities
+- Worked on creating a UML class diagram for the project
+
+# 10/29/2023
+## 9:00 - 9:55 AM
+### Activities
+- Continued working on UML class diagram
