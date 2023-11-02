@@ -2,11 +2,10 @@
 #include <vector>
 #include <string>
 #include <cstlib>
-
-const static unsigned long kBigNumThreshold = 10000000000000000000;
+#include <cstdint>
 
 BigNum::BigNum() {}
-BigNum::BigNum(unsigned long num) {
+BigNum::BigNum(uint_fast64_t num) {
   num_.push_back(num);
 }
 BigNum::BigNum(const std::string& num) {
@@ -17,8 +16,8 @@ BigNum::BigNum(const std::string& num) {
 std::size_t BigNum::digit_count() {
   std::size_t len = 0;
   len += ulongs_used() - 1;
-  len *= 19;
-  unsigned long back = num_.back();
+  len *= kDigitLength;
+  uint_fast64_t back = num_.back();
   while (back != 0) {
     len++;
     back /= 10;
@@ -31,7 +30,7 @@ std::string BigNum::to_string() {
   out += to_string(num_[num_.size() - 1]);
   for (int i = num_.size() - 2; i >= 0; i--) {
     std::string next_part = to_string(num_[i]);
-    next_part.insert(0, (19 - next_part.length()), '0');
+    next_part.insert(0, (kDigitLength - next_part.length()), '0');
     out += next_part;
   }
   return out;
@@ -43,7 +42,7 @@ void BigNum::set_neg() {positive_ = false;}
 bool BigNum::is_pos() {return positive_;}
 bool BigNum::is_neg() {return !positive_;}
 
-void BigNum::set_num(unsigned int num) {
+void BigNum::set_num(uint_fast64_t num) {
   num_.clear();
   num_.push_back(num);
 }
@@ -56,11 +55,11 @@ void BigNum::set_num(const std::string& num) {
     start_index++;
     size--;
   }
-  int divs = (size / 19) + 1;
+  int divs = (size / kDigitLength) + 1;
   for (int i = 0; i < divs; i++) {
     nums_.push_back(
       std::strtoul(
-        num.substr(start_index + i * 19, 19).c_str(),
+        num.substr(start_index + i * kDigitLength, kDigitLength).c_str(),
         nullptr, 
         10
         )
@@ -72,8 +71,21 @@ std::size_t BigNum::ulongs_used() {
   return num_.size();
 };
 
-std::vector<uint> num_;
-bool sign_;
+
+void BigNum::Reset() {
+  num_ = std::vector<uint_fast64_t>;
+  set_pos();
+}
+
+bool BigNum::is_zero() {
+  return ulongs_used() == 1 && !(num_[0]);
+}
+
+void BigNum::CorrectForZero() {
+  if (is_zero()) {
+    set_pos();
+  }
+}
 
 friend BigNum BigNum::operator+(const BigNum &a, const BigNum &b) {
   if (a.is_pos() != b.is_pos()) {
@@ -98,8 +110,8 @@ friend BigNum BigNum::operator-(const BigNum &a, const BigNum &b) {
     }
   }
   BigNum result;
-  unsigned long difference;
-  unsigned long carry = 0;
+  uint_fast64_t difference;
+  uint_fast64_t carry = 0;
   int index = 0;
   while (true) {
     if (index >= a.size() && index >= b.size()) {
@@ -120,22 +132,81 @@ friend BigNum BigNum::operator-(const BigNum &a, const BigNum &b) {
       difference -= b.num_[index];
     }
     difference -= carry;
-    if (ULONG_MAX - b - carry < difference) {
+    if (UINT64_MAX - b - carry < difference) {
       carry = 1;
-      difference = (ULONG_MAX - difference) + 1;
+      difference = (UINT64_MAX - difference) + 1;
     } else {
       carry = 0;
     }
     index++;
     result.push_back(difference);
   }
+  result.CorrectForZero();
   return result;
 }
 
-// TODO(Jake): Implement the hard shit
+// 
+// TODO(Jake): add Karatsuba implementation instead (maybe)
 friend BigNum BigNum::operator*(const BigNum &a, const BigNum &b) {
+  BigNum product;
+  product.postive_ = (a.positive_ == b.positive_);
 
+  // early out 1
+  if (a.ulongs_used() == 1 && b.ulongs_used() == 1
+      && a.num_[0] <= kHalfBaseLo && .num_[0] <= kHalfBaseLo) {
+    product.num_.push_back(a.num_[0] * b.num_[0]);
+    return product;
+  }
+
+  // early out 2
+  if (a.is_zero() or b.is_zero()) {
+    product.num_.push_back(0);
+    product.set_pos();
+    return product;
+  }
+  
+  for (std::size_t i = 0; i < a.ulongs_used() + b.ulongs_used() + 1; i++) {
+    product.push_back(0);
+  }
+
+
+  std::size_t carry_pos;
+  uint_fast64_t lo_half_a;
+  uint_fast64_t hi_half_a;
+  uint_fast64_t lo_half_b;
+  uint_fast64_t hi_half_b;
+  uint_fast64_t carry;
+
+  for (std::size_t i = 0; i < a.ulongs_used(); i++) {
+    lo_half_a = a.num_[i] % kHalfBaseLo;
+    hi_half_a = a.num_[i] / kHalfBaseLo;
+    for (std::size_t j = 0; j < b.ulongs_used(); j++) {
+      lo_half_b = b.num_[i] % kHalfBaseLo;
+      hi_half_b = b.num_[i] / kHalfBaseLo;
+      product.num_[i + j] = lo_half_a * lo_half_b;
+      if (hi_half_a && hi_half_b) {
+        carry = hi_half_a * hi_half_b;
+        if (carry >= kHalfBaseHi) {
+          product.num_[i + j] += (carry % kHalfBaseHi) * kHalfBaseLo;
+          carry /= kHalfBaseHi;
+          product.num_[i + j + 1] += carry;
+        }
+      }
+      carry_pos = 0;
+      while (product.has_carry(i + j + carry_pos)) {
+        carry = product.num_[i + j + carry_pos] / kBigNumBase;
+        product.num_[i + j + carry_pos + 1] += carry;
+        carry_pos++;
+      }
+    }
+  }
+
+  // remove extraneous zeroes
+
+  product.CorrectForZero();
+  return product;
 }
+
 friend BigNum BigNum::operator/(const BigNum &a, const BigNum &b);
 friend BigNum BigNum::operator%(const BigNum &a, const BigNum &b);
 
@@ -145,7 +216,7 @@ bool BigNum::operator<(const BigNum &a, const BigNum &b) {
   if (a.ulongs_used() < b.ulongs_used()) {
     return true;
   }
-  else if (a.ulong_used() > b.ulongs_used()) {
+  else if (a.ulongs_used() > b.ulongs_used()) {
     return false;
   }
   else {
@@ -187,14 +258,18 @@ bool BigNum::operator==(const BigNum &a, const BigNum &b) {
 
 bool BigNum::operator!=(const BigNum &a, const BigNum &b) {return !(a == b);}
 
-BigNum BigNum::AddInternal(
+bool BigNum::has_carry(int index = 0) {
+  return num_[index] >= kBigNumBase;
+}
+
+friend BigNum BigNum::AddInternal(
         const BigNum& a, 
         const BigNum& b, 
         bool result_positive) {
   BigNum result;
   result.set_sign(result_positive);
-  unsigned long sum;
-  unsigned long carry = 0;
+  uint_fast64_t sum;
+  uint_fast64_t carry = 0;
   int index = 0;
   while (true) {
     if (index >= a.size() && index >= b.size() && !carry) {
@@ -208,9 +283,10 @@ BigNum BigNum::AddInternal(
     if (index < b.size()) {
       sum += b.num_[index];
     }
-    carry = (sum / kBigNumThreshold);
+    carry = (sum / kBigNumBase);
     result.push_back(sum);
     index++;
   }
+  result.CorrectForZero();
   return result;
 }

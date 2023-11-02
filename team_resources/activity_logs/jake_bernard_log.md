@@ -146,3 +146,8 @@
 ## 9:00 - 9:55 AM
 ### Activities
 - Continued working on UML class diagram
+
+# 11/2/2023
+## 9:00 - 9:55 AM
+### Activities
+- Worked on grade-school multiplication for BigNum, researched Karatsuba algo
