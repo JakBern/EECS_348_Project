@@ -151,3 +151,9 @@
 ## 9:00 - 9:55 AM
 ### Activities
 - Worked on grade-school multiplication for BigNum, researched Karatsuba algo
+
+# 11/3/2023
+## Various Times
+### Activities
+- Worked on implementation of divide-and-conquer division 
+	- see: https://web.archive.org/web/20170708221722/https://static1.squarespace.com/static/5692a9ad7086d724272eb00a/t/5692dbe6b204d50df79e577f/1452465127528/masters-thesis.pdf

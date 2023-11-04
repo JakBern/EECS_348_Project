@@ -21,6 +21,9 @@ class BigNum {
     void set_num(uint_fast64_t);
     void set_num(const std::string&);
 
+    void Shift(int);
+    BigNum Shifted(int);
+
     std::size_t digit_count();
     std::string to_string();
 
@@ -30,20 +33,27 @@ class BigNum {
     friend BigNum operator/(const BigNum &a, const BigNum &b);
     friend BigNum operator%(const BigNum &a, const BigNum &b);
 
+
     BigNum operator<(const BigNum &a, const BigNum &b);
     BigNum operator>(const BigNum &a, const BigNum &b);
     BigNum operator<=(const BigNum &a, const BigNum &b);
     BigNum operator>=(const BigNum &a, const BigNum &b);
     BigNum operator==(const BigNum &a, const BigNum &b);
     BigNum operator!=(const BigNum &a, const BigNum &b);
+
+    friend BigNum GradeSchoolMult(const BigNum &a, const BigNum &b
+                                  BigNum &product);
+
+    friend void QuotientAndRemainder(const BigNum &a, const BigNum &b, 
+                                    BigNum* quotient, BigNum* remainder);
     
 
   private:
 
-    const static uint_fast64_t kBigNumBase = 10000000000000000000;
-    const static int kDigitLength = 19;
+    const static uint_fast64_t kBigNumBase = 1000000000000000000;
+    const static int kDigitLength = 18;
     const static uint_fast64_t kHalfBaseLo = 1000000000;
-    const static uint_fast64_t kHalfBaseHi = 10000000000;
+    const static uint_fast64_t kHalfBaseHi = 1000000000;
     // organized little endian-ly
     // num_[0] is the least significant digits, then [1], etc
     std::vector<uint_fast64_t> num_;
@@ -55,7 +65,9 @@ class BigNum {
 
     bool is_zero();
 
-    void CheckForZero();
+    void CorrectForZero();
+
+    void PurgeZeroes();
 
     bool has_carry(int index = 0);
 

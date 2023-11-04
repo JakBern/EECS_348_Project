@@ -67,6 +67,54 @@ void BigNum::set_num(const std::string& num) {
   }
 }
 
+void BigNum::Shift(int amount) {
+  if (!amount) {
+    return;
+  }
+  if (amount > 0) {
+    for (int i = 0; i < amount; i++) {
+      if (num_.size()) {
+        num_.erase(num_.begin());
+      }
+    }
+    if (!num_.size()) {
+      num_.push_back(0);
+      set_pos();
+    }
+    return;
+  }
+  else {
+    for (int i = 0; i < amount; i++) {
+      num_.insert(num_.begin(), 0);
+    }
+    return;
+  }
+}
+BigNum BigNum::Shifted(int amount) {
+  BigNum result = (*this);
+  if (!amount) {
+    return result;
+  }
+  if (amount > 0) {
+    for (int i = 0; i < amount; i++) {
+      if (result.num_.size()) {
+        result.num_.erase(result.num_.begin());
+      }
+    }
+    if (!result.num_.size()) {
+      result.num_.push_back(0);
+      result.set_pos();
+    }
+    return result;
+  }
+  else {
+    for (int i = 0; i < amount; i++) {
+      result.num_.insert(result.num_.begin(), 0);
+    }
+    return result;
+  }
+}
+
 std::size_t BigNum::ulongs_used() {
   return num_.size();
 };
@@ -84,6 +132,17 @@ bool BigNum::is_zero() {
 void BigNum::CorrectForZero() {
   if (is_zero()) {
     set_pos();
+  }
+}
+
+void BigNum::PurgeZeroes() {
+  for (int i = num_.size() - 1; i > 0; i--) {
+    if (num_[i]) {
+      return;
+    }
+    else {
+      num_.pop_back();
+    }
   }
 }
 
@@ -169,41 +228,7 @@ friend BigNum BigNum::operator*(const BigNum &a, const BigNum &b) {
     product.push_back(0);
   }
 
-
-  std::size_t carry_pos;
-  uint_fast64_t lo_half_a;
-  uint_fast64_t hi_half_a;
-  uint_fast64_t lo_half_b;
-  uint_fast64_t hi_half_b;
-  uint_fast64_t carry;
-
-  for (std::size_t i = 0; i < a.ulongs_used(); i++) {
-    lo_half_a = a.num_[i] % kHalfBaseLo;
-    hi_half_a = a.num_[i] / kHalfBaseLo;
-    for (std::size_t j = 0; j < b.ulongs_used(); j++) {
-      lo_half_b = b.num_[i] % kHalfBaseLo;
-      hi_half_b = b.num_[i] / kHalfBaseLo;
-      product.num_[i + j] = lo_half_a * lo_half_b;
-      if (hi_half_a && hi_half_b) {
-        carry = hi_half_a * hi_half_b;
-        if (carry >= kHalfBaseHi) {
-          product.num_[i + j] += (carry % kHalfBaseHi) * kHalfBaseLo;
-          carry /= kHalfBaseHi;
-          product.num_[i + j + 1] += carry;
-        }
-      }
-      carry_pos = 0;
-      while (product.has_carry(i + j + carry_pos)) {
-        carry = product.num_[i + j + carry_pos] / kBigNumBase;
-        product.num_[i + j + carry_pos + 1] += carry;
-        carry_pos++;
-      }
-    }
-  }
-
-  // remove extraneous zeroes
-
-  product.CorrectForZero();
+  GradeSchoolMult(a, b, product);
   return product;
 }
 
@@ -289,4 +314,88 @@ friend BigNum BigNum::AddInternal(
   }
   result.CorrectForZero();
   return result;
+}
+
+void BigNum::GradeSchoolMult(const BigNum &a, const BigNum &b, BigNum &product) {
+  std::size_t carry_pos;
+  uint_fast64_t lo_half_a;
+  uint_fast64_t hi_half_a;
+  uint_fast64_t lo_half_b;
+  uint_fast64_t hi_half_b;
+  uint_fast64_t carry;
+
+  for (std::size_t i = 0; i < a.ulongs_used(); i++) {
+    lo_half_a = a.num_[i] % kHalfBaseLo;
+    hi_half_a = a.num_[i] / kHalfBaseLo;
+    for (std::size_t j = 0; j < b.ulongs_used(); j++) {
+      lo_half_b = b.num_[i] % kHalfBaseLo;
+      hi_half_b = b.num_[i] / kHalfBaseLo;
+      product.num_[i + j] = lo_half_a * lo_half_b;
+      if (hi_half_a && hi_half_b) {
+        carry = hi_half_a * hi_half_b;
+        if (carry >= kHalfBaseHi) {
+          product.num_[i + j] += (carry % kHalfBaseHi) * kHalfBaseLo;
+          carry /= kHalfBaseHi;
+          product.num_[i + j + 1] += carry;
+        }
+      }
+      carry_pos = 0;
+      while (product.has_carry(i + j + carry_pos)) {
+        carry = product.num_[i + j + carry_pos] / kBigNumBase;
+        product.num_[i + j + carry_pos + 1] += carry;
+        carry_pos++;
+      }
+    }
+  }
+
+  // remove extraneous zeroes
+
+  product.PurgeZeroes();
+
+  product.CorrectForZero();
+  return;
+}
+
+// GradeSchool Div
+friend void BigNum::QuotientAndRemainder(const BigNum &a, const BigNum &b, 
+                                    BigNum* quotient, BigNum* remainder) {
+  // early out 1
+  if (a < b) {
+    if (quotient) {
+      (*quotient) = BigNum(0);
+    }
+    if (remainder) {
+      (*remainder) = b;
+    }
+    return;
+  }
+
+  // early out 2
+  if (a == b) {
+    if (quotient) {
+      (*quotient) = BigNum(1);
+    }
+    if (remainder) {
+      (*remainder) = BigNum(0);
+    }
+    return;
+  }
+
+  if (a.ulongs_used() == b.ulongs_used()) {
+    // early out 3
+    if (a.ulongs_used() == 1) {
+      if (quotient) {
+        (*quotient).push_back( a.num_[0] / b.num_[0] );
+      }
+      if (remainder) {
+        (*remainder).push_back( a.num_[0] % b.num_[0] );
+      }
+      return;
+    }
+  }
+  
+
+
+
+
 }
