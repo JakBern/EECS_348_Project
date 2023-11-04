@@ -5,24 +5,11 @@
 class MathNode{
     
     //public
+    // Needs to be abstract
+    // Works with operator and num node
+    // Will assign to respective nodes
     public:
-    //Add
-    void Add();
 
-    //Subtraction
-    void Subtract();
-
-    //Multiply
-    void Multiply();
-
-    //Divide
-    void Divide();
-
-    //Square
-    void Square();
-
-    //Square Root
-    void SquareRoot();
     
     //protected
     protected:
