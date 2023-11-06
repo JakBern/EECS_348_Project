@@ -52,8 +52,8 @@ class BigNum {
 
     const static uint_fast64_t kBigNumBase = 1000000000000000000;
     const static int kDigitLength = 18;
-    const static uint_fast64_t kHalfBaseLo = 1000000000;
-    const static uint_fast64_t kHalfBaseHi = 1000000000;
+    const static uint_fast64_t kHalfBase = 1000000000;
+    constexpr static uint_fast64_t kBigNumBaseDiv2 = kBigNumBase / 2;
     // organized little endian-ly
     // num_[0] is the least significant digits, then [1], etc
     std::vector<uint_fast64_t> num_;
@@ -73,8 +73,14 @@ class BigNum {
 
     std::size_t ulongs_used();
 
+    friend void Concatenate(const BigNum& other);
 
+    friend BigNum SplitRHS();
+    friend BigNum SplitLHS();
 
+    void Mult10();
+
+    void AddUlong(uint_fast64_t);
 
 };
 

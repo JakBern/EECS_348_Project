@@ -3,10 +3,12 @@
 #include <string>
 #include <cstlib>
 #include <cstdint>
+#include <cctype>
 
 BigNum::BigNum() {}
 BigNum::BigNum(uint_fast64_t num) {
   num_.push_back(num);
+  set_pos()
 }
 BigNum::BigNum(const std::string& num) {
   set_num(num);
@@ -27,6 +29,9 @@ std::size_t BigNum::digit_count() {
 
 std::string BigNum::to_string() {
   std::string out;
+  if (is_neg()) {
+    out += "-";
+  }
   out += to_string(num_[num_.size() - 1]);
   for (int i = num_.size() - 2; i >= 0; i--) {
     std::string next_part = to_string(num_[i]);
@@ -374,6 +379,7 @@ friend void BigNum::QuotientAndRemainder(const BigNum &a, const BigNum &b,
   if (a == b) {
     if (quotient) {
       (*quotient) = BigNum(1);
+      (*quotient).set_sign(!(a.positive_ ^ b.positive_));
     }
     if (remainder) {
       (*remainder) = BigNum(0);
@@ -394,8 +400,94 @@ friend void BigNum::QuotientAndRemainder(const BigNum &a, const BigNum &b,
     }
   }
   
+  // terrible horrible implementation
+  std::string a_digits = a.to_string();
+  BigNum working_remainder = 0;
+  uint_fast64_t cur_digit;
+  std::string q_string;
 
+  for (int str_index = 0; str_index < a_digits.length(); str_index++) {
+    uint_fast64_t cur_digit = a_digits[str_index];
+    if (!std::isdigit(cur_digit)) {
+      continue;
+    }
+    cur_digit = cur_digit - '0';
+    if (!working_remainder.is_zero()) {
+      working_remainder.Mult10();
+      working_remainder.AddUlong(cur_digit);
+    }
+    if (working_remainder < b) {
+      continue;
+    }
+    else {
+      int q_digit = 0;
+      while (working_remainder > b) {
+        working_remainder = working_remainder - b;
+        q_digit++;
+      }
+      q_string.append(std::to_string(q_digit));
+    }
+  }
 
+  if (quotient) {
+    (*quotient) = BigNum(q_string);
+  }
+  if (remainder) {
+    (*remainder) = working_remainder;
+  }
 
+  return;
 
+}
+
+friend void BigNum::Concatenate(const BigNum& other) {
+  num_.insert(num_.end(), other.num_.begin(), other.num_.end());
+}
+
+BigNum BigNum::SplitRHS() {
+  BigNum output;
+  output.num_.insert(output.num_.begin(), 
+                    num_.begin() + (num_.size() / 2) + 1, 
+                    num_.end());
+  return output;
+}
+
+BigNum BigNum::SplitLHS() {
+  BigNum output;
+  output.num_.insert(output.num_.begin(), 
+                    num_.begin(), 
+                    num_.begin() + (num_.size() / 2));
+  return output;
+}
+
+void BigNum::Mult10() {
+  for ( auto num_part : num_) {
+    num_part *= 10;
+  }
+  for (int num_index = 0; num_index < ulongs_used(); num_index++) {
+    if (has_carry(num_index)) {
+      uint_fast64_t carry = num_[num_index] / kBigNumBase;
+      if (num_index == ulongs_used() - 1) {
+        num_.push_back(carry);
+      }
+      else {
+        num_[num_index + 1] += carry;
+      }
+    }
+  }
+}
+
+void BigNum::AddUlong(uint_fast64_t addend) {
+  num_[0] += addend;
+  for (int num_index = 0; num_index < ulongs_used(); num_index++) {
+    if (has_carry(num_index)) {
+      uint_fast64_t carry = num_[num_index] / kBigNumBase;
+      if (num_index == ulongs_used() - 1) {
+        num_.push_back(carry);
+      }
+      else {
+        num_[num_index + 1] += carry;
+      }
+    }
+  }
 }

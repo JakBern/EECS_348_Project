@@ -42,6 +42,9 @@ class UserContext {
     // will later use Value type instead of int
     std::map<std::string, int> user_vars_;
 
+    // holds last evaluated expression value
+    int last_expression_value_;
+
 };
 
 #endif

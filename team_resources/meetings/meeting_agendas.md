@@ -50,3 +50,8 @@ to the next meeting.
  **Topics**
  - Review Software Requirements Specifications
  - Assign programming tasks
+ 
+  ## 11/7/2023 : 3:50 PM
+ **Topics**
+ - Review explanations made
+ - Review Software Architecture document

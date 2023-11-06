@@ -157,3 +157,10 @@
 ### Activities
 - Worked on implementation of divide-and-conquer division 
 	- see: https://web.archive.org/web/20170708221722/https://static1.squarespace.com/static/5692a9ad7086d724272eb00a/t/5692dbe6b204d50df79e577f/1452465127528/masters-thesis.pdf
+- Scrapped this and just added gradeschool division due to numbers not being stored as powers of 2
+
+# 11/5/2023
+## Various Times
+### Activities
+- Created 4 helpful diagrams to explain different mechanics of the software to team members
+- Worked on Software Architecture document
