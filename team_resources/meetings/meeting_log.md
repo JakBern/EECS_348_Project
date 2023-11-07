@@ -89,3 +89,16 @@ decided upon sprint times of 2 weeks.
 	- Vidur -> Math Node
 	- Drew and Nick -> Parser
  	- Charlie and Jake -> GUI
+
+## 11-7-2023
+
+### 3:55 PM - _:__PM
+#### Note Taker
+- Drew Meyer
+#### Members present
+- Jake
+- Drew
+- Vidur
+#### Summary
+- Reviewed Parser and MathNode Functionality
+- See /team_resources/examples
