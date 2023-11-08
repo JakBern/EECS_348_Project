@@ -102,3 +102,4 @@ decided upon sprint times of 2 weeks.
 #### Summary
 - Reviewed Parser and MathNode Functionality
 - See /team_resources/examples
+- Need to fill out sections 1.1-1.5 of the Software Architecture Document
