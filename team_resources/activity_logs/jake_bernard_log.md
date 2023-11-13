@@ -164,3 +164,8 @@
 ### Activities
 - Created 4 helpful diagrams to explain different mechanics of the software to team members
 - Worked on Software Architecture document
+
+# 11/11/2023
+## 11 AM - 5 PM (intermittently)
+### Activities
+- Worked on Software architecture document
