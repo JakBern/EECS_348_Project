@@ -169,3 +169,8 @@
 ## 11 AM - 5 PM (intermittently)
 ### Activities
 - Worked on Software architecture document
+
+# 11/11/2023
+## All day
+### Activities
+- Finished Software architecture document
