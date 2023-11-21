@@ -48,7 +48,7 @@ flags::InterfaceCode TUI::Run() {
   while (true) {
     std::cout << kMainMenuMessage;
 
-    std::cin >> user_input_;
+    std::getline(std::cin, user_input_);
 
     if (user_input_ == "help") {
       std::cout << kHelpMessage;
