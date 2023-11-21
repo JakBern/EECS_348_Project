@@ -117,15 +117,15 @@ void TUI::DisplayHistory() {
 
 void TUI::DisplayVars() {
   std::cout << "USER VARIABLES\n";
-  auto const& var_list = context->get_var_list();
+  auto const& var_list = user_context_->get_var_list();
   if (!var_list.size()) {
-    std::cout << "...No user variables saved...\n";
+    std::cout << "\t...No user variables saved...\n";
     return;
   }
   for (auto const& var_val_pair : var_list) {
-    std::cout << "Name: " << var_val_pair->first
+    std::cout << "Name: " << var_val_pair.first
               << "\n"
-              << "Value" << var_val_pair->second
+              << "Value" << var_val_pair.second
               << "\n\n";
   }
 }

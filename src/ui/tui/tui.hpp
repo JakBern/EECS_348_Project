@@ -59,11 +59,13 @@ class TUI : public AppInterface {
     // Sends an expression to the parser
     void Eval(std::string expr) override;
 
-    // Displays what error occured
+    // Displays what error occured to the terminal
+    // Optionally takes a parameter for position of the error
+    // initialized to -1 for errors that do not have a positional argument.
     void DisplayError(
                   std::string expr, 
                   flags::EvalErr err,
-                  int position) override;
+                  int position=-1) override;
 
                   
 };

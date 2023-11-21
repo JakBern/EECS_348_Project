@@ -209,8 +209,6 @@ friend BigNum BigNum::operator-(const BigNum &a, const BigNum &b) {
   return result;
 }
 
-// 
-// TODO(Jake): add Karatsuba implementation instead (maybe)
 friend BigNum BigNum::operator*(const BigNum &a, const BigNum &b) {
   BigNum product;
   product.postive_ = (a.positive_ == b.positive_);

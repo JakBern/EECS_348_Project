@@ -67,7 +67,7 @@ bool UserContext::in_keywords(std::string var) {
 }
 
 bool UserContext::var_exists(std::string var) {
-  return user_vars_.contains(var);
+  return (bool)user_vars_.count(var);
 }
 
 flags::UserVarMsg UserContext::add_var(std::string var, int val) {
@@ -107,7 +107,7 @@ void UserContext::overwrite_var(std::string var, int val) {
 bool UserContext::var_format_correct(std::string var) {
   std::string::iterator itr;
   for (itr = var.begin(); itr != var.end(); itr++) {
-    if (std::isaalpha(*itr) || (*itr) == '_') {
+    if (std::isalpha(*itr) || (*itr) == '_') {
       continue;
     }
     else {

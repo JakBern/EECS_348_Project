@@ -40,12 +40,6 @@ class BigNum {
     BigNum operator>=(const BigNum &a, const BigNum &b);
     BigNum operator==(const BigNum &a, const BigNum &b);
     BigNum operator!=(const BigNum &a, const BigNum &b);
-
-    friend BigNum GradeSchoolMult(const BigNum &a, const BigNum &b
-                                  BigNum &product);
-
-    friend void QuotientAndRemainder(const BigNum &a, const BigNum &b, 
-                                    BigNum* quotient, BigNum* remainder);
     
 
   private:
@@ -54,12 +48,19 @@ class BigNum {
     const static int kDigitLength = 18;
     const static uint_fast64_t kHalfBase = 1000000000;
     constexpr static uint_fast64_t kBigNumBaseDiv2 = kBigNumBase / 2;
-    // organized little endian-ly
+
+    // Little endian organization
     // num_[0] is the least significant digits, then [1], etc
     std::vector<uint_fast64_t> num_;
     bool positive_;
 
     friend BigNum AddInternal(const BigNum&, const BigNum&, bool);
+
+    friend BigNum GradeSchoolMult(const BigNum &a, const BigNum &b
+                                  BigNum &product);
+
+    friend void QuotientAndRemainder(const BigNum &a, const BigNum &b, 
+                                    BigNum* quotient, BigNum* remainder);
 
     void Reset();
 
