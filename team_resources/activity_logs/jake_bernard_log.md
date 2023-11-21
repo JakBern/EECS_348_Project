@@ -174,3 +174,13 @@
 ## All day
 ### Activities
 - Finished Software architecture document
+
+# 11/21/2023
+## 10:00 - 11:00 AM
+### Activities
+- Began commenting some previously uncommented code
+
+## 12:30 - 1:30 PM
+### Activities
+- Continued commenting code
+- changed/added some things to UserContext and TUI
