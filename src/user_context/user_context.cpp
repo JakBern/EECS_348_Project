@@ -31,7 +31,7 @@ constexpr std::string_view kReservedKeywords[] = {
                                 "savetovar", "history",
                                 "removevar", "help",
                                 "switchGUI", "e",
-                                "pi", "g", "log",
+                                "pi", "G", "log",
                                 "ln", "sqrt", "root"
                               };
 

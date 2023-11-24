@@ -50,6 +50,14 @@ class TUI : public AppInterface {
     // or exit.
     void RunHistoryMenu();
 
+    // Switches to the evaluation menu in which the user can input expressions
+    // to be sent to the parser.
+    void RunEvalMenu();
+
+    // Switches to the graphing menu in which the user can input expressions
+    // to be sent to the parser to create graphs of.
+    void RunGraphMenu();
+
     // Displays the current history of the program to the terminal.
     void DisplayHistory();
 

@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string_view>
+#include <string>
+#include <vector>
 
 #include "ui/tui/tui.hpp"
 #include "util/flags.hpp"
+#include "util/helper.hpp"
 #include "user_context/user_context.hpp"
 
 constexpr std::string_view kWelcomeMessage = 
@@ -15,6 +18,10 @@ constexpr std::string_view kHelpMessage =
 "Supported operators:\n"
 "+, -, /, *, %, ^ (or **)\n"
 "Current commands are:\n"
+"- \"eval\": allows you to enter an expression to be evaluated\n"
+"\t- alternvatively, enter \"eval <expression>\"\n"
+"- \"graph\": enter an expression to graph (use graphing variable \"G\")\n"
+"\t- alternvatively, enter \"graph <expression>\"\n"
 "- \"exit\": exits program\n"
 "- \"history\": displays history and allows selecting a previous expression\n"
 "- \"vars\": displays all user stored variables and their values\n"
@@ -50,34 +57,40 @@ flags::InterfaceCode TUI::Run() {
 
     std::getline(std::cin, user_input_);
 
-    if (user_input_ == "help") {
+    helper::str_func::Trim(user_input_);
+
+    std::vector<std::string> input = helper::str_func::Split(user_input_);
+
+    if (input[0] == "help") {
       std::cout << kHelpMessage;
     }
 
-    else if (user_input_ == "history") {
+    else if (input[0] == "history") {
       RunHistoryMenu();
     }
 
-    else if (user_input_ == "vars") {
+    else if (input[0] == "vars") {
       DisplayVars();
     }
 
-    else if (user_input_ == "savetovar") {
+    else if (input[0] == "savetovar") {
       std::cout << "Functionality not yet implemented :)\n";
     }
 
-    else if (user_input_ == "removevar") {
+    else if (input[0] == "removevar") {
       std::cout << "Functionality not yet implemented :)\n";
     }
 
-    else if (user_input_ == "exit") {
+    else if (input[0] == "exit") {
       return flags::InterfaceCode::kCleanExit;
     }
 
-    else if (user_input_ == "switchGUI") {
+    else if (input[0] == "switchGUI") {
       std::cout << "Functionality not yet implemented :)\n";
       // return flags::kSwitchToGUI;
     }
+
+    else if ( )
 
     else {
       Eval(user_input_);

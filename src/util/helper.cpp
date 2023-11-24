@@ -3,17 +3,21 @@
 // 
 // Helper function categories:
 //  - Config related (read, write, make, exists)
+//  - String parsing (TrimStart, TrimEnd, )
 //
 // Author(s): 
 // Jake Bernard [from 10/17/2023 - Present],
 //
 // Last update:
-//  - 10/17/2023 (Jake):
+//  - 11/23/2023 (Jake):
 //    Created file, added config helpers
 
 
 #include <string>
 #include <fstream>
+#include <algorithm>
+#include <vector>
+#include <iterator>
 
 #include "util/helper.hpp"
 
@@ -111,4 +115,77 @@ std::string helper::config::GetGUIStyle() {
 
 // =============================================================================
 //                           END CONFIG HELPERS
+// =============================================================================
+
+
+// =============================================================================
+//                           STRING PARSING HELPERS
+// =============================================================================
+
+bool helper::str_func::char_is_in(const char* c, const char* comp_list) {
+  for (int i = 0; i < sizeof(comp_list) / sizeof(char); i++) {
+    if (comp_list[i] == *c) {
+        return true;
+    }
+  }
+  return false;
+}
+
+std::string& helper::str_func::TrimStart(std::string& str, 
+                                      const char* whitespace = " \t\f\n\r\v") {
+  str.erase(0, str.find_first_not_of(whitespace));
+  return str;
+}
+    
+std::string& helper::str_func::TrimEnd(std::string& str, 
+                                      const char* whitespace = " \t\f\n\r\v") {
+  str.erase(str.find_last_not_of(whitespace) + 1);
+  return str;
+}
+
+std::string& Trim(std::string& str, 
+                      const char* whitespace = " \t\f\n\r\v") {
+  return helper::str_func::TrimEnd(helper::str_func::TrimStart(str));
+}
+
+std::string& helper::str_func::RemoveWhitespace(std::string& str) {
+  str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
+  return str;
+}
+
+std::string helper::str_func::GetWord(std::string& str,
+                    std::string::iterator& iter,
+                    const char* whitespace = " \t\f\n\r\v") {
+  std::string::iterator first = iter;
+  for (; 
+      first != str.end() && helper::str_func::char_is_in(&*first, whitespace); 
+      first++){}
+  std::string::iterator last = first;
+  for (; 
+      last != str.end() && !(helper::str_func::char_is_in(&*last, whitespace)); 
+      last++) {}
+  iter = last;
+  std::string output(first, last);
+  return output;
+}
+
+std::vector<std::string> helper::str_func::Split(std::string& str,
+                                const char* whitespace = " \t\f\n\r\v") {
+  std::vector<std::string> output;
+  std::string word;
+  std::string::iterator iter = str.begin();
+  while (true) {
+    word = helper::str_func::GetWord(str, iter, whitespace);
+    if (word != "") {
+      output.push_back(word);
+    }
+    else {
+      break;
+    }
+  }
+  return output;
+}
+
+// =============================================================================
+//                          END STRING PARSING HELPERS
 // =============================================================================
