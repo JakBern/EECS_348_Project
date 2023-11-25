@@ -4,5 +4,10 @@
 class NumNode : public MathNode{
     public:
 
-    private:
+        NumNode(int value){
+            number(value);
+        }
+
+    protected:
+        int number; 
 }
