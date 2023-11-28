@@ -121,4 +121,4 @@ decided upon sprint times of 2 weeks.
    - Parser functioning with strings
    - Yet to develop test cases or error / error code handling
    - Need to add functionality for exponent (** and ^), modulo (%), negative sign (-1)
-- Math Node has been abolished
+- Math Node has been abolished, Vidur feel free to join either Parser or CLI
