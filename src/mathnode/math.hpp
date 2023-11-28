@@ -1,3 +1,18 @@
+// Contains the math node used to evaluate the expression for the Arithmetic Expression Evaluator
+//
+// The node is used to check if numbers are being passed and 
+// append the values to a vector 
+//
+// Author(s): 
+// Jake Bernard [from 10/17/2023 - Present],
+// Vidur Pandiripally [from 10/17/2023 - Present]
+// YourName Here [from Blank - Blank]
+//
+// Last update:
+//  - 10/19/2023 (Jake): 
+//  - 11/28/2023 (Vidur)
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 #ifndef MATH_NODE_H_ 
@@ -14,41 +29,27 @@ class MathNode{
     // Works with operator and num node
     // Will assign to respective nodes
     public:
+        
+        //Im unsure what this is
+        virtual bool is_num() const = 0; 
 
-        void createNumNode(double value){
-            NumNode* num = new numNode(value);
-            numNode.push_back(num);
-        }
-
-        //is_num == bool
-        bool is_number() const{
-            for (const auto&num : numNode){
-                if (num -> is_()){
-                    return true;
-                }
+        //delete allocated memory
+        virtual ~MathNode(){
+            delete operatorNode;
+            for (auto num : numNode)}{
+                delete : num;
             }
-            return false;
         }
-
     
     //protected
     protected:
+        //array of nums
+        std::vector<MathNode*> nodes;
+        OperatorNode* operatorNode;
     
     
     //private
-    private:
-    //array of nums
-    
-    
-    
-    //constructor
-    //delete allocated memory
-    ~MathNode(){
-        delete operatorNode;
-        for (auto num : numNode)}{
-            delete : num;
-        }
-    }
+    private:   
     
     
     //Needs to handle every integer in user input
