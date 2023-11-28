@@ -22,6 +22,9 @@ class Parser{
 
         queue<string> parsedQueue;
         stack<string> operatorStack;
+        //note that the output stack is made of float values
+        // that means we need to change the strings to ints when they are added to this stack
+        stack<float> outputStack;
 
 
 

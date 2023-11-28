@@ -10,6 +10,13 @@ using namespace std;
 
 Parser::Parser(){}
 
+
+//right now I don't think this code can handle any implied multiplication using parentheses 9(3-2) = 9*(3-2)
+// i would prefer if we just edit the string it receives to add the * where it is needed
+//additionally I think it might need to be changed to doubles instead of floats or something
+// i tried a large test case with many three digit values and  the result was 20005.4 when I expected 20365
+// however, this could also be do to the ambiguity of /, or the decision to have * be higher precedence than /
+
 //my goal is to have this method contain all the logic for the parser
 //it should eventually recieve the single parameter, the equation as a string,
 // then return a single value, either the result or a specific error message
@@ -123,7 +130,63 @@ string Parser::parse(string equation){
     }
 
 
+
+    //now we will evaluate the parsedQueue down to one value
+    // we will use the output stack to do this
+    // as long as the parsed queue has values in it, we will continue to perform operations
+    while (!parsedQueue.empty()){
+        //if the value is a number, it should simply be added to the outputStack
+        // we can check if a value is a number, by checking if its first character is a digit
+        // this will handle any multiple digit numbers
+        if (parsedQueue.front()[0] == '0' || parsedQueue.front()[0] == '1' || parsedQueue.front()[0] == '2' || parsedQueue.front()[0] == '3' || parsedQueue.front()[0] == '4' || parsedQueue.front()[0] == '5' || parsedQueue.front()[0] == '6' || parsedQueue.front()[0] == '7' || parsedQueue.front()[0] == '8' || parsedQueue.front()[0] == '9'){
+            //change the string to a float, add it to the stack, then remove it from the queue
+            float floatValue = std::stof(parsedQueue.front());
+            outputStack.push(floatValue);
+            parsedQueue.pop();
+        }else{
+            //if it is not a number, then it must be an operator
+            // in which case we should start by popping off the top two values from the output stack
+            // these values will then have the corresponding operation performed on them
+            // and a new value will be added to the stack
+            //
+            //we will create values a and b to be used in the operations,
+            // the shape of a stack means that for the operation a/b, we will first pop off b, then a
+            float b = outputStack.top();
+            outputStack.pop();
+            float a = outputStack.top();
+            outputStack.pop();
+
+            //we will now perform the operation based on the front value of parsedQueue
+            // this value will be added to the outputStack
+            if (parsedQueue.front() == "+"){
+                outputStack.push(float (a + b));
+            }else if (parsedQueue.front() == "-"){
+                outputStack.push(float (a - b));
+            }else if (parsedQueue.front() == "*"){
+                outputStack.push(float (a * b));
+            }else if (parsedQueue.front() == "/"){
+                outputStack.push(float (a / b));
+            }
+
+            //now pop the front of parsedQueue off
+            parsedQueue.pop();
+            
+
+        }
+    }
+
+    //lets print off the entire contents of output stack, which will hopefully be one value
+    while (!outputStack.empty()){
+        cout << outputStack.top() << " ";
+        outputStack.pop();
+    }
+
+
+
     //now we will just print the parsedQueue for the sake of testing
+    // later we will repurpose this code to the clean out section,
+    // just remove the part that prints the values
+    // however, they should also be cleared out naturallly during the evaluation process
     while (!parsedQueue.empty()){
         cout << parsedQueue.front() << " ";
         parsedQueue.pop();
