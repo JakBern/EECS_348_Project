@@ -103,3 +103,22 @@ decided upon sprint times of 2 weeks.
 - Reviewed Parser and MathNode Functionality
 - See /team_resources/examples
 - Need to fill out sections 1.1-1.5 of the Software Architecture Document
+
+## 11-28-2023
+
+### 3:48 PM - 4:30 PM
+#### Note Taker
+- Drew Meyer
+#### Members present
+- Charlie
+- Drew
+- Jake
+- Nick
+#### Summary
+- Charlie and Jake continue to develop the UI
+   - Working menu, close to wrapping up CLI / Text interface
+- Nick and Drew continue to develop Parser
+   - Parser functioning with strings
+   - Yet to develop test cases or error / error code handling
+   - Need to add functionality for exponent (** and ^), modulo (%), negative sign (-1)
+- Math Node has been abolished
