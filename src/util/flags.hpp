@@ -32,9 +32,11 @@ namespace flags {
   //
   // The position returned alongside a divide by zero error should be at the
   // division operator which caused the error.
-  enum class EvalErr {
+  enum class EvalError {
+    kSuccess,
     kDivByZero,
-    kInvalidSyntax
+    kInvalidSyntax,
+    kMismatchedParentheses
   };
 
   // Used when creating a user variable.

@@ -96,7 +96,7 @@ class AppInterface {
     // it occurs in the evaluated expression.
     virtual void DisplayError(
                 std::string expr, 
-                flags::EvalErr err,
+                flags::EvalError err,
                 int position) = 0;
 
     // std::shared_ptr<Parser> parser_;

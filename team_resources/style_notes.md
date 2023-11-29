@@ -17,4 +17,4 @@ Variables that are data members of classes should have an added underscore at th
 Classes should use upper camel case (eg, ClassName).
 
 **Namespaces**
-Namespaces should use snake case, although they should preferably only be one word long (eg, namespace_name, preferably just "namespace")
+Namespaces should use snake case, although they should preferably only be one word long (eg, namespace_name, preferably just "namespace").

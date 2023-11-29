@@ -10,22 +10,23 @@ class BigNum {
   public:
     BigNum();
     BigNum(uint_fast64_t);
-    BigNum(std::string);
+    BigNum(const std::string&);
     ~BigNum();
 
     void set_sign(bool is_pos);
     void set_pos();
     void set_neg();
-    bool is_pos();
-    bool is_neg();
+    bool is_pos() const;
+    bool is_neg() const;
     void set_num(uint_fast64_t);
     void set_num(const std::string&);
 
     void Shift(int);
     BigNum Shifted(int);
 
-    std::size_t digit_count();
-    std::string to_string();
+    std::size_t digit_count() const;
+    std::size_t size() const;
+    std::string to_string() const;
 
     friend BigNum operator+(const BigNum &a, const BigNum &b);
     friend BigNum operator-(const BigNum &a, const BigNum &b);
@@ -34,12 +35,12 @@ class BigNum {
     friend BigNum operator%(const BigNum &a, const BigNum &b);
 
 
-    BigNum operator<(const BigNum &a, const BigNum &b);
-    BigNum operator>(const BigNum &a, const BigNum &b);
-    BigNum operator<=(const BigNum &a, const BigNum &b);
-    BigNum operator>=(const BigNum &a, const BigNum &b);
-    BigNum operator==(const BigNum &a, const BigNum &b);
-    BigNum operator!=(const BigNum &a, const BigNum &b);
+    friend bool operator<(const BigNum &a, const BigNum &b);
+    friend bool operator>(const BigNum &a, const BigNum &b);
+    friend bool operator<=(const BigNum &a, const BigNum &b);
+    friend bool operator>=(const BigNum &a, const BigNum &b);
+    friend bool operator==(const BigNum &a, const BigNum &b);
+    friend bool operator!=(const BigNum &a, const BigNum &b);
     
 
   private:
@@ -56,7 +57,7 @@ class BigNum {
 
     friend BigNum AddInternal(const BigNum&, const BigNum&, bool);
 
-    friend BigNum GradeSchoolMult(const BigNum &a, const BigNum &b
+    friend BigNum GradeSchoolMult(const BigNum &a, const BigNum &b,
                                   BigNum &product);
 
     friend void QuotientAndRemainder(const BigNum &a, const BigNum &b, 
@@ -64,7 +65,7 @@ class BigNum {
 
     void Reset();
 
-    bool is_zero();
+    bool is_zero() const;
 
     void CorrectForZero();
 
@@ -72,7 +73,7 @@ class BigNum {
 
     bool has_carry(int index = 0);
 
-    std::size_t ulongs_used();
+    std::size_t ulongs_used() const;
 
     friend void Concatenate(const BigNum& other);
 

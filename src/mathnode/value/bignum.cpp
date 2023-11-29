@@ -1,21 +1,23 @@
 #include <climits>
 #include <vector>
 #include <string>
-#include <cstlib>
+#include <cstdlib>
 #include <cstdint>
 #include <cctype>
+
+#include "bignum.hpp"
 
 BigNum::BigNum() {}
 BigNum::BigNum(uint_fast64_t num) {
   num_.push_back(num);
-  set_pos()
+  set_pos();
 }
 BigNum::BigNum(const std::string& num) {
   set_num(num);
 }
-~BigNum() {}
+BigNum::~BigNum() {}
 
-std::size_t BigNum::digit_count() {
+std::size_t BigNum::digit_count() const {
   std::size_t len = 0;
   len += ulongs_used() - 1;
   len *= kDigitLength;
@@ -27,25 +29,29 @@ std::size_t BigNum::digit_count() {
   return len;
 }
 
-std::string BigNum::to_string() {
+std::size_t BigNum::size() const {
+  return digit_count();
+}
+
+std::string BigNum::to_string() const {
   std::string out;
   if (is_neg()) {
     out += "-";
   }
-  out += to_string(num_[num_.size() - 1]);
+  out += std::to_string(num_[num_.size() - 1]);
   for (int i = num_.size() - 2; i >= 0; i--) {
-    std::string next_part = to_string(num_[i]);
+    std::string next_part = std::to_string(num_[i]);
     next_part.insert(0, (kDigitLength - next_part.length()), '0');
     out += next_part;
   }
   return out;
 }
 
-void set_sign(bool is_pos) {positive_ = is_pos;}
+void BigNum::set_sign(bool is_pos) {positive_ = is_pos;}
 void BigNum::set_pos() {positive_ = true;}
 void BigNum::set_neg() {positive_ = false;}
-bool BigNum::is_pos() {return positive_;}
-bool BigNum::is_neg() {return !positive_;}
+bool BigNum::is_pos() const {return positive_;}
+bool BigNum::is_neg() const {return !positive_;}
 
 void BigNum::set_num(uint_fast64_t num) {
   num_.clear();
@@ -62,7 +68,7 @@ void BigNum::set_num(const std::string& num) {
   }
   int divs = (size / kDigitLength) + 1;
   for (int i = 0; i < divs; i++) {
-    nums_.push_back(
+    num_.push_back(
       std::strtoul(
         num.substr(start_index + i * kDigitLength, kDigitLength).c_str(),
         nullptr, 
@@ -120,17 +126,17 @@ BigNum BigNum::Shifted(int amount) {
   }
 }
 
-std::size_t BigNum::ulongs_used() {
+std::size_t BigNum::ulongs_used() const {
   return num_.size();
 };
 
 
 void BigNum::Reset() {
-  num_ = std::vector<uint_fast64_t>;
+  num_.clear();
   set_pos();
 }
 
-bool BigNum::is_zero() {
+bool BigNum::is_zero() const {
   return ulongs_used() == 1 && !(num_[0]);
 }
 
@@ -151,7 +157,7 @@ void BigNum::PurgeZeroes() {
   }
 }
 
-friend BigNum BigNum::operator+(const BigNum &a, const BigNum &b) {
+BigNum operator+(const BigNum &a, const BigNum &b) {
   if (a.is_pos() != b.is_pos()) {
     if (a.is_pos()) {
       return a - b;
@@ -164,7 +170,7 @@ friend BigNum BigNum::operator+(const BigNum &a, const BigNum &b) {
 }
 
 
-friend BigNum BigNum::operator-(const BigNum &a, const BigNum &b) {
+BigNum operator-(const BigNum &a, const BigNum &b) {
   if (a.is_pos() != b.is_pos()) {
     if (a.is_neg()) {
       return AddInternal(a, b, false);
@@ -209,9 +215,9 @@ friend BigNum BigNum::operator-(const BigNum &a, const BigNum &b) {
   return result;
 }
 
-friend BigNum BigNum::operator*(const BigNum &a, const BigNum &b) {
+BigNum operator*(const BigNum &a, const BigNum &b) {
   BigNum product;
-  product.postive_ = (a.positive_ == b.positive_);
+  product.positive_ = (a.positive_ == b.positive_);
 
   // early out 1
   if (a.ulongs_used() == 1 && b.ulongs_used() == 1
@@ -235,12 +241,12 @@ friend BigNum BigNum::operator*(const BigNum &a, const BigNum &b) {
   return product;
 }
 
-friend BigNum BigNum::operator/(const BigNum &a, const BigNum &b);
-friend BigNum BigNum::operator%(const BigNum &a, const BigNum &b);
+BigNum operator/(const BigNum &a, const BigNum &b);
+BigNum operator%(const BigNum &a, const BigNum &b);
 
 //  COMPARISON OPERATORS
 
-bool BigNum::operator<(const BigNum &a, const BigNum &b) {
+bool operator<(const BigNum &a, const BigNum &b) {
   if (a.ulongs_used() < b.ulongs_used()) {
     return true;
   }
@@ -263,11 +269,11 @@ bool BigNum::operator<(const BigNum &a, const BigNum &b) {
   }
 }
 
-bool BigNum::operator>(const BigNum &a, const BigNum &b) { return b < a;}
-bool BigNum::operator<=(const BigNum &a, const BigNum &b) { return !(a > b);}
-bool BigNum::operator>=(const BigNum &a, const BigNum &b) { return !(a < b);}
+bool operator>(const BigNum &a, const BigNum &b) { return b < a;}
+bool operator<=(const BigNum &a, const BigNum &b) { return !(a > b);}
+bool operator>=(const BigNum &a, const BigNum &b) { return !(a < b);}
 
-bool BigNum::operator==(const BigNum &a, const BigNum &b) {
+bool operator==(const BigNum &a, const BigNum &b) {
   if (a.ulongs_used() != b.ulongs_used()) {
     return false;
   }
@@ -284,13 +290,13 @@ bool BigNum::operator==(const BigNum &a, const BigNum &b) {
   }
 }
 
-bool BigNum::operator!=(const BigNum &a, const BigNum &b) {return !(a == b);}
+bool operator!=(const BigNum &a, const BigNum &b) {return !(a == b);}
 
 bool BigNum::has_carry(int index = 0) {
   return num_[index] >= kBigNumBase;
 }
 
-friend BigNum BigNum::AddInternal(
+BigNum BigNum::AddInternal(
         const BigNum& a, 
         const BigNum& b, 
         bool result_positive) {
@@ -360,7 +366,7 @@ void BigNum::GradeSchoolMult(const BigNum &a, const BigNum &b, BigNum &product) 
 }
 
 // GradeSchool Div
-friend void BigNum::QuotientAndRemainder(const BigNum &a, const BigNum &b, 
+void BigNum::QuotientAndRemainder(const BigNum &a, const BigNum &b, 
                                     BigNum* quotient, BigNum* remainder) {
   // early out 1
   if (a < b) {
@@ -438,7 +444,7 @@ friend void BigNum::QuotientAndRemainder(const BigNum &a, const BigNum &b,
 
 }
 
-friend void BigNum::Concatenate(const BigNum& other) {
+void BigNum::Concatenate(const BigNum& other) {
   num_.insert(num_.end(), other.num_.begin(), other.num_.end());
 }
 

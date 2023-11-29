@@ -184,3 +184,10 @@
 ### Activities
 - Continued commenting code
 - changed/added some things to UserContext and TUI
+
+# 11/28/2023
+## Activities
+- Met with team, discussed removing extraneous modules (mathnode, bignum, error codes, etc.) and focusing on core details of project
+- Began debugging and rewriting parts of the UI
+- Removed UI features that would not be necessary in the final implementation
+- Changed several functions which returned flags (enums) to return strings instead

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string_view>
 #include <string>
 #include <vector>
 
@@ -8,13 +7,13 @@
 #include "util/helper.hpp"
 #include "user_context/user_context.hpp"
 
-constexpr std::string_view kWelcomeMessage = 
+const char* kWelcomeMessage = 
 "Welcome to the Arithmetic Expression Evaluator\n";
 
-constexpr std::string_view kMainMenuMessage = 
+const char* kMainMenuMessage = 
 "Enter an expression or command below, type \"help\" for help:\n";
 
-constexpr std::string_view kHelpMessage = 
+const char* kHelpMessage = 
 "Supported operators:\n"
 "+, -, /, *, %, ^ (or **)\n"
 "Current commands are:\n"
@@ -35,15 +34,18 @@ void TUI::LoadFromHistory(int expr_num) {
 }
 
 void TUI::Eval(std::string expr) {
-  // parser_.eval(expr)
+  std::string result = "";
+  // flags::EvalError result_code = parser_.Eval(expr, result);
+  // if (result_code == flags::EvalError:kSuccess) {
+  // user_context_->add_history(expr); 
+  // }
+  // DisplayEvalResults(result_code, result);
   std::cout << "Functionality not yet implemented :)\n";
-  std::cout << "Entered string was added to history.\n";
-  user_context_->add_history(expr);
 }
 
 
 void TUI::DisplayError(std::string expr, 
-                        flags::EvalErr err, 
+                        flags::EvalError err, 
                         int position) {
   return;
 }
@@ -53,13 +55,19 @@ flags::InterfaceCode TUI::Run() {
   std::cout << kWelcomeMessage;
 
   while (true) {
-    std::cout << kMainMenuMessage;
+    std::cout << kMainMenuMessage << std::flush;
+
+    user_input_ = "";
 
     std::getline(std::cin, user_input_);
 
     helper::str_func::Trim(user_input_);
 
     std::vector<std::string> input = helper::str_func::Split(user_input_);
+
+    if (input.size() == 0) {
+      continue;
+    }
 
     if (input[0] == "help") {
       std::cout << kHelpMessage;
@@ -85,15 +93,51 @@ flags::InterfaceCode TUI::Run() {
       return flags::InterfaceCode::kCleanExit;
     }
 
-    else if (input[0] == "switchGUI") {
+    else if (input[0] == "switchgui") {
       std::cout << "Functionality not yet implemented :)\n";
       // return flags::kSwitchToGUI;
     }
 
-    else if ( )
+    else if (input[0] == "eval") {
+      if (input.size() == 1) {
+        RunEvalMenu();
+      }
+      else {
+        std::string result = "";
+        user_input_ = "";
+        for (unsigned int i = 1; i < input.size(); i++) {
+          user_input_ += input[i];
+        }
+        // flags::EvalError result_code = parser_.Eval(user_input_, result)
+        // DisplayEvalResults(result_code, result);
+        // if (result_code == flags::EvalError:kSuccess) {
+        // user_context_->add_history(expr); 
+        // }
+        
+      }
+
+    }
+
+    else if (input[0] == "graph") {
+      if (input.size() == 1) {
+        RunGraphMenu();
+      }
+      else {
+        std::string result = "";
+        user_input_ = "";
+        for (unsigned int i = 1; i < input.size(); i++) {
+          user_input_ += input[i];
+        }
+        // flags::EvalError result_code = parser_.Eval(user_input_, result)
+        // DisplayEvalResults(result_code, result);
+        // if (result_code == flags::EvalError:kSuccess) {
+        // user_context_->add_history(expr); 
+        // }
+      }
+    }
 
     else {
-      Eval(user_input_);
+      std::cout << "Input was not understood, please try again\n";
     }
   }
 
@@ -108,11 +152,50 @@ void TUI::RunHistoryMenu() {
   DisplayHistory();
   std::cout << "Choose an option with corresponding number,"
   " or enter anything else to return to the main menu.\n";
-  std::cin >> user_input_;
+  std::getline(std::cin, user_input_);
   if (user_input_ != "0") {
     std::cout << "Functionality not yet implemented :)\n";
   }
   return;
+}
+
+void TUI::RunEvalMenu() {
+  std::cout << "Enter expression to be evaluated or type \"exit\" to exit.\n";
+  user_input_ = "";
+  std::getline(std::cin, user_input_);
+  if (user_input_ == "exit") {
+    return;
+  }
+  Eval(user_input_);
+}
+
+void TUI::RunGraphMenu() {
+  std::cout << "Enter expression to be graphed or type \"exit\" to exit.\n";
+  user_input_ = "";
+  std::getline(std::cin, user_input_);
+  if (user_input_ == "exit") {
+    return;
+  }
+  // Graph(user_input_);
+}
+
+void TUI::DisplayEvalResults(flags::EvalError result_code, 
+                              std::string& result) {
+  switch (result_code) {
+    case flags::EvalError::kSuccess:
+      std::cout << "Result is:\n" << result << std::endl;
+      break;
+    case flags::EvalError::kDivByZero:
+      std::cout << "ERROR: Division by zero occurs in expression.\n";
+      break;
+    case flags::EvalError::kInvalidSyntax:
+      std::cout << "ERROR: An unknown character or variable reference occurs"
+                  "in expression.\n";
+      break;
+    case flags::EvalError::kMismatchedParentheses:
+      std::cout << "ERROR: Mismatched parentheses within the expression.";
+      break;
+  }
 }
 
 void TUI::DisplayHistory() {

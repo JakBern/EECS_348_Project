@@ -122,9 +122,9 @@ std::string helper::config::GetGUIStyle() {
 //                           STRING PARSING HELPERS
 // =============================================================================
 
-bool helper::str_func::char_is_in(const char* c, const char* comp_list) {
-  for (int i = 0; i < sizeof(comp_list) / sizeof(char); i++) {
-    if (comp_list[i] == *c) {
+bool helper::str_func::char_is_in(const char& c, const char* comp_list) {
+  for (unsigned int i = 0; i < sizeof(comp_list) / sizeof(char); i++) {
+    if (comp_list[i] == c) {
         return true;
     }
   }
@@ -132,19 +132,19 @@ bool helper::str_func::char_is_in(const char* c, const char* comp_list) {
 }
 
 std::string& helper::str_func::TrimStart(std::string& str, 
-                                      const char* whitespace = " \t\f\n\r\v") {
+                                      const char* whitespace) {
   str.erase(0, str.find_first_not_of(whitespace));
   return str;
 }
     
 std::string& helper::str_func::TrimEnd(std::string& str, 
-                                      const char* whitespace = " \t\f\n\r\v") {
+                                      const char* whitespace) {
   str.erase(str.find_last_not_of(whitespace) + 1);
   return str;
 }
 
-std::string& Trim(std::string& str, 
-                      const char* whitespace = " \t\f\n\r\v") {
+std::string& helper::str_func::Trim(std::string& str, 
+                      const char* whitespace) {
   return helper::str_func::TrimEnd(helper::str_func::TrimStart(str));
 }
 
@@ -155,14 +155,16 @@ std::string& helper::str_func::RemoveWhitespace(std::string& str) {
 
 std::string helper::str_func::GetWord(std::string& str,
                     std::string::iterator& iter,
-                    const char* whitespace = " \t\f\n\r\v") {
+                    const char* whitespace) {
   std::string::iterator first = iter;
   for (; 
-      first != str.end() && helper::str_func::char_is_in(&*first, whitespace); 
+      first != str.end() 
+      && helper::str_func::char_is_in((*first),  whitespace); 
       first++){}
   std::string::iterator last = first;
   for (; 
-      last != str.end() && !(helper::str_func::char_is_in(&*last, whitespace)); 
+      last != str.end() 
+      && !(helper::str_func::char_is_in((*last), whitespace)); 
       last++) {}
   iter = last;
   std::string output(first, last);
@@ -170,7 +172,7 @@ std::string helper::str_func::GetWord(std::string& str,
 }
 
 std::vector<std::string> helper::str_func::Split(std::string& str,
-                                const char* whitespace = " \t\f\n\r\v") {
+                                const char* whitespace) {
   std::vector<std::string> output;
   std::string word;
   std::string::iterator iter = str.begin();

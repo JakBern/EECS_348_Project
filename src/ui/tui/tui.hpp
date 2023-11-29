@@ -58,6 +58,9 @@ class TUI : public AppInterface {
     // to be sent to the parser to create graphs of.
     void RunGraphMenu();
 
+    // Displays the results of evaluating an expression
+    void DisplayEvalResults(flags::EvalError result_code, std::string& result);
+
     // Displays the current history of the program to the terminal.
     void DisplayHistory();
 
@@ -72,7 +75,7 @@ class TUI : public AppInterface {
     // initialized to -1 for errors that do not have a positional argument.
     void DisplayError(
                   std::string expr, 
-                  flags::EvalErr err,
+                  flags::EvalError err,
                   int position=-1) override;
 
                   
