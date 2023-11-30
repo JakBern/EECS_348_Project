@@ -191,3 +191,8 @@
 - Began debugging and rewriting parts of the UI
 - Removed UI features that would not be necessary in the final implementation
 - Changed several functions which returned flags (enums) to return strings instead
+
+# 11/30/2023
+## Activities
+- Rewrote and updated planning documents
+- Discussed progress with team online
