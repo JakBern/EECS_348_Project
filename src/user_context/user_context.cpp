@@ -23,10 +23,7 @@
 #include "user_context.hpp"
 #include "util/flags.hpp"
 
-// This is a "string_view" array because it's considered best practices
-// to have constexpr structures not use dynamic objects due to some
-// problems that can arise with calling destructors.
-constexpr std::string_view kReservedKeywords[] = {
+const std::string kReservedKeywords[] = {
                                 "exit", "var", "vars",
                                 "savetovar", "history",
                                 "removevar", "help",

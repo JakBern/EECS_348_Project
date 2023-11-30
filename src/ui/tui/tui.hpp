@@ -45,6 +45,8 @@ class TUI : public AppInterface {
     // Later is planned to allow editing of the expression
     void LoadFromHistory(int expr_num) override;
 
+    void RunWelcomeAnimation();
+
     // Switches to the history menu, which displays the current history
     // and allows the user to pick an expression from the history to re-evaluate
     // or exit.

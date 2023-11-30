@@ -1,17 +1,19 @@
 #include <iostream>
 #include <string>
 #include <vector>
+// #include <chrono>
+// #include <thread>
 
 #include "ui/tui/tui.hpp"
 #include "util/flags.hpp"
 #include "util/helper.hpp"
 #include "user_context/user_context.hpp"
 
-const char* kWelcomeMessage = 
-"Welcome to the Arithmetic Expression Evaluator\n";
+const char kWelcomeMessage[] = 
+"Welcome to the Arithmetic Expression Evaluator!\n";
 
 const char* kMainMenuMessage = 
-"Enter an expression or command below, type \"help\" for help:\n";
+"Enter a command below, type \"help\" for help:\n";
 
 const char* kHelpMessage = 
 "Supported operators:\n"
@@ -19,15 +21,36 @@ const char* kHelpMessage =
 "Current commands are:\n"
 "- \"eval\": allows you to enter an expression to be evaluated\n"
 "\t- alternvatively, enter \"eval <expression>\"\n"
-"- \"graph\": enter an expression to graph (use graphing variable \"G\")\n"
-"\t- alternvatively, enter \"graph <expression>\"\n"
+// "- \"graph\": enter an expression to graph (use graphing variable \"G\")\n"
+// "\t- alternvatively, enter \"graph <expression>\"\n"
 "- \"exit\": exits program\n"
 "- \"history\": displays history and allows selecting a previous expression\n"
-"- \"vars\": displays all user stored variables and their values\n"
-"- \"removevar <varname>\": removes variable with matching name\n"
-"- \"savetovar <varname>\": saves result of expression to <varname>\n"
-"- \"switchGUI\": switches to GUI version of program\n"
+// "- \"vars\": displays all user stored variables and their values\n"
+// "- \"removevar <varname>\": removes variable with matching name\n"
+// "- \"savetovar <varname>\": saves result of expression to <varname>\n"
+// "- \"switchGUI\": switches to GUI version of program\n"
 "- \"help\": displays this stuff\n";
+
+// ===========REMOVED UNTIL FUTURE ITERATIONS==========
+
+// void TUI::RunWelcomeAnimation() {
+//   std::string cycle = "0123456789+-*/^%";
+//   int cycle_ind = 0;
+//   for (unsigned int i = 0;
+//       i < (sizeof(kWelcomeMessage) / sizeof(char)) - 2; 
+//       i++) {
+//     for (unsigned int j = 0; j < 3; j++) {
+//       cycle_ind = (cycle_ind + 1) % cycle.length();
+//       std::this_thread::sleep_for(std::chrono::milliseconds(30));
+//       std::cout << cycle[cycle_ind] << std::flush;
+//       std::cout << "\b" << std::flush;
+//     }
+//     std::cout << kWelcomeMessage[i] << std::flush;
+//   }
+//   std::cout << std::endl;
+// }
+
+// =====================END REMOVED=================
 
 void TUI::LoadFromHistory(int expr_num) {
   std::cout << "Functionality not yet implemented :)\n";
@@ -63,50 +86,58 @@ flags::InterfaceCode TUI::Run() {
 
     helper::str_func::Trim(user_input_);
 
-    std::vector<std::string> input = helper::str_func::Split(user_input_);
+    std::vector<std::string> split_input = helper::str_func::Split(user_input_);
 
-    if (input.size() == 0) {
+    if (split_input.size() == 0) {
+      std::cout << "Input was not understood, please try again\n";
       continue;
     }
 
-    if (input[0] == "help") {
+    if (split_input[0] == "help") {
       std::cout << kHelpMessage;
     }
 
-    else if (input[0] == "history") {
+    else if (split_input[0] == "history") {
       RunHistoryMenu();
     }
 
-    else if (input[0] == "vars") {
-      DisplayVars();
-    }
+    // ===========REMOVED UNTIL FUTURE ITERATIONS==========
+    // else if (split_input[0] == "vars") {
+    //   DisplayVars();
+    // }
 
-    else if (input[0] == "savetovar") {
-      std::cout << "Functionality not yet implemented :)\n";
-    }
+    // else if (split_input[0] == "savetovar") {
+    //   std::cout << "Functionality not yet implemented :)\n";
+    // }
 
-    else if (input[0] == "removevar") {
-      std::cout << "Functionality not yet implemented :)\n";
-    }
+    // else if (split_input[0] == "removevar") {
+    //   std::cout << "Functionality not yet implemented :)\n";
+    // }
 
-    else if (input[0] == "exit") {
+    // =====================END REMOVED=================
+
+    else if (split_input[0] == "exit") {
       return flags::InterfaceCode::kCleanExit;
     }
 
-    else if (input[0] == "switchgui") {
-      std::cout << "Functionality not yet implemented :)\n";
-      // return flags::kSwitchToGUI;
-    }
+    // ========REMOVED UNTIL FUTURE ITERATIONS==========
 
-    else if (input[0] == "eval") {
-      if (input.size() == 1) {
+    // else if (split_input[0] == "switchgui") {
+    //   std::cout << "Functionality not yet implemented :)\n";
+    //   // return flags::kSwitchToGUI;
+    // }
+
+    // =====================END REMOVED=================
+
+    else if (split_input[0] == "eval") {
+      if (split_input.size() == 1) {
         RunEvalMenu();
       }
       else {
         std::string result = "";
         user_input_ = "";
-        for (unsigned int i = 1; i < input.size(); i++) {
-          user_input_ += input[i];
+        for (unsigned int i = 1; i < split_input.size(); i++) {
+          user_input_ += split_input[i];
         }
         // flags::EvalError result_code = parser_.Eval(user_input_, result)
         // DisplayEvalResults(result_code, result);
@@ -118,23 +149,27 @@ flags::InterfaceCode TUI::Run() {
 
     }
 
-    else if (input[0] == "graph") {
-      if (input.size() == 1) {
-        RunGraphMenu();
-      }
-      else {
-        std::string result = "";
-        user_input_ = "";
-        for (unsigned int i = 1; i < input.size(); i++) {
-          user_input_ += input[i];
-        }
-        // flags::EvalError result_code = parser_.Eval(user_input_, result)
-        // DisplayEvalResults(result_code, result);
-        // if (result_code == flags::EvalError:kSuccess) {
-        // user_context_->add_history(expr); 
-        // }
-      }
-    }
+    // ========REMOVED UNTIL FUTURE ITERATIONS==========
+
+    // else if (split_input[0] == "graph") {
+    //   if (split_input.size() == 1) {
+    //     RunGraphMenu();
+    //   }
+    //   else {
+    //     std::string result = "";
+    //     user_input_ = "";
+    //     for (unsigned int i = 1; i < split_input.size(); i++) {
+    //       user_input_ += split_input[i];
+    //     }
+    //     flags::EvalError result_code = parser_.Eval(user_input_, result)
+    //     DisplayEvalResults(result_code, result);
+    //     if (result_code == flags::EvalError:kSuccess) {
+    //     user_context_->add_history(expr); 
+    //     }
+    //   }
+    // }
+
+    // =====================END REMOVED=================
 
     else {
       std::cout << "Input was not understood, please try again\n";
@@ -169,15 +204,19 @@ void TUI::RunEvalMenu() {
   Eval(user_input_);
 }
 
-void TUI::RunGraphMenu() {
-  std::cout << "Enter expression to be graphed or type \"exit\" to exit.\n";
-  user_input_ = "";
-  std::getline(std::cin, user_input_);
-  if (user_input_ == "exit") {
-    return;
-  }
-  // Graph(user_input_);
-}
+// ========REMOVED UNTIL FUTURE ITERATIONS==========
+
+// void TUI::RunGraphMenu() {
+//   std::cout << "Enter expression to be graphed or type \"exit\" to exit.\n";
+//   user_input_ = "";
+//   std::getline(std::cin, user_input_);
+//   if (user_input_ == "exit") {
+//     return;
+//   }
+//   Graph(user_input_);
+// }
+
+// =====================END REMOVED=================
 
 void TUI::DisplayEvalResults(flags::EvalError result_code, 
                               std::string& result) {
@@ -211,20 +250,24 @@ void TUI::DisplayHistory() {
   return;
 }
 
-void TUI::DisplayVars() {
-  std::cout << "USER VARIABLES\n";
-  auto const& var_list = user_context_->get_var_list();
-  if (!var_list.size()) {
-    std::cout << "\t...No user variables saved...\n";
-    return;
-  }
-  for (auto const& var_val_pair : var_list) {
-    std::cout << "Name: " << var_val_pair.first
-              << "\n"
-              << "Value" << var_val_pair.second
-              << "\n\n";
-  }
-}
+// ========REMOVED UNTIL FUTURE ITERATIONS==========
+
+// void TUI::DisplayVars() {
+//   std::cout << "USER VARIABLES\n";
+//   auto const& var_list = user_context_->get_var_list();
+//   if (!var_list.size()) {
+//     std::cout << "\t...No user variables saved...\n";
+//     return;
+//   }
+//   for (auto const& var_val_pair : var_list) {
+//     std::cout << "Name: " << var_val_pair.first
+//               << "\n"
+//               << "Value" << var_val_pair.second
+//               << "\n\n";
+//   }
+// }
+
+// =====================END REMOVED=================
 
 
 TUI::TUI(std::shared_ptr<UserContext> context) : AppInterface(context) {}
