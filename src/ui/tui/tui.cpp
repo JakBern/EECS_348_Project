@@ -11,8 +11,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <chrono>
-#include <thread>
+// #include <chrono>
+// #include <thread>
 
 #include "ui/tui/tui.hpp"
 #include "util/flags.hpp"
@@ -43,22 +43,22 @@ const char* kHelpMessage =
 
 // ===========REMOVED UNTIL FUTURE ITERATIONS==========
 
-void TUI::RunWelcomeAnimation() {
-  std::string cycle = "0123456789+-*/^%";
-  int cycle_ind = 0;
-  for (unsigned int i = 0;
-      i < (sizeof(kWelcomeMessage) / sizeof(char)) - 2; 
-      i++) {
-    for (unsigned int j = 0; j < 3; j++) {
-      cycle_ind = (cycle_ind + 1) % cycle.length();
-      std::this_thread::sleep_for(std::chrono::milliseconds(30));
-      std::cout << cycle[cycle_ind] << std::flush;
-      std::cout << "\b" << std::flush;
-    }
-    std::cout << kWelcomeMessage[i] << std::flush;
-  }
-  std::cout << std::endl;
-}
+// void TUI::RunWelcomeAnimation() {
+//   std::string cycle = "0123456789+-*/^%";
+//   int cycle_ind = 0;
+//   for (unsigned int i = 0;
+//       i < (sizeof(kWelcomeMessage) / sizeof(char)) - 2; 
+//       i++) {
+//     for (unsigned int j = 0; j < 3; j++) {
+//       cycle_ind = (cycle_ind + 1) % cycle.length();
+//       std::this_thread::sleep_for(std::chrono::milliseconds(30));
+//       std::cout << cycle[cycle_ind] << std::flush;
+//       std::cout << "\b" << std::flush;
+//     }
+//     std::cout << kWelcomeMessage[i] << std::flush;
+//   }
+//   std::cout << std::endl;
+// }
 
 // =====================END REMOVED===================
 
@@ -81,8 +81,8 @@ void TUI::Eval(std::string expr) {
 
 flags::InterfaceCode TUI::Run() {
 
-  // std::cout << kWelcomeMessage;
-  RunWelcomeAnimation();
+  std::cout << kWelcomeMessage;
+  // RunWelcomeAnimation();
 
 
   while (true) {
