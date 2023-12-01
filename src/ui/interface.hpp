@@ -9,20 +9,18 @@
 // YourName Here [from Blank - Blank]
 //
 // Last update:
-//  - 10/19/2023 (Jake): 
-//    Continued filling out file
+//  - 11/30/2023 (Jake): Commented out unused functionality, removed functions
+//    AddToVars, AddToHistory, etc (can be done easily in each UI)
 //
 #ifndef UI_INTERFACE_H_
 #define UI_INTERFACE_H_
 
 #include <string>
-#include <vector>
-#include <map>
-#include <unordered_map>
 #include <memory>
 
 #include "util/flags.hpp"
 #include "user_context/user_context.hpp"
+#include "parser/parser.hpp"
 
 class AppInterface {
   public:
@@ -46,40 +44,11 @@ class AppInterface {
     virtual void Close() = 0;
 
     AppInterface();
-    AppInterface(std::shared_ptr<UserContext> context);
+    AppInterface(std::shared_ptr<UserContext> context,
+                  std::shared_ptr<Parser> parser);
     virtual ~AppInterface();
 
   protected:
-
-    // Adds an expression to the front of the expression history.
-    // If there are already the max amount of allowed expressions in the history
-    // then the oldest expression is removed.
-    virtual void AddToHistory(std::string expr);
-
-    // Loads an expression from the history to be edited by the user.
-    // Expressions will be enumerated based on their recency, eg the most recent
-    // expression evaluated will be 1, then 2, etc.
-    virtual void LoadFromHistory(int expr_num) = 0;
-
-    // Adds a user-defined var to the list of user defined vars.
-    //
-    // Returns one of several codes depending upon how the process went:
-    //  - kSuccess: the variable was successfully added
-    //  - kOverwrite: the variable will overwrite another, get user input to
-    //                make sure this is okay.
-    //  - kFormatError: the variable was formatted wrong and could not be added
-    //  - kReservedError: the variable was given a name already given to a
-    //                    reserved keyword and could not be added
-    //
-    virtual flags::UserVarMsg AddToUserVars(
-                                    std::string var, 
-                                    int val /*Value val*/);
-
-    // Removes the specified string from the user vars.
-    //  
-    // Returns false if the string does not exist in the user vars,
-    // true if successful.
-    bool RemoveFromUserVars(std::string var);
 
     
     // Evaluates the current expression by calling the parser and passing
@@ -91,15 +60,20 @@ class AppInterface {
     // 
     // If the evaluation is not successful, an error message should be displayed
     virtual void Eval(std::string expr) = 0;
+    
+    // ===========REMOVED UNTIL FUTURE ITERATIONS==========
 
     // If an expression has an error, this displays the error type, and where
     // it occurs in the evaluated expression.
-    virtual void DisplayError(
-                std::string expr, 
-                flags::EvalError err,
-                int position) = 0;
 
-    // std::shared_ptr<Parser> parser_;
+    // virtual void DisplayError(
+    //             std::string expr, 
+    //             flags::EvalError err,
+    //             int position) = 0;
+
+    // =====================END REMOVED====================
+
+    std::shared_ptr<Parser> parser_;
     std::shared_ptr<UserContext> user_context_;
 
     std::string user_input_;

@@ -42,8 +42,13 @@ class UserContext {
     // Returns the history as an iterable (list) object
     std::list<std::string>& get_history();
 
+    // Returns a specific history item
+    std::string get_history_item(int item_num);
+
+    // ===========REMOVED UNTIL FUTURE ITERATIONS==========
+    
     // Returns the stored user variables and values as map object
-    std::map<std::string, int>& get_var_list();
+    // std::map<std::string, int>& get_var_list();
 
     // Adds a variable and its associated value to the variable storage 
     // Note: returns a flag signalling success or failure.
@@ -58,20 +63,22 @@ class UserContext {
     //      formatted.
     //  - kVarReservedError
     //    - The variable is a reserved keyword and could not be saved.
-    flags::UserVarMsg add_var(std::string var, int val);
+    // flags::UserVarMsg add_var(std::string var, int val);
 
     // Removes a variable from internal variable storage based its string.
     // Returns false if the variable doesn't exist.
-    bool remove_var(std::string var);
+    // bool remove_var(std::string var);
 
     // Check if a string exists in the reserved keywords
-    bool in_keywords(std::string var);
+    // bool in_keywords(std::string var);
 
     // Check if a variable already exists
-    bool var_exists(std::string var);
+    // bool var_exists(std::string var);
 
     // Overwrites the value of a user_variable
-    void overwrite_var(std::string var, int val);
+    // void overwrite_var(std::string var, int val);
+
+    // =====================END REMOVED====================
 
     UserContext() {}
     ~UserContext() {}
@@ -86,14 +93,14 @@ class UserContext {
     static const std::size_t max_history_len_ = 8;
 
     // will later use Value type instead of int
-    std::map<std::string, int> user_vars_;
+    // std::map<std::string, int> user_vars_;
 
     // holds last evaluated expression value
-    int last_expression_value_;
+    // int last_expression_value_;
 
     // Checks if the user defined variable adheres to the format standards,
     // ie: only letters or underscores
-    bool var_format_correct(std::string var);
+    // bool var_format_correct(std::string var);
 
 };
 

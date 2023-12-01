@@ -50,66 +50,74 @@ std::list<std::string>& UserContext::get_history() {
   return history_;
 }
 
-std::map<std::string, int>& UserContext::get_var_list() {
-  return user_vars_;
+std::string get_history_item(int item_num) {
+  return history_[item_num];
 }
 
-bool UserContext::in_keywords(std::string var) {
-  for (auto keyword : kReservedKeywords) {
-    if (var == keyword) {
-      return true;
-    }
-  }
-  return false;
-}
+// ===========REMOVED UNTIL FUTURE ITERATIONS==========
 
-bool UserContext::var_exists(std::string var) {
-  return (bool)user_vars_.count(var);
-}
+// std::map<std::string, int>& UserContext::get_var_list() {
+//   return user_vars_;
+// }
 
-flags::UserVarMsg UserContext::add_var(std::string var, int val) {
+// bool UserContext::in_keywords(std::string var) {
+//   for (auto keyword : kReservedKeywords) {
+//     if (var == keyword) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
 
-  if (in_keywords(var)) {
-    return flags::UserVarMsg::kVarReservedError;
-  }
+// bool UserContext::var_exists(std::string var) {
+//   return (bool)user_vars_.count(var);
+// }
 
-  else if (var_exists(var)) {
-    return flags::UserVarMsg::kVarNeedOverwrite;
-  }
+// flags::UserVarMsg UserContext::add_var(std::string var, int val) {
 
-  else if (!var_format_correct(var)) {
-    return flags::UserVarMsg::kVarFormatError;
-  }
+//   if (in_keywords(var)) {
+//     return flags::UserVarMsg::kVarReservedError;
+//   }
 
-  else {
-    user_vars_.insert({var, val});
-    return flags::UserVarMsg::kVarWriteSuccess;
-  }
-}
+//   else if (var_exists(var)) {
+//     return flags::UserVarMsg::kVarNeedOverwrite;
+//   }
 
-bool UserContext::remove_var(std::string var) {
-  if (var_exists(var)) {
-    user_vars_.erase(var);
-    return true;
-  }
-  else {
-    return false;
-  }
-}
+//   else if (!var_format_correct(var)) {
+//     return flags::UserVarMsg::kVarFormatError;
+//   }
 
-void UserContext::overwrite_var(std::string var, int val) {
-  user_vars_[var] = val;
-}
+//   else {
+//     user_vars_.insert({var, val});
+//     return flags::UserVarMsg::kVarWriteSuccess;
+//   }
+// }
 
-bool UserContext::var_format_correct(std::string var) {
-  std::string::iterator itr;
-  for (itr = var.begin(); itr != var.end(); itr++) {
-    if (std::isalpha(*itr) || (*itr) == '_') {
-      continue;
-    }
-    else {
-      return false;
-    }
-  }
-  return true;
-}
+// bool UserContext::remove_var(std::string var) {
+//   if (var_exists(var)) {
+//     user_vars_.erase(var);
+//     return true;
+//   }
+//   else {
+//     return false;
+//   }
+// }
+
+// void UserContext::overwrite_var(std::string var, int val) {
+//   user_vars_[var] = val;
+// }
+
+// bool UserContext::var_format_correct(std::string var) {
+//   std::string::iterator itr;
+//   for (itr = var.begin(); itr != var.end(); itr++) {
+//     if (std::isalpha(*itr) || (*itr) == '_') {
+//       continue;
+//     }
+//     else {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+// =====================END REMOVED====================

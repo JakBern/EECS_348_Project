@@ -10,7 +10,7 @@
 // Vidur Pandiripally [from 10/24/2023 - Present],
 //
 // Last update:
-//  - 10/19/2023 (Jake): Created file, added basic code
+//  - 11/30/2023 (Jake): Updated to include parser
 //
 
 #include <memory>
@@ -21,6 +21,7 @@
 #include "util/flags.hpp"
 #include "util/helper.hpp"
 #include "user_context/user_context.hpp"
+#include "parser/parser.hpp"
 
 int main() {
 
@@ -32,13 +33,12 @@ int main() {
 
   std::shared_ptr<UserContext> context = std::make_shared<UserContext>();
 
-  // TODO: Add in parser when implemented
-  // std::shared_ptr<Parser> context = std::make_shared<Parser>(context);
+  std::shared_ptr<Parser> parser = std::make_shared<Parser>(parser);
 
   // TUI and GUI are child classes of AppInterface,
   // so we can make our window either of those.
   if (!helper::config::UseGUI()) {
-    window = std::make_unique<TUI>(context/*, parser*/);
+    window = std::make_unique<TUI>(context, parser);
   }
   // TODO: Add GUI implementation
   // else {
@@ -52,6 +52,7 @@ int main() {
     // InterfaceCode (see util/flags.h)
     flags::InterfaceCode exit_code = window->Run();
 
+    // Only possible exit code at the moment
     if ( exit_code == flags::InterfaceCode::kCleanExit) {
       window->Close();
       break;

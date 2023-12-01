@@ -1,8 +1,18 @@
+// TUI (Text User Interface) Implementation File
+// Represents the command line user interface
+//
+// Author(s): 
+// Jake Bernard [from 10/19/2023 - Present]
+//
+// Last update:
+//  - 11/30/2023 (Jake):
+//    Commented out features not in the final implementation
+//
 #include <iostream>
 #include <string>
 #include <vector>
-// #include <chrono>
-// #include <thread>
+#include <chrono>
+#include <thread>
 
 #include "ui/tui/tui.hpp"
 #include "util/flags.hpp"
@@ -33,45 +43,41 @@ const char* kHelpMessage =
 
 // ===========REMOVED UNTIL FUTURE ITERATIONS==========
 
-// void TUI::RunWelcomeAnimation() {
-//   std::string cycle = "0123456789+-*/^%";
-//   int cycle_ind = 0;
-//   for (unsigned int i = 0;
-//       i < (sizeof(kWelcomeMessage) / sizeof(char)) - 2; 
-//       i++) {
-//     for (unsigned int j = 0; j < 3; j++) {
-//       cycle_ind = (cycle_ind + 1) % cycle.length();
-//       std::this_thread::sleep_for(std::chrono::milliseconds(30));
-//       std::cout << cycle[cycle_ind] << std::flush;
-//       std::cout << "\b" << std::flush;
-//     }
-//     std::cout << kWelcomeMessage[i] << std::flush;
-//   }
-//   std::cout << std::endl;
-// }
-
-// =====================END REMOVED=================
-
-void TUI::LoadFromHistory(int expr_num) {
-  std::cout << "Functionality not yet implemented :)\n";
+void TUI::RunWelcomeAnimation() {
+  std::string cycle = "0123456789+-*/^%";
+  int cycle_ind = 0;
+  for (unsigned int i = 0;
+      i < (sizeof(kWelcomeMessage) / sizeof(char)) - 2; 
+      i++) {
+    for (unsigned int j = 0; j < 3; j++) {
+      cycle_ind = (cycle_ind + 1) % cycle.length();
+      std::this_thread::sleep_for(std::chrono::milliseconds(30));
+      std::cout << cycle[cycle_ind] << std::flush;
+      std::cout << "\b" << std::flush;
+    }
+    std::cout << kWelcomeMessage[i] << std::flush;
+  }
+  std::cout << std::endl;
 }
+
+// =====================END REMOVED===================
 
 void TUI::Eval(std::string expr) {
-  std::string result = "";
-  // flags::EvalError result_code = parser_.Eval(expr, result);
-  // if (result_code == flags::EvalError:kSuccess) {
-  // user_context_->add_history(expr); 
-  // }
-  // DisplayEvalResults(result_code, result);
-  std::cout << "Functionality not yet implemented :)\n";
+  std::string result = parser_.parse(expr);
+  user_context_->add_history(expr); 
+  std::cout << "Result is: " << result << std::endl;
 }
 
+// ===========REMOVED UNTIL FUTURE ITERATIONS==========
 
-void TUI::DisplayError(std::string expr, 
-                        flags::EvalError err, 
-                        int position) {
-  return;
-}
+// void TUI::DisplayError(std::string expr, 
+//                         flags::EvalError err, 
+//                         int position) {
+//   return;
+// }
+
+// =====================END REMOVED===================
+
 
 flags::InterfaceCode TUI::Run() {
 
@@ -102,6 +108,7 @@ flags::InterfaceCode TUI::Run() {
     }
 
     // ===========REMOVED UNTIL FUTURE ITERATIONS==========
+
     // else if (split_input[0] == "vars") {
     //   DisplayVars();
     // }
@@ -114,7 +121,7 @@ flags::InterfaceCode TUI::Run() {
     //   std::cout << "Functionality not yet implemented :)\n";
     // }
 
-    // =====================END REMOVED=================
+    // =====================END REMOVED===================
 
     else if (split_input[0] == "exit") {
       return flags::InterfaceCode::kCleanExit;
@@ -127,24 +134,21 @@ flags::InterfaceCode TUI::Run() {
     //   // return flags::kSwitchToGUI;
     // }
 
-    // =====================END REMOVED=================
+    // =====================END REMOVED===================
 
     else if (split_input[0] == "eval") {
       if (split_input.size() == 1) {
         RunEvalMenu();
       }
       else {
-        std::string result = "";
-        user_input_ = "";
+        // Concatenate the rest of the input
+        std::string to_parser = "";
         for (unsigned int i = 1; i < split_input.size(); i++) {
-          user_input_ += split_input[i];
+          to_parser += split_input[i];
         }
-        // flags::EvalError result_code = parser_.Eval(user_input_, result)
-        // DisplayEvalResults(result_code, result);
-        // if (result_code == flags::EvalError:kSuccess) {
-        // user_context_->add_history(expr); 
-        // }
-        
+        std::string result = parser_.parse(to_parser);
+        user_context_->add_history(to_parser);
+        std::cout << "Result is: " << result; 
       }
 
     }
@@ -169,7 +173,7 @@ flags::InterfaceCode TUI::Run() {
     //   }
     // }
 
-    // =====================END REMOVED=================
+    // =====================END REMOVED===================
 
     else {
       std::cout << "Input was not understood, please try again\n";
@@ -183,14 +187,34 @@ void TUI::Close() {
 }
 
 void TUI::RunHistoryMenu() {
+  user_input_ = "";
   std::cout << "Current history:\n";
   DisplayHistory();
   std::cout << "Choose an option with corresponding number,"
   " or enter anything else to return to the main menu.\n";
   std::getline(std::cin, user_input_);
-  if (user_input_ != "0") {
-    std::cout << "Functionality not yet implemented :)\n";
+
+  if (user_context_->history_len() == 0) {
+    return;
   }
+
+  for (unsigned int i = 0; i < user_input_.length(); i++) {
+    if (!std::is_digit(user_input_[i])) {
+      return;
+    }
+  }
+
+  int input_num = std::stoi(user_input_);
+  if (input_num < 0 || input_num >= user_context_->history_len()) {
+    return;
+  }
+  
+  std::cout << "Expression: " 
+            << user_context_->get_history_item(input_num) 
+            << "\nResult: "
+            << parser_.parse(user_context_->get_history_item(input_num))
+            << std::endl;
+  
   return;
 }
 
@@ -216,26 +240,30 @@ void TUI::RunEvalMenu() {
 //   Graph(user_input_);
 // }
 
-// =====================END REMOVED=================
+// =====================END REMOVED===================
 
-void TUI::DisplayEvalResults(flags::EvalError result_code, 
-                              std::string& result) {
-  switch (result_code) {
-    case flags::EvalError::kSuccess:
-      std::cout << "Result is:\n" << result << std::endl;
-      break;
-    case flags::EvalError::kDivByZero:
-      std::cout << "ERROR: Division by zero occurs in expression.\n";
-      break;
-    case flags::EvalError::kInvalidSyntax:
-      std::cout << "ERROR: An unknown character or variable reference occurs"
-                  "in expression.\n";
-      break;
-    case flags::EvalError::kMismatchedParentheses:
-      std::cout << "ERROR: Mismatched parentheses within the expression.";
-      break;
-  }
-}
+// ===========REMOVED UNTIL FUTURE ITERATIONS==========
+
+// void TUI::DisplayEvalResults(flags::EvalError result_code, 
+//                               std::string& result) {
+//   switch (result_code) {
+//     case flags::EvalError::kSuccess:
+//       std::cout << "Result is:\n" << result << std::endl;
+//       break;
+//     case flags::EvalError::kDivByZero:
+//       std::cout << "ERROR: Division by zero occurs in expression.\n";
+//       break;
+//     case flags::EvalError::kInvalidSyntax:
+//       std::cout << "ERROR: An unknown character or variable reference occurs"
+//                   "in expression.\n";
+//       break;
+//     case flags::EvalError::kMismatchedParentheses:
+//       std::cout << "ERROR: Mismatched parentheses within the expression.";
+//       break;
+//   }
+// }
+
+// =====================END REMOVED===================
 
 void TUI::DisplayHistory() {
   int num = 1;
