@@ -63,7 +63,7 @@ void TUI::RunWelcomeAnimation() {
 // =====================END REMOVED===================
 
 void TUI::Eval(std::string expr) {
-  std::string result = parser_.parse(expr);
+  std::string result = parser_->parse(expr);
   user_context_->add_history(expr); 
   std::cout << "Result is: " << result << std::endl;
 }
@@ -81,7 +81,9 @@ void TUI::Eval(std::string expr) {
 
 flags::InterfaceCode TUI::Run() {
 
-  std::cout << kWelcomeMessage;
+  // std::cout << kWelcomeMessage;
+  RunWelcomeAnimation();
+
 
   while (true) {
     std::cout << kMainMenuMessage << std::flush;
@@ -146,7 +148,7 @@ flags::InterfaceCode TUI::Run() {
         for (unsigned int i = 1; i < split_input.size(); i++) {
           to_parser += split_input[i];
         }
-        std::string result = parser_.parse(to_parser);
+        std::string result = parser_->parse(to_parser);
         user_context_->add_history(to_parser);
         std::cout << "Result is: " << result; 
       }
@@ -199,12 +201,12 @@ void TUI::RunHistoryMenu() {
   }
 
   for (unsigned int i = 0; i < user_input_.length(); i++) {
-    if (!std::is_digit(user_input_[i])) {
+    if (!std::isdigit(user_input_[i])) {
       return;
     }
   }
 
-  int input_num = std::stoi(user_input_);
+  unsigned int input_num = std::stoi(user_input_);
   if (input_num < 0 || input_num >= user_context_->history_len()) {
     return;
   }
@@ -212,7 +214,7 @@ void TUI::RunHistoryMenu() {
   std::cout << "Expression: " 
             << user_context_->get_history_item(input_num) 
             << "\nResult: "
-            << parser_.parse(user_context_->get_history_item(input_num))
+            << parser_->parse(user_context_->get_history_item(input_num))
             << std::endl;
   
   return;
@@ -298,6 +300,8 @@ void TUI::DisplayHistory() {
 // =====================END REMOVED=================
 
 
-TUI::TUI(std::shared_ptr<UserContext> context) : AppInterface(context) {}
+TUI::TUI(std::shared_ptr<UserContext> context, 
+          std::shared_ptr<Parser> parser) : 
+          AppInterface(context, parser) {}
 TUI::~TUI() {}
 

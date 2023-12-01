@@ -33,7 +33,7 @@ int main() {
 
   std::shared_ptr<UserContext> context = std::make_shared<UserContext>();
 
-  std::shared_ptr<Parser> parser = std::make_shared<Parser>(parser);
+  std::shared_ptr<Parser> parser = std::make_shared<Parser>();
 
   // TUI and GUI are child classes of AppInterface,
   // so we can make our window either of those.

@@ -73,8 +73,8 @@ class AppInterface {
 
     // =====================END REMOVED====================
 
-    std::shared_ptr<Parser> parser_;
     std::shared_ptr<UserContext> user_context_;
+    std::shared_ptr<Parser> parser_;
 
     std::string user_input_;
 

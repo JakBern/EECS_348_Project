@@ -17,7 +17,7 @@
 #include <vector>
 #include <string>
 #include <map>
-#include <array>
+#include <deque>
 #include <cctype>
 
 #include "user_context.hpp"
@@ -46,11 +46,11 @@ void UserContext::add_history(std::string expr) {
   history_.push_front(expr);
 }
 
-std::list<std::string>& UserContext::get_history() {
+std::deque<std::string>& UserContext::get_history() {
   return history_;
 }
 
-std::string get_history_item(int item_num) {
+std::string UserContext::get_history_item(int item_num) {
   return history_[item_num];
 }
 

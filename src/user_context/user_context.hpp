@@ -21,9 +21,9 @@
 #define USER_CONTEXT_USER_CONTEXT_H_
 
 #include <vector>
-#include <list>
+#include <deque>
 #include <string>
-#include <map>
+// #include <map>
 
 #include "util/flags.hpp"
 
@@ -40,7 +40,7 @@ class UserContext {
     std::size_t history_len();
 
     // Returns the history as an iterable (list) object
-    std::list<std::string>& get_history();
+    std::deque<std::string>& get_history();
 
     // Returns a specific history item
     std::string get_history_item(int item_num);
@@ -87,7 +87,7 @@ class UserContext {
   protected:
     // Contains the history of all expressions evaluated during runtime
     // up to a set threshold (max_history_)
-    std::list<std::string> history_;
+    std::deque<std::string> history_;
 
     // Specifies the maximum number of expressions that can exist in history.
     static const std::size_t max_history_len_ = 8;

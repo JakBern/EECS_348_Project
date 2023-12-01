@@ -20,7 +20,7 @@ class TUI : public AppInterface {
   public:
     
 
-    TUI(std::shared_ptr<UserContext> context);
+    TUI(std::shared_ptr<UserContext> context, std::shared_ptr<Parser> parser);
     ~TUI();
 
   protected:
