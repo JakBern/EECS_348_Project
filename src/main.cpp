@@ -37,10 +37,11 @@ int main() {
 
   // TUI and GUI are child classes of AppInterface,
   // so we can make our window either of those.
-  if (!helper::config::UseGUI()) {
+  // ====Config is currently unused, but in a working state===
+  // if (!helper::config::UseGUI()) {
     window = std::make_unique<TUI>(context, parser);
-  }
-  // TODO: Add GUI implementation
+  // }
+  // TODO(Jake): Add GUI implementation
   // else {
   //   window =  std::make_unique<GUI>(context/*, parser*/);
   // }
