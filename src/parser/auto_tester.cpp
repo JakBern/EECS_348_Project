@@ -79,7 +79,6 @@ int main() {
     }
     line_num = (line_num + 1) % 4;
   }
-  output << std::flush;
   output.close();
   input.close();
   return 0;
