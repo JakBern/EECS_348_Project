@@ -4,6 +4,9 @@
 #include <stack>
 #include <vector>
 
+#ifndef PARSER_PARSER_H_
+#define PARSER_PARSER_H_
+
 using namespace std;
 
 class Parser{
@@ -29,3 +32,5 @@ class Parser{
 
 
 };
+
+#endif
