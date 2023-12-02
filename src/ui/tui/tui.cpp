@@ -206,7 +206,7 @@ void TUI::RunHistoryMenu() {
     }
   }
 
-  unsigned int input_num = std::stoi(user_input_);
+  unsigned int input_num = std::stoi(user_input_) - 1;
   if (input_num < 0 || input_num >= user_context_->history_len()) {
     return;
   }

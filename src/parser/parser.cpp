@@ -32,7 +32,7 @@ string Parser::parse(string equation){
     //we will also check for "**" to change to "^"
     for (int i = 0; i < equation.length(); i++){
         //if it is not an operator before the "(", insert the "*"
-        if (!(equation[i] == '*' || equation[i] == '/' || equation[i] == '+' || equation[i] == '-') && equation[i+1] == '('){
+        if (!(equation[i] == '*' || equation[i] == '/' || equation[i] == '+' || equation[i] == '-' || equation[i] == '%') && equation[i+1] == '('){
             equation.insert(i+1, 1, '*');
         }else if (equation[i] == '*' && equation[i+1] == '*'){
             equation.erase(i, 2);
