@@ -15,7 +15,7 @@ Parser::Parser(){}
 
 // ========================LEXER SECTION=======================
 
-void Parser::lexer() {
+void Parser::lexer(string expression) {
     //cleanup passed equation
     //at the top of the code we will check for instances of implied multiplication using parentheses
     // like 6(2+1)
@@ -291,7 +291,7 @@ string Parser::parse(string equation){
 
   // Input is lexed -- now available in the vector of strings called "parsed"
   // reminder: "u-" means unary minus
-  lexer();
+  lexer(equation);
   if (error != "") {
     return error;
   }
@@ -309,9 +309,6 @@ string Parser::parse(string equation){
     return error;
   }
   return result;
-
-
-
 }
 
 

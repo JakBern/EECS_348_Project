@@ -15,7 +15,7 @@ class Parser{
         int precedence_greater_than(string a, string b);
 
     private:
-        void lexer();
+        void lexer(string expr);
         void to_polish_notation();
         void evaluator();
         //the purpose of parsed is to contain the different values from the equation in a vector of strings
