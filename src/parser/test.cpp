@@ -31,21 +31,39 @@ int main(){
     //we just define the Parser class as parser
     Parser parser;
 
-    //dont include the \n in the test cases, shouldn't break anything but would just mess with it
-    cout << "10+ 3- 4*(9-2) \n";
-    //i printed the equation for the sake of testing
     // right now the program should accomplish everything in the parsing example png
     // the output for the following line would  be "10 3 + 4 9 2 - * -"
-    parser.parse("10+ 3- 4*(9-2)/10");
-
-    cout << "3*(10-(2*4)) \n";
-    parser.parse("3*(10-(2*4))");
-
-    cout << "6/2*(1+2) \n";
-    parser.parse("6/2*(1+2)");
+    parser.parse("e+-e");
+    cout << "done \n";
 
 
 
+    parser.parse("6+-2");
+
+    parser.parse("6-(1+1)");
+
+    parser.parse("e+1");
+
+
+
+    
+    cout << parser.parse("pi + 1") << "\n";
+
+  
+    cout << parser.parse("6/2(1+2)") << "\n";
+
+    cout << parser.parse("6^2") << "\n";
+
+    cout << parser.parse("6**2") << "\n";
+
+    cout << parser.parse("7%2") << "\n";
+
+
+
+
+
+
+    cout << "all complete";
 
 
 

@@ -1,5 +1,3 @@
-#ifndef PARSER_PARSER_H_
-#define PARSER_PARSER_H_
 
 #include <string>
 #include <queue>
@@ -31,5 +29,3 @@ class Parser{
 
 
 };
-
-#endif
