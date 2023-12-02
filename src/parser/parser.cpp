@@ -6,6 +6,8 @@
 #include <queue>
 #include <stack>
 #include <math.h>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -274,12 +276,14 @@ string Parser::parse(string equation){
 
     //lets print off the entire contents of output stack, which will hopefully be one value
     // lets also save that value to return it at the very bottom
-    string returnableValue = to_string(outputStack.top());
+    std::stringstream returnable_value;
+    returnable_value << std::fixed << std::setprecision(2) << outputStack.top();
     while (!outputStack.empty()){
         cout << outputStack.top() << "\n";
         outputStack.pop();
     }
-    return returnableValue;
+
+    return returnable_value.str();
 
 }
 

@@ -1,11 +1,13 @@
 
+
+
+#ifndef PARSER_PARSER_H_
+#define PARSER_PARSER_H_
+
 #include <string>
 #include <queue>
 #include <stack>
 #include <vector>
-
-#ifndef PARSER_PARSER_H_
-#define PARSER_PARSER_H_
 
 using namespace std;
 
