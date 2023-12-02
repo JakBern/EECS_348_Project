@@ -42,7 +42,7 @@ string Parser::parse(string equation){
         }
 
     }
-    cout << equation << "\n";
+    // cout << equation << "\n";
 
 
     //the following block of code serves to cut the string into pieces and add it
@@ -112,9 +112,9 @@ string Parser::parse(string equation){
 
     //this just prints out the values in parsed, its in here for testing
     for (int i = 0; i < parsed.size(); i++){
-        cout << parsed[i] << " ";
+        // cout << parsed[i] << " ";
     }
-    cout<< "\n";
+    // cout<< "\n";
 
 
 
@@ -251,12 +251,12 @@ string Parser::parse(string equation){
     // just remove the part that prints the values
     // however, they should also be cleared out naturallly during the evaluation process
     while (!parsedQueue.empty()){
-        cout << parsedQueue.front() << " ";
+        // cout << parsedQueue.front() << " ";
         parsedQueue.pop();
     }
 
     while (!operatorStack.empty()){
-        cout << operatorStack.top() << " ";
+        // cout << operatorStack.top() << " ";
         operatorStack.pop();
     }
 
@@ -279,7 +279,7 @@ string Parser::parse(string equation){
     std::stringstream returnable_value;
     returnable_value << std::fixed << std::setprecision(2) << outputStack.top();
     while (!outputStack.empty()){
-        cout << outputStack.top() << "\n";
+        // cout << outputStack.top() << "\n";
         outputStack.pop();
     }
 

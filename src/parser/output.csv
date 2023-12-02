@@ -1,2 +1,3 @@
 BF-01,Test Addition,3+4,7.00,7.00,Pass
 BF-02,Test Subtraction,4-1,3.00,3.00,Pass
+BF-03,Test Division,4/2,2.00,2.00,Pass
