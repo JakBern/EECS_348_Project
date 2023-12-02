@@ -150,7 +150,7 @@ flags::InterfaceCode TUI::Run() {
         }
         std::string result = parser_->parse(to_parser);
         user_context_->add_history(to_parser);
-        std::cout << "Result is: " << result; 
+        std::cout << "Result is: " << result << std::endl; 
       }
 
     }
@@ -213,7 +213,7 @@ void TUI::RunHistoryMenu() {
   
   std::cout << "Expression: " 
             << user_context_->get_history_item(input_num) 
-            << "\nResult: "
+            << "\nResult is: "
             << parser_->parse(user_context_->get_history_item(input_num))
             << std::endl;
   
