@@ -588,7 +588,16 @@ void Parser::evaluator() {
     //lets print off the entire contents of output stack, which will hopefully be one value
     // lets also save that value to return it at the very bottom
     std::stringstream returnable_value;
-    returnable_value << std::fixed << std::setprecision(2) << outputStack.top();
+    if (outputStack.top() < 0.01f) {
+      returnable_value << std::scientific 
+                       << std::setprecision(2) 
+                       << outputStack.top();
+    }
+    else {
+      returnable_value << std::fixed 
+                       << std::setprecision(2) 
+                      << outputStack.top();
+    }
     while (!outputStack.empty()){
         // cout << outputStack.top() << "\n";
         outputStack.pop();
