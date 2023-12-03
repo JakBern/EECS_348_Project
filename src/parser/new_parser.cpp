@@ -157,7 +157,8 @@ void Parser::lexer(string expression) {
 
   for (unsigned int i = 0; i < expression.length(); i++){
     
-    std::cout << "Lexer print debug\n";
+    std::cout << "Current character: " << expression[i] << std::endl;
+    std::cout << "Current word: " << current_word << std::endl;
     
     // Check parenthetical balance from last action.
     // Return with an error if it's off.
@@ -259,16 +260,19 @@ void Parser::lexer(string expression) {
       }
 
       switch (last_read) {
-        case LexToken::none    :
-        case LexToken::l_paren :
+        case LexToken::none      :
+        case LexToken::m_operator:
+        case LexToken::l_paren   :
           if (current_character == '-') {
             current_word = "u-";
             last_read = LexToken::m_operator;
             continue;
           }
           else {
-            err_strstream << "Error: Binary operator in incorrectly placed " 
-                          << "at position " << i;
+            err_strstream << "Error: Binary operator \'"
+                          << current_character
+                          << "\' incorrectly placed at position " 
+                          << i;
             error = err_strstream.str();
             return;
           }
@@ -293,7 +297,7 @@ void Parser::lexer(string expression) {
           last_paren_pos = i;
           break;
         default:
-          parsed.push_back(")");
+          parsed.push_back("(");
           current_word = "";
           last_read = LexToken::l_paren;
           paren_balance++;
@@ -306,7 +310,7 @@ void Parser::lexer(string expression) {
     // Reading: right parenthesis
     if (is_reading == LexToken::r_paren) {
       switch (last_read) {
-        case LexToken::r_paren :
+        case LexToken::l_paren :
           err_strstream << "Error: Empty parentheses at position "
                         << last_paren_pos;
           error = err_strstream.str();
@@ -562,6 +566,13 @@ string Parser::parse(string equation){
   if (error != "") {
     return error;
   }
+
+  std::cout << "Parsed vector looks like: \n";
+
+  for (unsigned int i = 0; i < parsed.size(); i++) {
+    std::cout << parsed[i] << ", ";
+  }
+  std::cout << std::endl;
 
   // All input will be parsed into Reverse Polish Notation and put
   // into the parsedQueue

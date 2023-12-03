@@ -146,7 +146,7 @@ flags::InterfaceCode TUI::Run() {
         // Concatenate the rest of the input
         std::string to_parser = "";
         for (unsigned int i = 1; i < split_input.size(); i++) {
-          to_parser += split_input[i];
+          to_parser += split_input[i] + " ";
         }
         std::string result = parser_->parse(to_parser);
         user_context_->add_history(to_parser);
