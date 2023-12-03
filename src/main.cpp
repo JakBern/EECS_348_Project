@@ -21,7 +21,7 @@
 #include "util/flags.hpp"
 #include "util/helper.hpp"
 #include "user_context/user_context.hpp"
-#include "parser/new_parser.hpp"
+#include "parser/parser.hpp"
 
 int main() {
 

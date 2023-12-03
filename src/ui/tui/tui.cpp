@@ -23,7 +23,7 @@ const char kWelcomeMessage[] =
 "Welcome to the Arithmetic Expression Evaluator!\n";
 
 const char* kMainMenuMessage = 
-"\nEnter a command below, type \"help\" for help:\n";
+"Enter a command below, type \"help\" for help:\n";
 
 const char* kHelpMessage = 
 "Supported operators:\n"
@@ -66,7 +66,7 @@ const char* kHelpMessage =
 void TUI::Eval(std::string expr) {
   std::string result = parser_->parse(expr);
   user_context_->add_history(expr); 
-  std::cout << "Result is: " << result << std::endl;
+  std::cout << "Result:\n" << result << std::endl;
 }
 
 // ===========REMOVED UNTIL FUTURE ITERATIONS==========
@@ -151,7 +151,7 @@ flags::InterfaceCode TUI::Run() {
         }
         std::string result = parser_->parse(to_parser);
         user_context_->add_history(to_parser);
-        std::cout << "Result is: " << result << std::endl; 
+        std::cout << "Result:\n" << result << std::endl; 
       }
 
     }
@@ -181,6 +181,8 @@ flags::InterfaceCode TUI::Run() {
     else {
       std::cout << "Input was not understood, please try again\n";
     }
+
+    std::cout << std::endl;
   }
 
 }
@@ -212,9 +214,9 @@ void TUI::RunHistoryMenu() {
     return;
   }
   
-  std::cout << "Expression: " 
+  std::cout << "Expression:\n" 
             << user_context_->get_history_item(input_num) 
-            << "\nResult is: "
+            << "\nResult:\n"
             << parser_->parse(user_context_->get_history_item(input_num))
             << std::endl;
   
