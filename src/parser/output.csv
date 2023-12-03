@@ -1,3 +1,28 @@
-BF-01,Test Addition,3+4,7.00,7.00,Pass
-BF-02,Test Subtraction,4-1,3.00,3.00,Pass
-BF-03,Test Division,4/2,2.00,2.00,Pass
+BF-01,Test Addition ,3+4,7,7.00,Fail
+BF-02,Test Subtraction ,4-1,3,3.00,Fail
+BF-03,Test Multiplication,5*3,15,15.00,Fail
+BF-04,Test Exponentiation,2^4,16,16.00,Fail
+BF-05,Test Exponentiation(alt),3**3,27,27.00,Fail
+BF-06,Test Modulo,12%10,2,2.00,Fail
+BF-07,Test Negative Numbers,-3+9,6,6.00,Fail
+BF-08,Test Division,9/3,3,3.00,Fail
+ER-01,Test Division by Zero,9/0,Error Cannot Divide by Zero,Error: Division by zero encountered in expression,Fail
+ER-02,Test Modulo by Zero,9%0,Error Cannot Modulo by Zero,Error: Modulo by zero encountered in expression,Fail
+BF-09,Test Parentheses / Implicit Multiplication,9(3*3),81,81.00,Fail
+ER-03,Test Parentheses Error,(3+2,Error Unmatched Parentheses,Error: Parentheses in expression are not balanced,Fail
+ER-04,Test Invalid Operator,3$2,Error Invalid Operator,Error: Unusable character '$' at position 1,Fail
+ER-05,Test Invalid Input,“String”,Error Invalid Expression,Error: Unusable character '�' at position 0,Fail
+BF-10,Test Floating Point Numbers,1.50*4.0,6.0,Error: Unusable character '.' at position 1,Fail
+BF-11,Test Order of Operation,3/3*(2+1),3,3.00,Fail
+BF-12,Precision and Rounding,10 / 3,3.33,3.33,Pass
+BF-13,Large Numbers and Overflow,10^100,Error: Exceeds floating point size limit,Error: Exceeds floating point size limit (generated infinity during evaluation),Fail
+BF-14,Associativity,2^3^2,512,512.00,Fail
+BF-15,Zero Exponent,2^0,1,1.00,Fail
+BF-16,Negative Exponent,2^-2,0.25,0.25,Pass
+BF-17,Exponentiation with parentheses,2^(3+2),32,32.00,Fail
+BF-18,Decimal Numbers and Operator Precedence,0.3+0.6/0.2,3.3,Error: Unusable character '.' at position 1,Fail
+BF-19,Modulo with Negative Numbers,-2%3,-2,-2.00e+00,Fail
+BF-20,Nested Parentheses,((2+3)*2),10,10.00,Fail
+BF-21,Mixed Fractional and Integer Operations,5.5*2+3,14,Error: Unusable character '.' at position 1,Fail
+BF-22,Fractional Exponent,4^(1/2),2,2.00,Fail
+BF-22,Fractional Exponent (Negative Base),-4^(1/2),NaN Error,Error: Expression generated NaN during evaluation,Fail
