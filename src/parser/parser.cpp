@@ -354,6 +354,12 @@ void Parser::lexer(string expression) {
       }
       parsed.push_back(current_word);
     }
+
+    if (parsed.size() == 0) {
+      error = "No input given";
+      return;
+    }
+
     return;
   }
 
@@ -515,6 +521,10 @@ void Parser::evaluator() {
             }else if (parsedQueue.front() == "^"){
                 outputStack.push(float(pow(a, b)));
             }else if (parsedQueue.front() == "%"){
+               if (b == 0.f) {
+                  error = "Error: Modulo by zero encountered in expression";
+                  return;
+                }
                 outputStack.push(float (int(a) % int(b)));
             }
 
