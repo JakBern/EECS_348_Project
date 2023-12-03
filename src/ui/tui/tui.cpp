@@ -23,14 +23,15 @@ const char kWelcomeMessage[] =
 "Welcome to the Arithmetic Expression Evaluator!\n";
 
 const char* kMainMenuMessage = 
-"Enter a command below, type \"help\" for help:\n";
+"\nEnter a command below, type \"help\" for help:\n";
 
 const char* kHelpMessage = 
 "Supported operators:\n"
 "+, -, /, *, %, ^ (or **)\n"
 "Current commands are:\n"
 "- \"eval\": allows you to enter an expression to be evaluated\n"
-"\t- alternvatively, enter \"eval <expression>\"\n"
+"\t- alternvatively, enter \"eval <your expression>\" " 
+"(without angle brackets)\n"
 // "- \"graph\": enter an expression to graph (use graphing variable \"G\")\n"
 // "\t- alternvatively, enter \"graph <expression>\"\n"
 "- \"exit\": exits program\n"
