@@ -1,4 +1,4 @@
-#include "parser.hpp"
+#include "new_parser.hpp"
 //iostream is included because im making some tests where I print out values
 // from within this file
 #include <iostream>
@@ -16,8 +16,9 @@ Parser::Parser(){}
 
 // ========================LEXER SECTION=======================
 
+// Check if a character is/could be an operator or part of one
 bool Parser::is_operator(const char& c) {
-  string operators[] = {"^", "%", "*", "/", "+", "-"};
+  char operators[] = {'^', '%', '*', '/', '+', '-'};
   for (int i = 0; i < 6; i++) {
     if (operators[i] == c) {
       return true;
@@ -26,8 +27,9 @@ bool Parser::is_operator(const char& c) {
   return false;
 }
 
+// Check if a character is in the set used for constants
 bool Parser::is_constant_char(const char& c) {
-  string constant_chars[]= {"p", "i", "e"};
+  char constant_chars[]= {'p', 'i', 'e'};
   for (int i = 0; i < 3; i++) {
     if (constant_chars[i] == c) {
       return true;
@@ -36,6 +38,7 @@ bool Parser::is_constant_char(const char& c) {
   return false;
 }
 
+// Check if a string matches a constant
 bool Parser::is_constant(const string& str) {
   string constants[]= {"pi", "e"};
   for (int i = 0; i < 2; i++) {
@@ -46,6 +49,11 @@ bool Parser::is_constant(const string& str) {
   return false;
 }
 
+// If a given string is being added to the parsed vector,
+// we're checking if it's of type constant and if it
+// actually matches a constant.
+// If it is a constant but it doesn't match any, we return false.
+// Otherwise, we return true.
 bool Parser::constant_check(const string& str, LexToken type) {
   if (type != LexToken::constant) {
     return true;
@@ -61,6 +69,7 @@ bool Parser::constant_check(const string& str, LexToken type) {
   return false;
 }
 
+// Get the LexToken for the kind of character we're currently reading
 LexToken Parser::get_lex_token(const char& c) {
   if (std::isspace(c)) {
     return LexToken::none;
@@ -71,7 +80,7 @@ LexToken Parser::get_lex_token(const char& c) {
   }
 
   if (is_operator(c)) {
-    return LexToken::operator;
+    return LexToken::m_operator;
   }
 
   if (is_constant_char(c)) {
@@ -143,7 +152,12 @@ void Parser::lexer(string expression) {
   char current_character;
   string current_word = "";
 
-  for (int i = 0; i < equation.length(); i++){
+  std::cout << "Lexer print debug\n";
+  std::cout << "Expression is: " << expression << "\n";
+
+  for (unsigned int i = 0; i < expression.length(); i++){
+    
+    std::cout << "Lexer print debug\n";
     
     // Check parenthetical balance from last action.
     // Return with an error if it's off.
@@ -158,7 +172,7 @@ void Parser::lexer(string expression) {
       return;
     }
 
-    current_character = equation[i];
+    current_character = expression[i];
 
     current_type = get_lex_token(current_character);
 
@@ -219,15 +233,15 @@ void Parser::lexer(string expression) {
     }
 
     // Reading: operator
-    if (is_reading == LexToken::operator) {
+    if (is_reading == LexToken::m_operator) {
       // If there's already partially a word read
-      if (current_word.length() > 0 || ) {
+      if (current_word.length() > 0) {
         switch (current_character) {
           case '*':
             if (current_word[0] == '*') {
               parsed.push_back("^");
               current_word = "";
-              last_read = LexToken::operator;
+              last_read = LexToken::m_operator;
               continue;
             }
             else {
@@ -239,7 +253,7 @@ void Parser::lexer(string expression) {
           case '-':
             parsed.push_back(current_word);
             current_word = "u-";
-            last_read = LexToken::operator;
+            last_read = LexToken::m_operator;
             continue;
         }
       }
@@ -249,7 +263,7 @@ void Parser::lexer(string expression) {
         case LexToken::l_paren :
           if (current_character == '-') {
             current_word = "u-";
-            last_read = LexToken::operator;
+            last_read = LexToken::m_operator;
             continue;
           }
           else {
@@ -297,7 +311,7 @@ void Parser::lexer(string expression) {
                         << last_paren_pos;
           error = err_strstream.str();
           return;
-        case LexToken::operator:
+        case LexToken::m_operator:
           err_strstream << "Error: Operator precedes right parenthesis"
                         << " at position "
                         << i;
@@ -317,18 +331,18 @@ void Parser::lexer(string expression) {
   }
 
   if (paren_balance != 0) {
-    error = "Error: Parentheses in expression are not balanced."
+    error = "Error: Parentheses in expression are not balanced.";
     return;
   }
 
-  if (is_reading == LexToken::operator) {
-    error = "Error: Operator at the end of expression."
+  if (is_reading == LexToken::m_operator) {
+    error = "Error: Operator at the end of expression.";
     return;
   }
 
   else {
     if (current_word.length() != 0) {
-      if (!constant_check) {
+      if (!constant_check(current_word, is_reading)) {
         return;
       }
       parsed.push_back(current_word);
@@ -345,7 +359,7 @@ void Parser::lexer(string expression) {
 
 void Parser::to_polish_notation() {
       //we will iterate through the values of the parsed vector
-    for (int i = 0; i < parsed.size(); i++){
+    for (unsigned int i = 0; i < parsed.size(); i++){
         //we will look at the value we have from parsed to see if it is an operator other than ( )
         // right now we check for the following operators:  * / + - ^ %
         if (parsed[i] == "*" || parsed[i] == "/" || parsed[i] == "+" || parsed[i] == "-" || parsed[i] == "^" || parsed[i] == "%" ){

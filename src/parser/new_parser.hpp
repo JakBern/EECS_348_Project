@@ -8,6 +8,11 @@
 
 using namespace std;
 
+// These are a way of keeping track of the state of the lexer
+// I defined them here so I can compare against them in different 
+// functions outside of just the main lexer area.
+enum class LexToken {none, number, constant, m_operator, l_paren, r_paren, error};
+
 class Parser{
     public:
         Parser();
@@ -17,14 +22,8 @@ class Parser{
     private:
       // lexer functions and data
 
-      // These are a way of keeping track of the state of the lexer
-      // I defined them here so I can compare against them in different 
-      // functions outside of just the main lexer area.
-      enum class LexToken {none, number, constant, 
-                          operator, l_paren, r_paren, error};
-
       bool is_operator(const char& c);
-      bool is_special_char(const char& c);
+      bool is_constant_char(const char& c);
       bool is_constant(const string& str);
       bool constant_check(const string& str, LexToken type);
       void lexer(string expr);
