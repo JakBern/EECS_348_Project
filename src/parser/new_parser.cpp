@@ -152,13 +152,15 @@ void Parser::lexer(string expression) {
   char current_character;
   string current_word = "";
 
-  std::cout << "Lexer print debug\n";
-  std::cout << "Expression is: " << expression << "\n";
+  // Print debugs
+  // std::cout << "Lexer print debug\n";
+  // std::cout << "Expression is: " << expression << "\n";
 
   for (unsigned int i = 0; i < expression.length(); i++){
     
-    std::cout << "Current character: " << expression[i] << std::endl;
-    std::cout << "Current word: " << current_word << std::endl;
+    // Print debugs
+    // std::cout << "Current character: " << expression[i] << std::endl;
+    // std::cout << "Current word: " << current_word << std::endl;
     
     // Check parenthetical balance from last action.
     // Return with an error if it's off.
@@ -366,7 +368,7 @@ void Parser::to_polish_notation() {
     for (unsigned int i = 0; i < parsed.size(); i++){
         //we will look at the value we have from parsed to see if it is an operator other than ( )
         // right now we check for the following operators:  * / + - ^ %
-        if (parsed[i] == "*" || parsed[i] == "/" || parsed[i] == "+" || parsed[i] == "-" || parsed[i] == "^" || parsed[i] == "%" ){
+        if (parsed[i] == "*" || parsed[i] == "/" || parsed[i] == "+" || parsed[i] == "-" || parsed[i] == "^" || parsed[i] == "%" || parsed[i] == "u-" ){
             //if the stack is empty, or the operator is lower precedence, then it should be added to the opStack
             if (operatorStack.size() == 0 
                 || !(precedence_greater_than(operatorStack.top(), parsed[i]))){    
@@ -416,6 +418,15 @@ void Parser::evaluator() {
     // we will use the output stack to do this
     // as long as the parsed queue has values in it, we will continue to perform operations
     while (!parsedQueue.empty()){
+        
+        // Print debugs
+        // std::cout << "ParsedQueue front: " 
+        //           << parsedQueue.front() 
+        //           << std::endl;
+        // if (!outputStack.empty()) {
+        //   std::cout << "OutputStack top: " << outputStack.top() << std::endl;
+        // }
+
         //if the value is a number, it should simply be added to the outputStack
         // we can check if a value is a number, by checking if its first character is a digit
         // or if it is a "-" and its length is more than 1, in case of unary minus ex. "-6"
@@ -447,8 +458,9 @@ void Parser::evaluator() {
           
             // Negation/unary minus
             if (parsedQueue.front() == "u-"){
-                outputStack.push(float (outputStack.top()) * -1.0f);
+                float a = outputStack.top();
                 outputStack.pop();
+                outputStack.push(a * -1.0f);
                 parsedQueue.pop();
                 continue;
             }
@@ -567,12 +579,12 @@ string Parser::parse(string equation){
     return error;
   }
 
-  std::cout << "Parsed vector looks like: \n";
-
-  for (unsigned int i = 0; i < parsed.size(); i++) {
-    std::cout << parsed[i] << ", ";
-  }
-  std::cout << std::endl;
+  // Print debugs
+  // std::cout << "Parsed vector looks like: \n";
+  // for (unsigned int i = 0; i < parsed.size(); i++) {
+  //   std::cout << parsed[i] << ", ";
+  // }
+  // std::cout << std::endl;
 
   // All input will be parsed into Reverse Polish Notation and put
   // into the parsedQueue
