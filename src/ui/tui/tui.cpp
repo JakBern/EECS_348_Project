@@ -28,6 +28,8 @@ const char* kMainMenuMessage =
 const char* kHelpMessage = 
 "Supported operators:\n"
 "+, -, /, *, %, ^ (or **)\n"
+"Supported numerical constants:\n"
+"pi, e\n"
 "Current commands are:\n"
 "- \"eval\": allows you to enter an expression to be evaluated\n"
 "\t- alternvatively, enter \"eval <your expression>\" " 
