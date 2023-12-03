@@ -521,7 +521,7 @@ void Parser::evaluator() {
             }else if (parsedQueue.front() == "^"){
                 outputStack.push(float(pow(a, b)));
             }else if (parsedQueue.front() == "%"){
-               if (b == 0.f) {
+               if ((int)b == 0) {
                   error = "Error: Modulo by zero encountered in expression";
                   return;
                 }
