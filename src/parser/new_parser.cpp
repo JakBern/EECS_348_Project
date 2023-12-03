@@ -8,6 +8,7 @@
 #include <math.h>
 #include <sstream>
 #include <iomanip>
+#include <cctype>
 
 using namespace std;
 
@@ -15,88 +16,326 @@ Parser::Parser(){}
 
 // ========================LEXER SECTION=======================
 
+bool Parser::is_operator(const char& c) {
+  string operators[] = {"^", "%", "*", "/", "+", "-"};
+  for (int i = 0; i < 6; i++) {
+    if (operators[i] == c) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Parser::is_constant_char(const char& c) {
+  string constant_chars[]= {"p", "i", "e"};
+  for (int i = 0; i < 3; i++) {
+    if (constant_chars[i] == c) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Parser::is_constant(const string& str) {
+  string constants[]= {"pi", "e"};
+  for (int i = 0; i < 2; i++) {
+    if (constants[i] == str) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Parser::constant_check(const string& str, LexToken type) {
+  if (type != LexToken::constant) {
+    return true;
+  }
+  // We only have 2 constants, but it's better to do this for extensibility
+  string constants[] = {"pi", "e"};
+  for (int i = 0; i < 2; i++) {
+    if (str == constants[i]) {
+      return true;
+    }
+  }
+  error = "Error: Unknown word \"" + str + "\" in expression.";
+  return false;
+}
+
+LexToken Parser::get_lex_token(const char& c) {
+  if (std::isspace(c)) {
+    return LexToken::none;
+  }
+
+  if (std::isdigit(c)) {
+    return LexToken::number;
+  }
+
+  if (is_operator(c)) {
+    return LexToken::operator;
+  }
+
+  if (is_constant_char(c)) {
+    return LexToken::constant;
+  }
+
+  if (c == '(') {
+    return LexToken::l_paren;
+  }
+  
+  if (c == ')') {
+    return LexToken::r_paren;
+  }
+
+  return LexToken::error;
+}
+
+
+
 void Parser::lexer(string expression) {
-    //cleanup passed equation
-    //at the top of the code we will check for instances of implied multiplication using parentheses
-    // like 6(2+1)
-    // we will change the equation so these look like 6*(2+1)
-    //we will also check for "**" to change to "^"
-    for (int i = 0; i < equation.length(); i++){
-        //if it is not an operator before the "(", insert the "*"
-        if (!(equation[i] == '*' || equation[i] == '/' || equation[i] == '+' || equation[i] == '-' || equation[i] == '%') && equation[i+1] == '('){
-            equation.insert(i+1, 1, '*');
-        }else if (equation[i] == '*' && equation[i+1] == '*'){
-            equation.erase(i, 2);
-            equation.insert(i, 1, '^');
-        }
+  // Note: within this I'm using special vocabulary. It might not be the correct
+  // vocabulary, so I'll define it here.
+  // The terms worth explaining are "word" and "LexToken"
+  //
+  // Given this expression as an example:
+  // 21 + 3 - (pi * 9)
+  //
+  // "21", "+", "3", "-", "pi", "*", "9", "(", and ")"
+  // are all considered to be separate "words".
+  //
+  // Each word has a lexer token (LexToken) type I've assigned:
+  // "21"                 is of type "number"
+  // "+"                is of type "operator"
+  // "pi"               is of type "constant"
+  // "("                 is of type "l_paren"
+  // ")"                 is of type "r_paren"
+  // any space              is of type "none"
+  // an unknown character  is of type "error"
 
+  // Most addition of symbols/numbers to the "parsed" vector occurs at the
+  // boundary between symbols, eg in "2 + 3" 2 would be added to the parsed
+  // vector when the lexer reaches "+".
+  //
+  // However, parentheses are added as soon as they're encountered.
+  //
+  // Any left over symbols are added at the end.
+
+  // The type of the current character
+  LexToken current_type = LexToken::none;
+
+  // The current type of word being read
+  LexToken is_reading = LexToken::none;
+
+  // The type of the last word read
+  LexToken last_read = LexToken::none;
+
+  // Parenthetical balance will be checked throughout the lexing process to
+  // catch errors early -- should always end with 0.
+  //
+  // Left parentheses will add to this counter, while right parentheses
+  // will subtract from it.
+  int paren_balance = 0;
+
+  // To keep track of where the last parenthesis was for returning errors
+  unsigned int last_paren_pos;
+
+  stringstream err_strstream;
+
+  char current_character;
+  string current_word = "";
+
+  for (int i = 0; i < equation.length(); i++){
+    
+    // Check parenthetical balance from last action.
+    // Return with an error if it's off.
+    // 
+    // Parenthetical balance will be < 0 if an expression like:
+    // ")(+2)" is encountered, where the initial right parenthesis
+    // will decrement the initial balance by one.
+    if (paren_balance < 0) {
+      err_strstream << "Error: Mismatched parentheses at position " 
+                  << last_paren_pos;
+      error = err_strstream.str();
+      return;
     }
-    // cout << equation << "\n";
 
+    current_character = equation[i];
 
-    //the following block of code serves to cut the string into pieces and add it
-    // to the Parser class's private vector of strings
-    // the values added will either be a number or a operator, but will all be stored as a string
-    // the code needs to be able to deal with ints that have multiple digits,
-    // that is why it took on the structure that it does
-    // for example if equation = "10+3-4*(9-2)/10"
-    // then the Parser class vector, parsed, will contain:
-    //      "10" "+" "3" "-" "4" "*" "(" "9" "-" "2" ")" "/" "10"
+    current_type = get_lex_token(current_character);
 
+    // If the character is unrecognized
+    if (current_type == LexToken::error) {
+      err_strstream << "Error: Unusable character \'"
+                    << current_character
+                    << "\' at position "
+                    << i;
+      error = err_strstream.str();
+      return;
+    }
 
-    //I defined this string value outside the for loop, because it will be used to hold on to
-    // digits while the for loop continues
-    string individual_value;
-    //we must also prepare for an unary minus for operations involving negative numbers
-    // we declare unaryMinus, if a "-" is encountered while it is true, that - will be added to the individual_value
-    // otherwise it is an operator, and should be added normally
-    // if we the last bit of string was an operator, we know it is an unaryMinus, so it will be set to true
-    // if the last bit of string was a number, we will make it false
-    // we initialize it as true,  to deal with equations involving a leading negative ex. -6+2
-    bool unaryMinus = true;
-    //this for loop will iterate through the equation, allowing us to index any character
-    for (int i = 0; i < equation.size(); i++){
-        //if it is a number, we should add it to individual_value, in case the next value is a digit too
-        // we see if it is a number by just checking if it is any digit 0-9
-        // we also see if it is a constant by comparing to any characters from constants
-        if (equation[i] == '0' || equation[i] == '1' || equation[i] == '2' || equation[i] == '3' || equation[i] == '4' || equation[i] == '5' || equation[i] == '6' || equation[i] == '7' || equation[i] == '8' || equation[i] == '9' || equation[i] == 'e' || equation[i] == 'p' || equation[i] == 'i'){
-            individual_value += equation[i];
-            unaryMinus = false;
-        //ignoring white space could be the first if statement, but it doesn't make any difference
-        }else if (equation[i] == ' '){
-            //if the current character is just white space, it will be skipped
-        //if we already know what we have is not a number, then there are two cases
-        // if the individual_value is not a length of zero, that means it is holding some digits
-        //  those digits should be added to parsed before the equation[i] is also added
-        }else if (individual_value.size() != 0){
-            //we will never encounter an unary minus when individual_size != 0
-            // so we dont worry about it here
-            Parser::parsed.push_back(individual_value);
-            individual_value = "";
-            individual_value += equation[i];
-            Parser::parsed.push_back(individual_value);
-            individual_value = "";
-            unaryMinus = true;
-        //otherwise individual value is empty, and we don't have to worry about adding anything before equation[i]
-        }else{
-            if (unaryMinus == false || !(equation[i] == '-')){
-                individual_value += equation[i];
-                Parser::parsed.push_back(individual_value);
-                individual_value = "";
-                unaryMinus = true;
-            }else{
-                individual_value += equation[i];
-                unaryMinus = false;
-            }
+    // If the current type is not what was being read in before,
+    // we've reached the edge of a symbol
+    if (current_type != is_reading) {
             
-        } 
+        if (current_word.length() != 0) {
+          if (!constant_check(current_word, is_reading)) {
+            return;
+          }
+        parsed.push_back(current_word);
+        current_word = "";
+      }
+
+      if (is_reading != LexToken::none) {
+        last_read = is_reading;
+      }   
+
+      is_reading = current_type;
     }
-    //if the last thing from the equation was a number, then it will still be in individual_value
-    // we check if that is the case, and add it to parsed
-    if (individual_value.size() != 0){
-        Parser::parsed.push_back(individual_value);
-        individual_value = "";
+
+    // If the current character is "none" (a space)
+    if (current_type == LexToken::none) {
+      continue;
     }
+
+    // Reading: number or constant
+    if (is_reading == LexToken::number || is_reading == LexToken::constant) {
+      switch (last_read) {
+        case LexToken::number  :
+        case LexToken::constant:
+          err_strstream << "Error: Number follows number at position " << i;
+          error = err_strstream.str();
+          return;
+        case LexToken::r_paren :
+          parsed.push_back("*");
+          last_read = LexToken::none;
+          // I am deliberately not using the fall-through
+          // of the switch statement
+          current_word += current_character;
+          break;
+        default:
+          current_word += current_character;
+          break;
+      }
+      continue;
+    }
+
+    // Reading: operator
+    if (is_reading == LexToken::operator) {
+      // If there's already partially a word read
+      if (current_word.length() > 0 || ) {
+        switch (current_character) {
+          case '*':
+            if (current_word[0] == '*') {
+              parsed.push_back("^");
+              current_word = "";
+              last_read = LexToken::operator;
+              continue;
+            }
+            else {
+              err_strstream << "Error: Operator follows operator at position " 
+                            << i;
+              error = err_strstream.str();
+              return;
+            }
+          case '-':
+            parsed.push_back(current_word);
+            current_word = "u-";
+            last_read = LexToken::operator;
+            continue;
+        }
+      }
+
+      switch (last_read) {
+        case LexToken::none    :
+        case LexToken::l_paren :
+          if (current_character == '-') {
+            current_word = "u-";
+            last_read = LexToken::operator;
+            continue;
+          }
+          else {
+            err_strstream << "Error: Binary operator in incorrectly placed " 
+                          << "at position " << i;
+            error = err_strstream.str();
+            return;
+          }
+        default:
+          current_word += current_character;
+          break;
+      }
+      continue;
+    }
+
+    // Reading: left parenthesis
+    if (is_reading == LexToken::l_paren) {
+      switch (last_read) {
+        case LexToken::number  :
+        case LexToken::constant:
+        case LexToken::r_paren :
+          parsed.push_back("*");
+          parsed.push_back("(");
+          current_word = "";
+          last_read = LexToken::l_paren;
+          paren_balance++;
+          last_paren_pos = i;
+          break;
+        default:
+          parsed.push_back(")");
+          current_word = "";
+          last_read = LexToken::l_paren;
+          paren_balance++;
+          last_paren_pos = i;
+          break;
+      }
+      continue;
+    }
+
+    // Reading: right parenthesis
+    if (is_reading == LexToken::r_paren) {
+      switch (last_read) {
+        case LexToken::r_paren :
+          err_strstream << "Error: Empty parentheses at position "
+                        << last_paren_pos;
+          error = err_strstream.str();
+          return;
+        case LexToken::operator:
+          err_strstream << "Error: Operator precedes right parenthesis"
+                        << " at position "
+                        << i;
+          error = err_strstream.str();
+          return;
+        default:
+          parsed.push_back(")");
+          current_word = "";
+          last_read = LexToken::r_paren;
+          paren_balance--;
+          last_paren_pos = i;
+          break;
+      }
+      continue;
+    }
+
+  }
+
+  if (paren_balance != 0) {
+    error = "Error: Parentheses in expression are not balanced."
+    return;
+  }
+
+  if (is_reading == LexToken::operator) {
+    error = "Error: Operator at the end of expression."
+    return;
+  }
+
+  else {
+    if (current_word.length() != 0) {
+      if (!constant_check) {
+        return;
+      }
+      parsed.push_back(current_word);
+    }
+    return;
+  }
+
 }
 
 // ========================END LEXER SECTION=======================
@@ -111,7 +350,8 @@ void Parser::to_polish_notation() {
         // right now we check for the following operators:  * / + - ^ %
         if (parsed[i] == "*" || parsed[i] == "/" || parsed[i] == "+" || parsed[i] == "-" || parsed[i] == "^" || parsed[i] == "%" ){
             //if the stack is empty, or the operator is lower precedence, then it should be added to the opStack
-            if (operatorStack.size() == 0 || !(precedence(operatorStack.top(), parsed[i]))){    
+            if (operatorStack.size() == 0 
+                || !(precedence_greater_than(operatorStack.top(), parsed[i]))){    
                 operatorStack.push(parsed[i]);
                 
             }else{
@@ -186,6 +426,15 @@ void Parser::evaluator() {
             outputStack.push(floatValue);
             parsedQueue.pop();
         }else{
+          
+            // Negation/unary minus
+            if (parsedQueue.front() == "u-"){
+                outputStack.push(float (outputStack.top()) * -1.0f);
+                outputStack.pop();
+                parsedQueue.pop();
+                continue;
+            }
+
             //if it is not a number, then it must be an operator
             // in which case we should start by popping off the top two values from the output stack
             // these values will then have the corresponding operation performed on them
@@ -207,6 +456,10 @@ void Parser::evaluator() {
             }else if (parsedQueue.front() == "*"){
                 outputStack.push(float (a * b));
             }else if (parsedQueue.front() == "/"){
+                if (b == 0.f) {
+                  error = "Error: Division by zero encountered in expression";
+                  return;
+                }
                 outputStack.push(float (a / b));
             }else if (parsedQueue.front() == "^"){
                 outputStack.push(float(pow(a, b)));
@@ -321,7 +574,7 @@ int Parser::precedence_greater_than(string a, string b) {
     // we will do this using an array, where the low index values have the highest priority
     // it will be a string array, to make comparing values easier
 
-    string precedence[7] = {"^", "%", "*", "/", "+", "-", "("};
+    string precedence[8] = {"u-", "^", "%", "*", "/", "+", "-", "("};
 
     //however, we want "*", "%", and "/" to have equal precedence
     // same with "+" "-"
