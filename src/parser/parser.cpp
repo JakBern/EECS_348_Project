@@ -503,7 +503,14 @@ void Parser::Evaluator() {
             parsed_queue_.pop();
         }else if (parsed_queue_.front()[0] == '0' || parsed_queue_.front()[0] == '1' || parsed_queue_.front()[0] == '2' || parsed_queue_.front()[0] == '3' || parsed_queue_.front()[0] == '4' || parsed_queue_.front()[0] == '5' || parsed_queue_.front()[0] == '6' || parsed_queue_.front()[0] == '7' || parsed_queue_.front()[0] == '8' || parsed_queue_.front()[0] == '9' ||(parsed_queue_.front()[0] == '-' && parsed_queue_.front().length() != 1)){
             //change the string to a float, add it to the stack, then remove it from the queue
-            float floatValue = std::stof(parsed_queue_.front());
+            float floatValue;
+            try {
+              floatValue = std::stof(parsed_queue_.front());
+            }
+            catch (const std::exception& e) {
+              error_ = "Error: Input was larger than allowed";
+              return;
+            }
             output_stack_.push(floatValue);
             parsed_queue_.pop();
         }else{
