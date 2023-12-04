@@ -528,11 +528,13 @@ void Parser::Evaluator() {
             }
 
 
-            // these values will then have the corresponding operation performed on them
+            // these values will then have the corresponding operation 
+            // performed on them
             // and a new value will be added to the stack
             //
-            //we will create values a and b to be used in the operations,
-            // the shape of a stack means that for the operation a/b, we will first pop off b, then a
+            // we will create values a and b to be used in the operations,
+            // the shape of a stack means that for the operation a/b, we will 
+            // first pop off b, then a
             float b = output_stack_.top();
             output_stack_.pop();
             float a = output_stack_.top();
@@ -563,7 +565,7 @@ void Parser::Evaluator() {
                 output_stack_.push(float (int(a) % int(b)));
             }
 
-            //now pop the front of parsed_queue_ off
+            // now pop the front of parsed_queue_ off
             parsed_queue_.pop();
             
 
@@ -573,10 +575,11 @@ void Parser::Evaluator() {
 
 
 
-    //now we will just print the parsed_queue_ for the sake of testing
+    // now we will just print the parsed_queue_ for the sake of testing
     // later we will repurpose this code to the clean out section,
     // just remove the part that prints the values
-    // however, they should also be cleared out naturallly during the evaluation process
+    // however, they should also be cleared out naturallly during the 
+    // evaluation process
     while (!parsed_queue_.empty()){
         // cout << parsed_queue_.front() << " ";
         parsed_queue_.pop();
@@ -611,6 +614,7 @@ void Parser::Evaluator() {
       error_ = "Error: Expression generated NaN during evaluation";
       return;
     }
+    // infinity
     else if (std::isinf(output_stack_.top())) {
       error_ = "Error: Exceeds floating point size limit"
               " (generated infinity during evaluation)";
