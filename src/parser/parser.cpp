@@ -1,7 +1,24 @@
+// Implementation file for the Parser class.
+//
+// Rather lengthy, so comments are used to break it up by sections.
+//
+// There is a lexing section, a conversion section, an evaluation section, and 
+// a general parser section.
+//
+// Author(s): 
+// Nick Reinig [from 11/27/2023 - Present],
+// Jake Bernard [from 12/3/2023 - Present]
+//
+//
+// Last update:
+//  - 12/3/2023 (Jake): 
+//    Refactored some areas and updated code to match standards, 
+//    made comments more concise in some areas.
+//
+
 #include "parser.hpp"
-//iostream is included because im making some tests where I print out values
-// from within this file
-#include <iostream>
+// iostream was included for print debugs previously.
+// #include <iostream>
 #include <vector>
 #include <queue>
 #include <stack>
@@ -10,8 +27,6 @@
 #include <iomanip>
 #include <cctype>
 #include <cfloat>
-
-using namespace std;
 
 Parser::Parser(){}
 
@@ -40,8 +55,8 @@ bool Parser::is_constant_char(const char& c) {
 }
 
 // Check if a string matches a constant
-bool Parser::is_constant(const string& str) {
-  string constants[]= {"pi", "e"};
+bool Parser::is_constant(const std::string& str) {
+  std::string constants[]= {"pi", "e"};
   for (int i = 0; i < 2; i++) {
     if (constants[i] == str) {
       return true;
@@ -50,58 +65,58 @@ bool Parser::is_constant(const string& str) {
   return false;
 }
 
-// If a given string is being added to the parsed vector,
+// If a given string is being added to the parsed_ vector,
 // we're checking if it's of type constant and if it
 // actually matches a constant.
 // If it is a constant but it doesn't match any, we return false.
 // Otherwise, we return true.
-bool Parser::constant_check(const string& str, LexToken type) {
-  if (type != LexToken::constant) {
+bool Parser::constant_check(const std::string& str, LexToken type) {
+  if (type != LexToken::kConstant) {
     return true;
   }
   // We only have 2 constants, but it's better to do this for extensibility
-  string constants[] = {"pi", "e"};
+  std::string constants[] = {"pi", "e"};
   for (int i = 0; i < 2; i++) {
     if (str == constants[i]) {
       return true;
     }
   }
-  error = "Error: Unknown word \"" + str + "\" in expression";
+  error_ = "Error: Unknown word \"" + str + "\" in expression";
   return false;
 }
 
 // Get the LexToken for the kind of character we're currently reading
 LexToken Parser::get_lex_token(const char& c) {
   if (std::isspace(c)) {
-    return LexToken::none;
+    return LexToken::kNone;
   }
 
   if (std::isdigit(c)) {
-    return LexToken::number;
+    return LexToken::kNumber;
   }
 
   if (is_operator(c)) {
-    return LexToken::m_operator;
+    return LexToken::kOperator;
   }
 
   if (is_constant_char(c)) {
-    return LexToken::constant;
+    return LexToken::kConstant;
   }
 
   if (c == '(') {
-    return LexToken::l_paren;
+    return LexToken::kL_Paren;
   }
   
   if (c == ')') {
-    return LexToken::r_paren;
+    return LexToken::kR_Paren;
   }
 
-  return LexToken::error;
+  return LexToken::kError;
 }
 
 
 
-void Parser::lexer(string expression) {
+void Parser::Lexer(std::string expression) {
   // Note: within this I'm using special vocabulary. It might not be the correct
   // vocabulary, so I'll define it here.
   // The terms worth explaining are "word" and "LexToken"
@@ -119,24 +134,26 @@ void Parser::lexer(string expression) {
   // "("                 is of type "l_paren"
   // ")"                 is of type "r_paren"
   // any space              is of type "none"
-  // an unknown character  is of type "error"
+  // an unknown character  is of type "error_"
 
-  // Most addition of symbols/numbers to the "parsed" vector occurs at the
-  // boundary between symbols, eg in "2 + 3" 2 would be added to the parsed
+  // Most addition of symbols/numbers to the "parsed_" vector occurs at the
+  // boundary between symbols, eg in "2 + 3" 2 would be added to the parsed_
   // vector when the lexer reaches "+".
   //
   // However, parentheses are added as soon as they're encountered.
   //
   // Any left over symbols are added at the end.
 
+  bool number_encountered = false;
+
   // The type of the current character
-  LexToken current_type = LexToken::none;
+  LexToken current_type = LexToken::kNone;
 
   // The current type of word being read
-  LexToken is_reading = LexToken::none;
+  LexToken is_reading = LexToken::kNone;
 
   // The type of the last word read
-  LexToken last_read = LexToken::none;
+  LexToken last_read = LexToken::kNone;
 
   // Parenthetical balance will be checked throughout the lexing process to
   // catch errors early -- should always end with 0.
@@ -148,10 +165,10 @@ void Parser::lexer(string expression) {
   // To keep track of where the last parenthesis was for returning errors
   unsigned int last_paren_pos;
 
-  stringstream err_strstream;
+  std::stringstream err_strstream;
 
   char current_character;
-  string current_word = "";
+  std::string current_word = "";
 
   // Print debugs
   // std::cout << "Lexer print debug\n";
@@ -164,7 +181,7 @@ void Parser::lexer(string expression) {
     // std::cout << "Current word: " << current_word << std::endl;
     
     // Check parenthetical balance from last action.
-    // Return with an error if it's off.
+    // Return with an error_ if it's off.
     // 
     // Parenthetical balance will be < 0 if an expression like:
     // ")(+2)" is encountered, where the initial right parenthesis
@@ -172,7 +189,7 @@ void Parser::lexer(string expression) {
     if (paren_balance < 0) {
       err_strstream << "Error: Mismatched parentheses at position " 
                   << last_paren_pos;
-      error = err_strstream.str();
+      error_ = err_strstream.str();
       return;
     }
 
@@ -181,12 +198,12 @@ void Parser::lexer(string expression) {
     current_type = get_lex_token(current_character);
 
     // If the character is unrecognized
-    if (current_type == LexToken::error) {
+    if (current_type == LexToken::kError) {
       err_strstream << "Error: Unusable character \'"
                     << current_character
                     << "\' at position "
                     << i;
-      error = err_strstream.str();
+      error_ = err_strstream.str();
       return;
     }
 
@@ -198,11 +215,11 @@ void Parser::lexer(string expression) {
           if (!constant_check(current_word, is_reading)) {
             return;
           }
-        parsed.push_back(current_word);
+        parsed_.push_back(current_word);
         current_word = "";
       }
 
-      if (is_reading != LexToken::none) {
+      if (is_reading != LexToken::kNone) {
         last_read = is_reading;
       }   
 
@@ -210,21 +227,22 @@ void Parser::lexer(string expression) {
     }
 
     // If the current character is "none" (a space)
-    if (current_type == LexToken::none) {
+    if (current_type == LexToken::kNone) {
       continue;
     }
 
     // Reading: number or constant
-    if (is_reading == LexToken::number || is_reading == LexToken::constant) {
+    if (is_reading == LexToken::kNumber || is_reading == LexToken::kConstant) {
+      number_encountered = true;
       switch (last_read) {
-        case LexToken::number  :
-        case LexToken::constant:
+        case LexToken::kNumber  :
+        case LexToken::kConstant:
           err_strstream << "Error: Number follows number at position " << i;
-          error = err_strstream.str();
+          error_ = err_strstream.str();
           return;
-        case LexToken::r_paren :
-          parsed.push_back("*");
-          last_read = LexToken::none;
+        case LexToken::kR_Paren :
+          parsed_.push_back("*");
+          last_read = LexToken::kNone;
           // I am deliberately not using the fall-through
           // of the switch statement
           current_word += current_character;
@@ -237,38 +255,38 @@ void Parser::lexer(string expression) {
     }
 
     // Reading: operator
-    if (is_reading == LexToken::m_operator) {
+    if (is_reading == LexToken::kOperator) {
       // If there's already partially a word read
       if (current_word.length() > 0) {
         switch (current_character) {
           case '*':
             if (current_word[0] == '*') {
-              parsed.push_back("^");
+              parsed_.push_back("^");
               current_word = "";
-              last_read = LexToken::m_operator;
+              last_read = LexToken::kOperator;
               continue;
             }
             else {
               err_strstream << "Error: Operator follows operator at position " 
                             << i;
-              error = err_strstream.str();
+              error_ = err_strstream.str();
               return;
             }
           case '-':
-            parsed.push_back(current_word);
+            parsed_.push_back(current_word);
             current_word = "u-";
-            last_read = LexToken::m_operator;
+            last_read = LexToken::kOperator;
             continue;
         }
       }
 
       switch (last_read) {
-        case LexToken::none      :
-        case LexToken::m_operator:
-        case LexToken::l_paren   :
+        case LexToken::kNone      :
+        case LexToken::kOperator  :
+        case LexToken::kL_Paren   :
           if (current_character == '-') {
             current_word = "u-";
-            last_read = LexToken::m_operator;
+            last_read = LexToken::kOperator;
             continue;
           }
           else {
@@ -276,7 +294,7 @@ void Parser::lexer(string expression) {
                           << current_character
                           << "\' incorrectly placed at position " 
                           << i;
-            error = err_strstream.str();
+            error_ = err_strstream.str();
             return;
           }
         default:
@@ -287,22 +305,22 @@ void Parser::lexer(string expression) {
     }
 
     // Reading: left parenthesis
-    if (is_reading == LexToken::l_paren) {
+    if (is_reading == LexToken::kL_Paren) {
       switch (last_read) {
-        case LexToken::number  :
-        case LexToken::constant:
-        case LexToken::r_paren :
-          parsed.push_back("*");
-          parsed.push_back("(");
+        case LexToken::kNumber  :
+        case LexToken::kConstant:
+        case LexToken::kR_Paren :
+          parsed_.push_back("*");
+          parsed_.push_back("(");
           current_word = "";
-          last_read = LexToken::l_paren;
+          last_read = LexToken::kL_Paren;
           paren_balance++;
           last_paren_pos = i;
           break;
         default:
-          parsed.push_back("(");
+          parsed_.push_back("(");
           current_word = "";
-          last_read = LexToken::l_paren;
+          last_read = LexToken::kL_Paren;
           paren_balance++;
           last_paren_pos = i;
           break;
@@ -311,23 +329,23 @@ void Parser::lexer(string expression) {
     }
 
     // Reading: right parenthesis
-    if (is_reading == LexToken::r_paren) {
+    if (is_reading == LexToken::kR_Paren) {
       switch (last_read) {
-        case LexToken::l_paren :
+        case LexToken::kL_Paren :
           err_strstream << "Error: Empty parentheses at position "
                         << last_paren_pos;
-          error = err_strstream.str();
+          error_ = err_strstream.str();
           return;
-        case LexToken::m_operator:
+        case LexToken::kOperator:
           err_strstream << "Error: Operator precedes right parenthesis"
                         << " at position "
                         << i;
-          error = err_strstream.str();
+          error_ = err_strstream.str();
           return;
         default:
-          parsed.push_back(")");
+          parsed_.push_back(")");
           current_word = "";
-          last_read = LexToken::r_paren;
+          last_read = LexToken::kR_Paren;
           paren_balance--;
           last_paren_pos = i;
           break;
@@ -338,12 +356,14 @@ void Parser::lexer(string expression) {
   }
 
   if (paren_balance != 0) {
-    error = "Error: Parentheses in expression are not balanced";
+    error_ = "Error: Parentheses in expression are not balanced";
     return;
   }
 
-  if (is_reading == LexToken::m_operator) {
-    error = "Error: Operator at the end of expression";
+  if (is_reading == LexToken::kOperator 
+      || (is_reading == LexToken::kNone 
+         && last_read == LexToken::kOperator ) ) {
+    error_ = "Error: Operator at the end of expression";
     return;
   }
 
@@ -352,11 +372,17 @@ void Parser::lexer(string expression) {
       if (!constant_check(current_word, is_reading)) {
         return;
       }
-      parsed.push_back(current_word);
+      parsed_.push_back(current_word);
     }
 
-    if (parsed.size() == 0) {
-      error = "No input given";
+    if (parsed_.size() == 0) {
+      error_ = "No input given";
+      return;
+    }
+
+    // No number was ever encountered, so the expression is invalid by default
+    if (!number_encountered) {
+      error_ = "Error: No numbers in expression.";
       return;
     }
 
@@ -370,48 +396,47 @@ void Parser::lexer(string expression) {
 
 // =======================REVERSE POLISH NOTATION SECTION=====================
 
-void Parser::to_reverse_polish_notation() {
-      //we will iterate through the values of the parsed vector
-    for (unsigned int i = 0; i < parsed.size(); i++){
-        //we will look at the value we have from parsed to see if it is an operator other than ( )
-        // right now we check for the following operators:  * / + - ^ %
-        if (parsed[i] == "*" || parsed[i] == "/" || parsed[i] == "+" || parsed[i] == "-" || parsed[i] == "^" || parsed[i] == "%" || parsed[i] == "u-" ){
+void Parser::ToReversePolishNotation() {
+      //we will iterate through the values of the parsed_ vector
+    for (unsigned int i = 0; i < parsed_.size(); i++){
+        //we will look at the value we have from parsed_ to see if it is an operator other than ( )
+        if (parsed_[i] == "*" || parsed_[i] == "/" || parsed_[i] == "+" || parsed_[i] == "-" || parsed_[i] == "^" || parsed_[i] == "%" || parsed_[i] == "u-" ){
             //if the stack is empty, or the operator is lower precedence, then it should be added to the opStack
-            if (operatorStack.size() == 0 
-                || !(precedence_greater_than(operatorStack.top(), parsed[i]))){    
-                operatorStack.push(parsed[i]);
+            if (operator_stack_.size() == 0 
+                || !(precedence_greater_than(operator_stack_.top(), parsed_[i]))){    
+                operator_stack_.push(parsed_[i]);
                 
             }else{
                 //otherwise, take the first value out and put it in the queue
-                parsedQueue.push(operatorStack.top());
-                operatorStack.pop();
+                parsed_queue_.push(operator_stack_.top());
+                operator_stack_.pop();
                 //now I will simply set i back one, meaning the for loop will reevaluate the current one
                 i--;
             }
-        }else if (parsed[i] == "("){
+        }else if (parsed_[i] == "("){
             //if we come across an open parentheses, add it to the stack
             //its low precedence will ensure it doesn't get removed
-            operatorStack.push(parsed[i]);
-        }else if (parsed[i] == ")"){
-            if (operatorStack.top() != "("){
-                parsedQueue.push(operatorStack.top());
-                operatorStack.pop();
+            operator_stack_.push(parsed_[i]);
+        }else if (parsed_[i] == ")"){
+            if (operator_stack_.top() != "("){
+                parsed_queue_.push(operator_stack_.top());
+                operator_stack_.pop();
                 //once again using i-- to test this value again
                 i--;
             }else{
-                operatorStack.pop();
+                operator_stack_.pop();
             }
 
         }else{
-            parsedQueue.push(parsed[i]);
+            parsed_queue_.push(parsed_[i]);
         }
         
 
     }
     //now any leftover values in the operator stack should be added
-    while (!operatorStack.empty()){
-        parsedQueue.push(operatorStack.top());
-        operatorStack.pop();
+    while (!operator_stack_.empty()){
+        parsed_queue_.push(operator_stack_.top());
+        operator_stack_.pop();
     }
 }
 
@@ -420,27 +445,27 @@ void Parser::to_reverse_polish_notation() {
 
 // =======================EVALUATOR SECTION=====================
 
-void Parser::evaluator() {
-      //now we will evaluate the parsedQueue down to one value
+void Parser::Evaluator() {
+      //now we will evaluate the parsed_queue_ down to one value
     // we will use the output stack to do this
-    // as long as the parsed queue has values in it, we will continue to perform operations
-    while (!parsedQueue.empty()){
+    // as long as the parsed_ queue has values in it, we will continue to perform operations
+    while (!parsed_queue_.empty()){
 
         // Check for unruly values (-0, +/-inf, NaN) and correct them or return 
-        // an error.
-        if (!outputStack.empty()) {
+        // an error_.
+        if (!output_stack_.empty()) {
           // - 0.0
-          if (outputStack.top() == -0.0f) {
-            outputStack.pop();
-            outputStack.push(0.0f);
+          if (output_stack_.top() == -0.0f) {
+            output_stack_.pop();
+            output_stack_.push(0.0f);
           }
           // detecting NaN
-          else if (std::isnan(outputStack.top())) {
-            error = "Error: Expression generated NaN during evaluation";
+          else if (std::isnan(output_stack_.top())) {
+            error_ = "Error: Expression generated NaN during evaluation";
             return;
           }
-          else if (std::isinf(outputStack.top())) {
-            error = "Error: Exceeds floating point size limit"
+          else if (std::isinf(output_stack_.top())) {
+            error_ = "Error: Exceeds floating point size limit"
                     " (generated infinity during evaluation)";
             return;
           }
@@ -448,88 +473,98 @@ void Parser::evaluator() {
         
         // Print debugs
         // std::cout << "ParsedQueue front: " 
-        //           << parsedQueue.front() 
+        //           << parsed_queue_.front() 
         //           << std::endl;
-        // if (!outputStack.empty()) {
-        //   std::cout << "OutputStack top: " << outputStack.top() << std::endl;
+        // if (!output_stack_.empty()) {
+        //   std::cout << "OutputStack top: " << output_stack_.top() << std::endl;
         // }
 
-        //if the value is a number, it should simply be added to the outputStack
+        //if the value is a number, it should simply be added to the output_stack_
         // we can check if a value is a number, by checking if its first character is a digit
         // or if it is a "-" and its length is more than 1, in case of unary minus ex. "-6"
         // this will handle any multiple digit numbers
-        if(parsedQueue.front()[0] == 'e' ){
+        if(parsed_queue_.front()[0] == 'e' ){
             //now we check if it is a constant e or a negative constant
             // it is easiest to do these with seperate statements
             float floatValue = 2.718281828;
-            outputStack.push(floatValue);
-            parsedQueue.pop();
-        }else if (parsedQueue.front() == "-e"){
+            output_stack_.push(floatValue);
+            parsed_queue_.pop();
+        }else if (parsed_queue_.front() == "-e"){
             float floatValue = -2.718281828;
-            outputStack.push(floatValue);
-            parsedQueue.pop();
-        }else if (parsedQueue.front() == "pi"){
+            output_stack_.push(floatValue);
+            parsed_queue_.pop();
+        }else if (parsed_queue_.front() == "pi"){
             float floatValue = 3.1415926;
-            outputStack.push(floatValue);
-            parsedQueue.pop();
-        }else if (parsedQueue.front() == "-pi"){
+            output_stack_.push(floatValue);
+            parsed_queue_.pop();
+        }else if (parsed_queue_.front() == "-pi"){
             float floatValue = -3.1415926;
-            outputStack.push(floatValue);
-            parsedQueue.pop();
-        }else if (parsedQueue.front()[0] == '0' || parsedQueue.front()[0] == '1' || parsedQueue.front()[0] == '2' || parsedQueue.front()[0] == '3' || parsedQueue.front()[0] == '4' || parsedQueue.front()[0] == '5' || parsedQueue.front()[0] == '6' || parsedQueue.front()[0] == '7' || parsedQueue.front()[0] == '8' || parsedQueue.front()[0] == '9' ||(parsedQueue.front()[0] == '-' && parsedQueue.front().length() != 1)){
+            output_stack_.push(floatValue);
+            parsed_queue_.pop();
+        }else if (parsed_queue_.front()[0] == '0' || parsed_queue_.front()[0] == '1' || parsed_queue_.front()[0] == '2' || parsed_queue_.front()[0] == '3' || parsed_queue_.front()[0] == '4' || parsed_queue_.front()[0] == '5' || parsed_queue_.front()[0] == '6' || parsed_queue_.front()[0] == '7' || parsed_queue_.front()[0] == '8' || parsed_queue_.front()[0] == '9' ||(parsed_queue_.front()[0] == '-' && parsed_queue_.front().length() != 1)){
             //change the string to a float, add it to the stack, then remove it from the queue
-            float floatValue = std::stof(parsedQueue.front());
-            outputStack.push(floatValue);
-            parsedQueue.pop();
+            float floatValue = std::stof(parsed_queue_.front());
+            output_stack_.push(floatValue);
+            parsed_queue_.pop();
         }else{
           
+            // if it is not a number, then it must be an operator
+            // in which case we should start by popping off the top 
+            // two values from the output stack
+            
+            // But first, we should make sure the output stack isn't empty
+            if (output_stack_.empty()) {
+              error_ = "Error: Malformed expression";
+              return;
+            }
+
             // Negation/unary minus
-            if (parsedQueue.front() == "u-"){
-                float a = outputStack.top();
-                outputStack.pop();
-                outputStack.push(a * -1.0f);
-                parsedQueue.pop();
+            if (parsed_queue_.front() == "u-"){
+                float a = output_stack_.top();
+                output_stack_.pop();
+                output_stack_.push(a * -1.0f);
+                parsed_queue_.pop();
                 continue;
             }
 
-            //if it is not a number, then it must be an operator
-            // in which case we should start by popping off the top two values from the output stack
+
             // these values will then have the corresponding operation performed on them
             // and a new value will be added to the stack
             //
             //we will create values a and b to be used in the operations,
             // the shape of a stack means that for the operation a/b, we will first pop off b, then a
-            float b = outputStack.top();
-            outputStack.pop();
-            float a = outputStack.top();
-            outputStack.pop();
+            float b = output_stack_.top();
+            output_stack_.pop();
+            float a = output_stack_.top();
+            output_stack_.pop();
 
-            //we will now perform the operation based on the front value of parsedQueue
-            // this value will be added to the outputStack
-            if (parsedQueue.front() == "+"){
-                outputStack.push(float (a + b));
-            }else if (parsedQueue.front() == "-"){
-                outputStack.push(float (a - b));
-            }else if (parsedQueue.front() == "*"){
-                outputStack.push(float (a * b));
-            }else if (parsedQueue.front() == "/"){
+            // we will now perform the operation based on the front 
+            // value of parsed_ queue.
+            // this value will be added to the output stack
+            if (parsed_queue_.front() == "+"){
+                output_stack_.push(float (a + b));
+            }else if (parsed_queue_.front() == "-"){
+                output_stack_.push(float (a - b));
+            }else if (parsed_queue_.front() == "*"){
+                output_stack_.push(float (a * b));
+            }else if (parsed_queue_.front() == "/"){
                 if (b == 0.f) {
-                  error = "Error: Division by zero encountered in expression";
+                  error_ = "Error: Division by zero encountered in expression";
                   return;
                 }
-                outputStack.push(float (a / b));
-            }else if (parsedQueue.front() == "^"){
-                outputStack.push(float(pow(a, b)));
-            }else if (parsedQueue.front() == "%"){
+                output_stack_.push(float (a / b));
+            }else if (parsed_queue_.front() == "^"){
+                output_stack_.push(float(pow(a, b)));
+            }else if (parsed_queue_.front() == "%"){
                if ((int)b == 0) {
-                  error = "Error: Modulo by zero encountered in expression";
+                  error_ = "Error: Modulo by zero encountered in expression";
                   return;
                 }
-                outputStack.push(float (int(a) % int(b)));
+                output_stack_.push(float (int(a) % int(b)));
             }
 
-            //now pop the front of parsedQueue off
-            parsedQueue.pop();
+            //now pop the front of parsed_queue_ off
+            parsed_queue_.pop();
             
 
         }
@@ -538,18 +573,18 @@ void Parser::evaluator() {
 
 
 
-    //now we will just print the parsedQueue for the sake of testing
+    //now we will just print the parsed_queue_ for the sake of testing
     // later we will repurpose this code to the clean out section,
     // just remove the part that prints the values
     // however, they should also be cleared out naturallly during the evaluation process
-    while (!parsedQueue.empty()){
-        // cout << parsedQueue.front() << " ";
-        parsedQueue.pop();
+    while (!parsed_queue_.empty()){
+        // cout << parsed_queue_.front() << " ";
+        parsed_queue_.pop();
     }
 
-    while (!operatorStack.empty()){
-        // cout << operatorStack.top() << " ";
-        operatorStack.pop();
+    while (!operator_stack_.empty()){
+        // cout << operator_stack_.top() << " ";
+        operator_stack_.pop();
     }
 
 
@@ -561,23 +596,23 @@ void Parser::evaluator() {
     //because this is a class, and not a function, any values it keeps must be reset
     //down here we will clear the stacks, queues, and vectors
     //it will also mean that we can start running multiple test cases from the test.cpp
-    Parser::parsed.clear();
+    Parser::parsed_.clear();
 
 
     // Once again checking for unruly values
 
     // - 0.0
-    if (outputStack.top() == -0.0f) {
-      outputStack.pop();
-      outputStack.push(0.0f);
+    if (output_stack_.top() == -0.0f) {
+      output_stack_.pop();
+      output_stack_.push(0.0f);
     }
     // detecting NaN
-    else if (std::isnan(outputStack.top())) {
-      error = "Error: Expression generated NaN during evaluation";
+    else if (std::isnan(output_stack_.top())) {
+      error_ = "Error: Expression generated NaN during evaluation";
       return;
     }
-    else if (std::isinf(outputStack.top())) {
-      error = "Error: Exceeds floating point size limit"
+    else if (std::isinf(output_stack_.top())) {
+      error_ = "Error: Exceeds floating point size limit"
               " (generated infinity during evaluation)";
       return;
     }
@@ -585,103 +620,102 @@ void Parser::evaluator() {
    
 
 
-    //lets print off the entire contents of output stack, which will hopefully be one value
-    // lets also save that value to return it at the very bottom
+    // Using a stringstream to store the intermediate value
     std::stringstream returnable_value;
-    if (   (outputStack.top() < 0.01f && outputStack.top() > 0.f)
-        || (outputStack.top() > -0.01f && outputStack.top() < 0.f) ) {
+    // Checking if the value is small enough to be put into scientific notation
+    if (   (output_stack_.top() < 0.01f && output_stack_.top() > 0.f)
+        || (output_stack_.top() > -0.01f && output_stack_.top() < 0.f) ) {
       returnable_value << std::scientific 
                        << std::setprecision(2) 
-                       << outputStack.top();
+                       << output_stack_.top();
     }
     else {
       returnable_value << std::fixed 
                        << std::setprecision(2) 
-                      << outputStack.top();
+                      << output_stack_.top();
     }
-    while (!outputStack.empty()){
-        // cout << outputStack.top() << "\n";
-        outputStack.pop();
+    while (!output_stack_.empty()){
+        output_stack_.pop();
     }
 
-    result = returnable_value.str();
+    result_ = returnable_value.str();
 }
 
 // ===================END EVALUATOR SECTION=====================
 
 
+// ===================GENERAL PARSING SECTION===================
 
+std::string Parser::Parse(std::string equation){
 
-string Parser::parse(string equation){
-
-  // Initialize result and error to empty strings
-  result = "";
-  error = "";
-  // clear parsed vector
-  parsed.clear();
-  // clear parsedQueue
-  while (!parsedQueue.empty()){
-      parsedQueue.pop();
+  // Initialize result_ and error_ to empty strings
+  result_ = "";
+  error_ = "";
+  // clear parsed_ vector
+  parsed_.clear();
+  // clear parsed_queue_
+  while (!parsed_queue_.empty()){
+      parsed_queue_.pop();
   }
-  // clear operatorStack
-  while (!operatorStack.empty()){
-      operatorStack.pop();
+  // clear operator_stack_
+  while (!operator_stack_.empty()){
+      operator_stack_.pop();
   }
-  // clear outputStack
-  while (!outputStack.empty()){
-      outputStack.pop();
+  // clear output_stack_
+  while (!output_stack_.empty()){
+      output_stack_.pop();
   }
 
-  // Input is lexed -- now available in the vector of strings called "parsed"
+  // Input is lexed -- now available in the vector of strings called "parsed_"
   // reminder: "u-" means unary minus
-  lexer(equation);
-  if (error != "") {
-    return error;
+  Lexer(equation);
+  if (error_ != "") {
+    return error_;
   }
 
   // Print debugs
   // std::cout << "Parsed vector looks like: \n";
-  // for (unsigned int i = 0; i < parsed.size(); i++) {
-  //   std::cout << parsed[i] << ", ";
+  // for (unsigned int i = 0; i < parsed_.size(); i++) {
+  //   std::cout << parsed_[i] << ", ";
   // }
   // std::cout << std::endl;
 
-  // All input will be parsed into Reverse Polish Notation and put
-  // into the parsedQueue
-  to_reverse_polish_notation();
-  if (error != "") {
-    return error;
+  // All input will be parsed_ into Reverse Polish Notation and put
+  // into the parsed_queue_
+  ToReversePolishNotation();
+  if (error_ != "") {
+    return error_;
   }
 
-  // The parsedQueue is evaluated
-  evaluator();
-  if (error != "") {
-    return error;
+  // The parsed_queue_ is evaluated
+  Evaluator();
+  if (error_ != "") {
+    return error_;
   }
-  return result;
+  return result_;
 }
 
 
 
 //the precedence function will receive two strings
 //it will return true (1) if a > b, and false otherwise
-int Parser::precedence_greater_than(string a, string b) {
+bool Parser::precedence_greater_than(std::string a, std::string b) {
 
     //we must define our precedence at this point
     // we will do this using an array, where the low index values have the highest priority
     // it will be a string array, to make comparing values easier
 
-    string precedence[8] = {"u-", "^", "%", "*", "/", "+", "-", "("};
+    std::string precedence[8] = {"u-", "^", "%", "*", "/", "+", "-", "("};
 
     //however, we want "*", "%", and "/" to have equal precedence
     // same with "+" "-"
     // so we will just check here if the parameters are the specific operators, and return 1 if so
     // this means the operators will move into the proper location in the stack
     if ((a == "*" || a == "/" || a == "%") && (b == "*" || b == "/" || b == "%")){
-        return 1;
+        return true;
     }
     if ((a == "+" || a == "-") && (b == "+" || b == "-")){
-        return 1;
+        return true;
     }
 
     int indexA = 0;
@@ -695,7 +729,9 @@ int Parser::precedence_greater_than(string a, string b) {
     //both indexes will be one higher than the actual index of their corresponding character
     // but this does not affect comparing them
     if (indexA < indexB){
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
+
+// ===============END GENERAL PARSING SECTION=====================

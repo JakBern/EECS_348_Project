@@ -7,7 +7,7 @@ For the purposes of this project, this guideline will not followed. Only code th
 ## Function, Variable, Class, and Namespace Names
 **Functions**
 Most functions should use upper camel case (eg, FunctionName()).  
-Getters, setters, and simple boolean functions should use snake case (eg, set_color(), is_green()).  
+Getters, setters, and simple boolean functions should use snake case (eg, set_color(), add_variable(), is_green()).  
   
 **Variables**  
 Variables should be given names using snake case (eg, var_name).  

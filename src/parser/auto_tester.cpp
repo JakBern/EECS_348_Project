@@ -70,7 +70,7 @@ int main() {
       case 3:
         expected = line;
         output_line += expected + ",";
-        actual = parser.parse(expr);
+        actual = parser.Parse(expr);
         output_line += actual + ",";
         output_line += (expected == actual) ? "Pass\n" : "Fail\n";
         output << output_line;

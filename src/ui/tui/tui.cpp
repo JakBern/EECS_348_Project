@@ -66,7 +66,7 @@ const char* kHelpMessage =
 // =====================END REMOVED===================
 
 void TUI::Eval(std::string expr) {
-  std::string result = parser_->parse(expr);
+  std::string result = parser_->Parse(expr);
   user_context_->add_history(expr); 
   std::cout << "Result:\n" << result << std::endl;
 }
@@ -151,7 +151,7 @@ flags::InterfaceCode TUI::Run() {
         for (unsigned int i = 1; i < split_input.size(); i++) {
           to_parser += split_input[i] + " ";
         }
-        std::string result = parser_->parse(to_parser);
+        std::string result = parser_->Parse(to_parser);
         user_context_->add_history(to_parser);
         std::cout << "Result:\n" << result << std::endl; 
       }
@@ -219,7 +219,7 @@ void TUI::RunHistoryMenu() {
   std::cout << "Expression:\n" 
             << user_context_->get_history_item(input_num) 
             << "\nResult:\n"
-            << parser_->parse(user_context_->get_history_item(input_num))
+            << parser_->Parse(user_context_->get_history_item(input_num))
             << std::endl;
   
   return;

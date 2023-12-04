@@ -1,28 +1,27 @@
-BF-01,Test Addition ,3+4,7,7.00,Fail
-BF-02,Test Subtraction ,4-1,3,3.00,Fail
-BF-03,Test Multiplication,5*3,15,15.00,Fail
-BF-04,Test Exponentiation,2^4,16,16.00,Fail
-BF-05,Test Exponentiation(alt),3**3,27,27.00,Fail
-BF-06,Test Modulo,12%10,2,2.00,Fail
-BF-07,Test Negative Numbers,-3+9,6,6.00,Fail
-BF-08,Test Division,9/3,3,3.00,Fail
-ER-01,Test Division by Zero,9/0,Error Cannot Divide by Zero,Error: Division by zero encountered in expression,Fail
-ER-02,Test Modulo by Zero,9%0,Error Cannot Modulo by Zero,Error: Modulo by zero encountered in expression,Fail
-BF-09,Test Parentheses / Implicit Multiplication,9(3*3),81,81.00,Fail
-ER-03,Test Parentheses Error,(3+2,Error Unmatched Parentheses,Error: Parentheses in expression are not balanced,Fail
-ER-04,Test Invalid Operator,3$2,Error Invalid Operator,Error: Unusable character '$' at position 1,Fail
-ER-05,Test Invalid Input,“String”,Error Invalid Expression,Error: Unusable character '�' at position 0,Fail
-BF-10,Test Floating Point Numbers,1.50*4.0,6.0,Error: Unusable character '.' at position 1,Fail
-BF-11,Test Order of Operation,3/3*(2+1),3,3.00,Fail
-BF-12,Precision and Rounding,10 / 3,3.33,3.33,Pass
-BF-13,Large Numbers and Overflow,10^100,Error: Exceeds floating point size limit,Error: Exceeds floating point size limit (generated infinity during evaluation),Fail
-BF-14,Associativity,2^3^2,512,512.00,Fail
-BF-15,Zero Exponent,2^0,1,1.00,Fail
-BF-16,Negative Exponent,2^-2,0.25,0.25,Pass
-BF-17,Exponentiation with parentheses,2^(3+2),32,32.00,Fail
-BF-18,Decimal Numbers and Operator Precedence,0.3+0.6/0.2,3.3,Error: Unusable character '.' at position 1,Fail
-BF-19,Modulo with Negative Numbers,-2%3,-2,-2.00e+00,Fail
-BF-20,Nested Parentheses,((2+3)*2),10,10.00,Fail
-BF-21,Mixed Fractional and Integer Operations,5.5*2+3,14,Error: Unusable character '.' at position 1,Fail
-BF-22,Fractional Exponent,4^(1/2),2,2.00,Fail
-BF-22,Fractional Exponent (Negative Base),-4^(1/2),NaN Error,Error: Expression generated NaN during evaluation,Fail
+AT-01,Empty Parentheses,(),Error: Empty parentheses at position 0,Error: Empty parentheses at position 0,Pass
+AT-02,Scientific Notation 1,(2 ** (17/18)) / 10000,1.92e-04,1.92e-04,Pass
+AT-03,Scientific Notation 2,1 / 101,9.90e-03,9.90e-03,Pass
+AT-04,Negative Scientific Notation 1,9 / -1007,-8.94e-03,-8.94e-03,Pass
+AT-05,Negative Scientific Notation 2,-1 * 12 ^ (-6),-3.35e-07,-3.35e-07,Pass
+AT-06,Implicit multiplication 1,1(2)3(4)5,120.00,120.00,Pass
+AT-07,Implicit multiplication 2,1(2 - 1)3 + 5(4 * 2)5 - (1)8,195.00,195.00,Pass
+AT-08,Implicit multiplication 3,(7)((((8)))),56.00,56.00,Pass
+AT-09,Extraneous parentheses 1,(((1))) + (2),3.00,3.00,Pass
+AT-10,Extraneous parentheses 2, (2 - ((1 + (1)))),0.00,0.00,Pass
+AT-11,Hidden divide by zero,1 / (2 - ((1 + 1))),Error: Division by zero encountered in expression,Error: Division by zero encountered in expression,Pass
+AT-12,Mod by value cast to zero,6 % (1 / 1000),Error: Modulo by zero encountered in expression,Error: Modulo by zero encountered in expression,Pass
+AT-13,Two methods of exponentiation,(2 ** 3) - (2 ^ 3),0.00,0.00,Pass
+AT-14,Extraneous negation 1,-------------9,-9.00,-9.00,Pass
+AT-15,Extraneous negation 2,-1(- (9 + 2 * (- (3 --1)))),1.00,1.00,Pass
+AT-16,Leading zeroes 1 (and Jake's birthday),09/25,0.36,0.36,Pass
+AT-17,Leading zeroes 2,0000001,1.00,1.00,Pass
+AT-18,Leading zeroes 3,9 + 001,10.00,10.00,Pass
+AT-19,Number following number,1 + 001 2 + 1,Error: Number follows number at position 8,Error: Number follows number at position 8,Pass
+AT-20,Operator following operator,19 - + 2,Error: Binary operator '+' incorrectly placed at position 5,Error: Binary operator '+' incorrectly placed at position 5,Pass
+AT-21,Delicious misuse of constant characters,pie,Error: Unknown word "pie" in expression,Error: Unknown word "pie" in expression,Pass
+AT-22,Correct, possibly irrational, use of constants,pi(e),8.54,8.54,Pass
+AT-23,Extremely long expression,51 - - - 3 + 18 - 9 + 2 - (3*6(9 - 8)) + - (24 % 13) - 7 ** 2 + (80/4) - 1,0.00,0.00,Pass
+AT-24,Single unary operator,-,Error: Operator at the end of expression,Error: Operator at the end of expression,Pass
+AT-25,Single unary operator (repeated),--------,Error: Operator at the end of expression,Error: Operator at the end of expression,Pass
+AT-26,Unary operator follows number,1 -,Error: Operator at the end of expression,Error: Operator at the end of expression,Pass
+AT-27,ASCII Sword,---)000000007,Error: Operator precedes right parenthesis at position 3,Error: Operator precedes right parenthesis at position 3,Pass
