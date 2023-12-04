@@ -8,3 +8,9 @@ Team members are:
 - **Nick Reinig**, Software Quality Analyst, Parser Development
 - **Jake Bernard**, Project Manager, Interface Development
 - **Charlie Gillund**, Configuration Manager, Interface Development
+
+### Downloads
+- [full_program.zip](full_program.zip)
+- [source_code.zip](source_code.zip)
+- [artifacts.zip](artifacts.zip)
+
